@@ -17,6 +17,7 @@ jobs:
     steps:
       - name: Ping common search engines
         run: |
+          set +e
           endpoints=(
             "https://www.bing.com/ping?sitemap=${SITEMAP_URL}"
             "https://www.google.com/ping?sitemap=${SITEMAP_URL}"
@@ -24,12 +25,19 @@ jobs:
           )
 
           for endpoint in "${endpoints[@]}"; do
-            code=$(curl -L -s -o /dev/null -w "%{http_code}" "$endpoint")
-            echo "$endpoint -> HTTP $code"
+            code=$(curl -L -s --max-time 20 -o /dev/null -w "%{http_code}" "$endpoint")
+            exit_code=$?
+            if [ "$exit_code" -ne 0 ]; then
+              echo "$endpoint -> CURL_ERROR $exit_code"
+            else
+              echo "$endpoint -> HTTP $code"
+            fi
           done
+
+          exit 0
 
       - name: Submit homepage to Baidu (optional)
         if: ${{ secrets.BAIDU_SITE != '' && secrets.BAIDU_TOKEN != '' }}
         run: |
-          response=$(curl -s -H "Content-Type: text/plain" --data-binary "${SITE_URL}/" "http://data.zz.baidu.com/urls?site=${{ secrets.BAIDU_SITE }}&token=${{ secrets.BAIDU_TOKEN }}")
+          response=$(curl -s --max-time 20 -H "Content-Type: text/plain" --data-binary "${SITE_URL}/" "http://data.zz.baidu.com/urls?site=${{ secrets.BAIDU_SITE }}&token=${{ secrets.BAIDU_TOKEN }}" || true)
           echo "Baidu response: $response"
