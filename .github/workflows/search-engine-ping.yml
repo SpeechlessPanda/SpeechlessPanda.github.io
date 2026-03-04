@@ -14,6 +14,8 @@ jobs:
     env:
       SITE_URL: https://speechlesspanda.github.io
       SITEMAP_URL: https://speechlesspanda.github.io/sitemap.xml
+      BAIDU_SITE: ${{ secrets.BAIDU_SITE }}
+      BAIDU_TOKEN: ${{ secrets.BAIDU_TOKEN }}
     steps:
       - name: Ping common search engines
         run: |
@@ -37,7 +39,11 @@ jobs:
           exit 0
 
       - name: Submit homepage to Baidu (optional)
-        if: ${{ secrets.BAIDU_SITE != '' && secrets.BAIDU_TOKEN != '' }}
         run: |
-          response=$(curl -s --max-time 20 -H "Content-Type: text/plain" --data-binary "${SITE_URL}/" "http://data.zz.baidu.com/urls?site=${{ secrets.BAIDU_SITE }}&token=${{ secrets.BAIDU_TOKEN }}" || true)
+          if [ -z "$BAIDU_SITE" ] || [ -z "$BAIDU_TOKEN" ]; then
+            echo "Skip Baidu submit: BAIDU_SITE or BAIDU_TOKEN is empty"
+            exit 0
+          fi
+
+          response=$(curl -s --max-time 20 -H "Content-Type: text/plain" --data-binary "${SITE_URL}/" "http://data.zz.baidu.com/urls?site=${BAIDU_SITE}&token=${BAIDU_TOKEN}" || true)
           echo "Baidu response: $response"
