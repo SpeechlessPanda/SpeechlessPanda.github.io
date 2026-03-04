@@ -1,0 +1,35 @@
+name: Search Engine Sitemap Ping
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  ping-sitemap:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      SITE_URL: https://speechlesspanda.github.io
+      SITEMAP_URL: https://speechlesspanda.github.io/sitemap.xml
+    steps:
+      - name: Ping common search engines
+        run: |
+          endpoints=(
+            "https://www.bing.com/ping?sitemap=${SITEMAP_URL}"
+            "https://www.google.com/ping?sitemap=${SITEMAP_URL}"
+            "https://yandex.com/ping?sitemap=${SITEMAP_URL}"
+          )
+
+          for endpoint in "${endpoints[@]}"; do
+            code=$(curl -L -s -o /dev/null -w "%{http_code}" "$endpoint")
+            echo "$endpoint -> HTTP $code"
+          done
+
+      - name: Submit homepage to Baidu (optional)
+        if: ${{ secrets.BAIDU_SITE != '' && secrets.BAIDU_TOKEN != '' }}
+        run: |
+          response=$(curl -s -H "Content-Type: text/plain" --data-binary "${SITE_URL}/" "http://data.zz.baidu.com/urls?site=${{ secrets.BAIDU_SITE }}&token=${{ secrets.BAIDU_TOKEN }}")
+          echo "Baidu response: $response"
