@@ -9,7 +9,7 @@ on:
 jobs:
   send-email:
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' || github.event.action == 'created'
+    if: github.repository == 'SpeechlessPanda/SpeechlessPanda.github.io' && (github.event_name == 'workflow_dispatch' || github.event.action == 'created')
     permissions:
       contents: read
     steps:

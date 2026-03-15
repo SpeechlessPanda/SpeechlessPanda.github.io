@@ -56,11 +56,43 @@
 |-------------------------------------------|--------------------------|
 | [GitHub Pages](https://pages.github.com/) | 静态页面托管，免费、稳定 |
 
+### 自动部署（源码仓库 -> Pages 仓库）
+
+项目已支持：在**源码仓库**推送代码后，通过 GitHub Actions 自动构建并部署到 `SpeechlessPanda/SpeechlessPanda.github.io`。
+
+- 工作流文件：`.github/workflows/deploy-from-source.yml`
+- 触发条件：`main` 分支 push / 手动触发
+- 部署目标：`SpeechlessPanda/SpeechlessPanda.github.io` 的 `main` 分支
+
+---
+
+## 🔄 多设备协作（推荐流程）
+
+### 仓库分工
+
+- **源码仓库（建议新建）**：保存 Hexo 源码（你当前这个目录）
+- **发布仓库（现有）**：`SpeechlessPanda/SpeechlessPanda.github.io`，保存静态文件
+
+### 一次性配置
+
+1. 在源码仓库 `Settings -> Secrets and variables -> Actions` 新增 Secret：
+   - `PAGES_DEPLOY_TOKEN`
+2. `PAGES_DEPLOY_TOKEN` 建议使用 GitHub PAT（classic），至少勾选：
+   - `repo`（用于向发布仓库推送）
+
+### 日常更新
+
+1. 在任意设备 `clone` 源码仓库
+2. 修改文章/配置后提交并 push 到 `main`
+3. Actions 自动构建并部署到发布仓库
+
+> 仍可本地运行 `pnpm run server` 预览，或使用原本发布命令手动发布。
+
 ---
 
 ## 📁 项目结构
 
-```
+```text
 blog/
 ├── _config.yml          # Hexo 全局配置
 ├── package.json         # 项目依赖

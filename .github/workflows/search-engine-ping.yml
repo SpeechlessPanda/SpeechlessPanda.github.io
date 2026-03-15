@@ -9,6 +9,7 @@ on:
 jobs:
   ping-sitemap:
     runs-on: ubuntu-latest
+    if: github.repository == 'SpeechlessPanda/SpeechlessPanda.github.io'
     permissions:
       contents: read
     env:
