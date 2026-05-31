@@ -2052,7 +2052,7 @@ figure.highlight pre .javascript .function {
 .container pre,
 .container code {
   font-size: var(--global-font-size);
-  font-family: 'Sarasa Mono SC','JetBrains Mono','Cascadia Code','Fira Code',Consolas,monospace !important;
+  font-family: 'LXGW WenKai','Sarasa Mono SC','JetBrains Mono','Cascadia Code','Fira Code',Consolas,monospace !important;
   border-radius: 6px;
 }
 .container code {
