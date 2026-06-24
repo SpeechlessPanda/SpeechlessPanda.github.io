@@ -25,7 +25,7 @@
 
 ### 📊 统计与分析
 
-- **Umami Analytics**：站点 UV / PV、各文章浏览量统计（Umami Cloud 托管，无 Cookie 追踪）
+- **busuanzi（不蒜子）**：站点 UV / PV、各文章浏览量统计（轻量第三方计数服务，免后端）
 
 ### 🔍 搜索
 
@@ -78,7 +78,7 @@
 | 运行时 | Node.js 20 | CI 运行环境 |
 | OG 渲染 | [@resvg/resvg-js](https://github.com/thx/resvg-js) | SVG → PNG，跨平台中文字体 |
 | 评论 | [Giscus](https://giscus.app/) | GitHub Discussions |
-| 统计 | [Umami](https://umami.is/) | 隐私友好 |
+| 统计 | [busuanzi](https://busuanzi.ibruce.info/) | UV/PV 计数 |
 | 部署 | [GitHub Pages](https://pages.github.com/) + Actions | 自动 |
 
 ---

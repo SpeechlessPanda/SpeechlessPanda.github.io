@@ -103,14 +103,16 @@ class LocalSearch {
 
   getResultItems (keywords) {
     const resultItems = []
-    this.datas.forEach(({ title, content, url }) => {
+    this.datas.forEach(({ title, content, url, tags }) => {
       // The number of different keywords included in the article.
+      const [indexOfTags, keysOfTags] = this.getIndexByWord(keywords, (tags || []).join(' '))
       const [indexOfTitle, keysOfTitle] = this.getIndexByWord(keywords, title)
       const [indexOfContent, keysOfContent] = this.getIndexByWord(keywords, content)
-      const includedCount = new Set([...keysOfTitle, ...keysOfContent]).size
+      const includedCount = new Set([...keysOfTags, ...keysOfTitle, ...keysOfContent]).size
 
       // Show search results
-      const hitCount = indexOfTitle.length + indexOfContent.length
+      const tagHit = indexOfTags.length
+      const hitCount = tagHit + indexOfTitle.length + indexOfContent.length
       if (hitCount === 0) return
 
       const slicesOfTitle = []
@@ -164,7 +166,8 @@ class LocalSearch {
         item: resultItem,
         id: resultItems.length,
         hitCount,
-        includedCount
+        includedCount,
+        tagHit
       })
     })
     return resultItems
@@ -181,7 +184,8 @@ class LocalSearch {
           ? [...new DOMParser().parseFromString(res, 'text/xml').querySelectorAll('entry')].map(element => ({
               title: element.querySelector('title').textContent,
               content: element.querySelector('content').textContent,
-              url: element.querySelector('url').textContent
+              url: element.querySelector('url').textContent,
+              tags: [...element.querySelectorAll('tags tag')].map(t => t.textContent)
             }))
           : JSON.parse(res)
         // Only match articles with non-empty titles
@@ -458,9 +462,11 @@ window.addEventListener('load', () => {
     } else if (resultItems.length === 0) {
       showNoResults(searchText)
     } else {
-      // Sort results by relevance
+      // Sort results by relevance (tag hits first, then coverage, then total hits)
       resultItems.sort((left, right) => {
-        if (left.includedCount !== right.includedCount) {
+        if (left.tagHit !== right.tagHit) {
+          return right.tagHit - left.tagHit
+        } else if (left.includedCount !== right.includedCount) {
           return right.includedCount - left.includedCount
         } else if (left.hitCount !== right.hitCount) {
           return right.hitCount - left.hitCount
