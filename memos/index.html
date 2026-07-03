@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://speechlesspanda.github.io/img/avatar.png">
 <meta property="article:published_time" content="2026-06-24T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-03T04:05:59.346Z">
+<meta property="article:modified_time" content="2026-07-03T04:36:42.725Z">
 <meta property="article:author" content="SpeechlessPanda">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://speechlesspanda.github.io/img/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://speechlesspanda.github.io/memos/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.9/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
@@ -442,30 +442,40 @@
 
   // 用独立 iframe 直嵌 giscus /widget(绕过 client.js 单例),支持同页多条独立评论区
   window.createShuoshuoGiscusWidget = (el, key) => {
+    const build = cfg => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+      const params = new URLSearchParams({
+        repo: cfg.repo,
+        'repo-id': cfg.repoId,
+        'category-id': cfg.categoryId,
+        mapping: 'specific',
+        term: key,
+        theme: isDark ? cfg.darkTheme : cfg.lightTheme,
+        'reactions-enabled': '1',
+        'emit-metadata': '0',
+        'input-position': 'top',
+        lang: cfg.lang,
+        origin: location.origin
+      })
+      el.innerHTML = ''
+      const iframe = document.createElement('iframe')
+      iframe.title = 'giscus-comments'
+      iframe.src = 'https://giscus.app/widget?' + params.toString()
+      iframe.loading = 'lazy'
+      iframe.allow = 'clipboard-write; oauth:*'
+      iframe.style.cssText = 'border:0;width:100%;min-height:200px;color-scheme:normal'
+      el.appendChild(iframe)
+    }
     const cfg = window.shuoshuoGiscusConfig
-    if (!cfg) return
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
-    const params = new URLSearchParams({
-      repo: cfg.repo,
-      'repo-id': cfg.repoId,
-      'category-id': cfg.categoryId,
-      mapping: 'specific',
-      term: key,
-      theme: isDark ? cfg.darkTheme : cfg.lightTheme,
-      'reactions-enabled': '1',
-      'emit-metadata': '0',
-      'input-position': 'top',
-      lang: cfg.lang,
-      origin: location.origin
-    })
-    el.innerHTML = ''
-    const iframe = document.createElement('iframe')
-    iframe.title = 'giscus-comments'
-    iframe.src = 'https://giscus.app/widget?' + params.toString()
-    iframe.loading = 'lazy'
-    iframe.allow = 'clipboard-write'
-    iframe.style.cssText = 'border:0;width:100%;min-height:200px;color-scheme:normal'
-    el.appendChild(iframe)
+    if (cfg) { build(cfg); return }
+    // pjax 时序:config 可能尚未暴露(后执行的 comments partial),轮询等待(最多 3s)
+    let n = 0
+    const wait = () => {
+      const c = window.shuoshuoGiscusConfig
+      if (c) build(c)
+      else if (++n < 30) setTimeout(wait, 100)
+    }
+    wait()
   }
 
   // 监听 Giscus iframe 高度消息,各自适应高度
