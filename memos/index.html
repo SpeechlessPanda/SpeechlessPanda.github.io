@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://speechlesspanda.github.io/img/avatar.png">
 <meta property="article:published_time" content="2026-06-24T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-03T07:11:20.683Z">
+<meta property="article:modified_time" content="2026-07-03T07:45:18.513Z">
 <meta property="article:author" content="SpeechlessPanda">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://speechlesspanda.github.io/img/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://speechlesspanda.github.io/memos/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.9/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
@@ -457,6 +457,7 @@
       const params = new URLSearchParams({
         repo: cfg.repo,
         repoId: cfg.repoId,
+        category: '',
         categoryId: cfg.categoryId,
         mapping: 'specific',
         term: key,
@@ -464,7 +465,6 @@
         reactionsEnabled: '1',
         emitMetadata: '0',
         inputPosition: 'top',
-        lang: cfg.lang,
         origin: __u.toString(),
         backLink: __u.toString(),
         session: localStorage.getItem('giscus-session') || '',
@@ -473,10 +473,10 @@
       el.innerHTML = ''
       const iframe = document.createElement('iframe')
       iframe.title = 'giscus-comments'
-      iframe.src = 'https://giscus.app/widget?' + params.toString()
+      iframe.src = 'https://giscus.app/' + (cfg.lang || 'en') + '/widget?' + params.toString()
       iframe.loading = 'lazy'
       iframe.allow = 'clipboard-write; oauth:*'
-      iframe.style.cssText = 'border:0;width:100%;min-height:200px;color-scheme:normal'
+      iframe.style.cssText = 'border:0;width:100%;height:600px;color-scheme:normal'
       el.appendChild(iframe)
     }
     const cfg = window.shuoshuoGiscusConfig
@@ -498,8 +498,8 @@
     if (!d || typeof d !== 'object' || !d.giscus) return
     const h = d.giscus.resizeHeight || d.giscus.height || d.setHeight
     if (!h) return
-    document.querySelectorAll('iframe[src*="giscus.app/widget"]').forEach(f => {
-      if (f.contentWindow === e.source) f.style.height = h + 'px'
+    document.querySelectorAll('iframe[src*="giscus.app/"]').forEach(f => {
+      f.style.height = h + 'px'
     })
   })
 
