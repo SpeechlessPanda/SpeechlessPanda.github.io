@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://speechlesspanda.github.io/img/avatar.png">
 <meta property="article:published_time" content="2026-06-24T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-03T02:48:50.633Z">
+<meta property="article:modified_time" content="2026-07-03T03:11:38.961Z">
 <meta property="article:author" content="SpeechlessPanda">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://speechlesspanda.github.io/img/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://speechlesspanda.github.io/memos/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.9/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
@@ -432,9 +432,6 @@
     btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
   }
 })()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/memos/"><i class="fa-fw fas fa-comment-dots"></i><span> 碎碎念</span></a></div></div></div></div><div class="page type-shuoshuo" id="body-wrap"><header class="not-home-page fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">SpeechlessPanda</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/memos/"><i class="fa-fw fas fa-comment-dots"></i><span> 碎碎念</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">碎碎念</h1></div></header><main class="layout hide-aside" id="content-inner"><div class="nc" id="page"><div id="article-container"><script>(() => {
-  const commentDiv = `<hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div>`
-  window.shuoshuoCommentDiv = commentDiv
-
   const runDestroy = () => {
     // 销毁手动展开的评论区,保留自动展开(有评论)的项
     document.querySelectorAll('#article-container .shuoshuo-comment:not(.no-comment):not([data-auto])').forEach(el => {
@@ -443,20 +440,37 @@
     })
   }
 
+  // 用 giscus-widget(custom element)支持同页多条碎碎念的独立评论区
+  window.createShuoshuoGiscusWidget = (el, key) => {
+    const cfg = window.shuoshuoGiscusConfig
+    if (!cfg) return
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    el.innerHTML = ''
+    const widget = document.createElement('giscus-widget')
+    widget.setAttribute('repo', cfg.repo)
+    widget.setAttribute('repo-id', cfg.repoId)
+    widget.setAttribute('category-id', cfg.categoryId)
+    widget.setAttribute('mapping', 'specific')
+    widget.setAttribute('term', key)
+    widget.setAttribute('theme', isDark ? cfg.darkTheme : cfg.lightTheme)
+    widget.setAttribute('reactions-enabled', '1')
+    widget.setAttribute('input-position', 'top')
+    widget.setAttribute('lang', cfg.lang)
+    widget.setAttribute('loading', 'lazy')
+    el.appendChild(widget)
+  }
+
   window.addCommentToShuoshuo = e => {
     const btn = e.target.closest('.shuoshuo-comment-btn')
     if (!btn) return
 
     const ele = btn.closest('.container').nextElementSibling
-    const { shuoshuoComment } = window
     const isInclude = ele.classList.contains('no-comment')
     runDestroy()
     if (isInclude) {
       ele.classList.remove('no-comment')
-      ele.innerHTML = commentDiv
       const key = `${location.pathname.replace(/\/$/, '')}?key=${ele.getAttribute('data-key')}`
-      btf.switchComments(ele, key)
-      shuoshuoComment.loadComment && shuoshuoComment.loadComment(ele, key)
+      window.createShuoshuoGiscusWidget(ele, key)
     }
   }
 })()
@@ -651,7 +665,7 @@
 
   // 有评论的碎碎念自动展开评论区(build 时已查 commentCount 注入 shuoshuo-data)
   const autoExpandComments = () => {
-    if (!window.shuoshuoComment || !window.shuoshuoComment.loadComment || !window.shuoshuoCommentDiv) return
+    if (!window.createShuoshuoGiscusWidget) return
     const containers = document.querySelectorAll('#article-container .shuoshuo-comment.no-comment[data-key]')
     containers.forEach(el => {
       const key = el.getAttribute('data-key')
@@ -659,9 +673,8 @@
       if (item && item.commentCount > 0) {
         el.classList.remove('no-comment')
         el.setAttribute('data-auto', '1')
-        el.innerHTML = window.shuoshuoCommentDiv
-        btf.switchComments(el, `${location.pathname.replace(/\/$/, '')}?key=${key}`)
-        window.shuoshuoComment.loadComment(el, key)
+        const term = `${location.pathname.replace(/\/$/, '')}?key=${key}`
+        window.createShuoshuoGiscusWidget(el, term)
       }
     })
   }
@@ -819,9 +832,24 @@
   btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
 
   if (isShuoshuo) {
-    'Giscus' === 'Giscus'
-      ? window.shuoshuoComment = { loadComment: loadGiscus }
-      : window.loadOtherComment = loadGiscus
+    if ('Giscus' === 'Giscus') {
+      // 碎碎念用 giscus-widget(custom element)支持同页多条独立评论区,避免多 client.js 冲突
+      window.shuoshuoGiscusConfig = {
+        repo: 'SpeechlessPanda/SpeechlessPanda.github.io',
+        repoId: 'R_kgDORZHPlQ',
+        categoryId: 'DIC_kwDORZHPlc4C3cyf',
+        lightTheme: getGiscusTheme('light'),
+        darkTheme: getGiscusTheme('dark'),
+        lang: (option && option['data-lang']) || 'zh-CN'
+      }
+      if (!window.__giscusWidgetLoaded) {
+        window.__giscusWidgetLoaded = true
+        const wjs = document.createElement('script')
+        wjs.type = 'module'
+        wjs.src = 'https://giscus.app/widget.js'
+        document.head.appendChild(wjs)
+      }
+    }
     return
   }
 
