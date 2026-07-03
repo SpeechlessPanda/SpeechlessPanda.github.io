@@ -3117,6 +3117,10 @@ figure.highlight pre .javascript .function {
 #article-container .shuoshuo-comment.no-comment {
   display: none;
 }
+#article-container .shuoshuo-comment .giscus-frame {
+  background: transparent;
+  color-scheme: normal;
+}
 .shuoshuo-navigation {
   display: -webkit-box;
   display: -moz-box;
