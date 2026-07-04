@@ -1,7 +1,16 @@
 name: Giscus Comment Email Notify
 
+# 监听 Giscus 评论:
+#   - discussion(created):某篇文章/碎碎念的第一条评论会"新建 discussion",触发此事件(首评)
+#   - discussion_comment(created):对已有 discussion 的后续回复
+# 两者字段不同(comment.* vs discussion.*),下面用 github.event_name 三元表达式分流取值。
+# 仅在发布仓 SpeechlessPanda.github.io 运行(Discussions 与 SMTP secrets 都在此仓)。
+
 on:
   workflow_dispatch:
+  discussion:
+    types:
+      - created
   discussion_comment:
     types:
       - created
@@ -9,7 +18,7 @@ on:
 jobs:
   send-email:
     runs-on: ubuntu-latest
-    if: github.repository == 'SpeechlessPanda/SpeechlessPanda.github.io' && (github.event_name == 'workflow_dispatch' || github.event.action == 'created')
+    if: github.repository == 'SpeechlessPanda/SpeechlessPanda.github.io'
     permissions:
       contents: read
     steps:
@@ -32,13 +41,13 @@ jobs:
           secure: true
           from: ${{ secrets.MAIL_FROM }}
           to: ${{ secrets.MAIL_TO }}
-          subject: "[Blog评论提醒] ${{ github.event_name == 'workflow_dispatch' && '手动测试邮件' || format('{0} 评论了你的文章', github.event.comment.user.login) }}"
+          subject: "[Blog评论提醒] ${{ github.event_name == 'workflow_dispatch' && '手动测试邮件' || (github.event_name == 'discussion_comment' && format('{0} 评论了你的文章', github.event.comment.user.login) || format('{0} 留下了首条评论(新建讨论)', github.event.discussion.user.login)) }}"
           html_body: |
             <h2>博客有新评论</h2>
-            <p><strong>评论人：</strong>${{ github.event_name == 'workflow_dispatch' && 'manual-test' || github.event.comment.user.login }}</p>
+            <p><strong>评论人：</strong>${{ github.event_name == 'workflow_dispatch' && 'manual-test' || (github.event_name == 'discussion_comment' && github.event.comment.user.login || github.event.discussion.user.login) }}</p>
             <p><strong>讨论标题：</strong>${{ github.event_name == 'workflow_dispatch' && 'GitHub Actions 手动测试' || github.event.discussion.title }}</p>
             <p><strong>评论内容：</strong></p>
-            <blockquote>${{ github.event_name == 'workflow_dispatch' && '这是一封手动触发的测试邮件，用于验证 QQ SMTP 配置是否正常。' || github.event.comment.body }}</blockquote>
-            <p><a href="${{ github.event_name == 'workflow_dispatch' && format('https://github.com/{0}/actions/runs/{1}', github.repository, github.run_id) || github.event.comment.html_url }}">点击查看来源</a></p>
+            <blockquote>${{ github.event_name == 'workflow_dispatch' && '这是一封手动触发的测试邮件，用于验证 QQ SMTP 配置是否正常。' || (github.event_name == 'discussion_comment' && github.event.comment.body || github.event.discussion.body) }}</blockquote>
+            <p><a href="${{ github.event_name == 'workflow_dispatch' && format('https://github.com/{0}/actions/runs/{1}', github.repository, github.run_id) || (github.event_name == 'discussion_comment' && github.event.comment.html_url || github.event.discussion.html_url) }}">点击查看来源</a></p>
             <hr/>
             <p>Repository: ${{ github.repository }}</p>
