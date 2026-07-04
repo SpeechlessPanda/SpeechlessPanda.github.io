@@ -21,7 +21,7 @@
 
 - **Giscus 评论**：基于 GitHub Discussions，支持 Reactions、多语言、暗色模式联动
 - **碎碎念每条可独立评论**：同页多条评论区用独立 iframe 直嵌 giscus `/widget`（绕过 client.js 单例），每条对应一个 Giscus discussion；登录态只在 OAuth 回调当次传递（不写 localStorage，避免过期 session 触发 `oauth/token` 400 导致整条评论区空白）；giscus.app 被广告拦截/跟踪防护屏蔽时，每条评论区常驻"在新标签页打开评论 ↗"一键出口
-- **评论邮件通知**：有人评论时通过 CI（`comment-email-notify.yml`）自动发邮件通知作者
+- **评论邮件通知**：`comment-email-notify.yml` 监听 `discussion`（首评/新建讨论）与 `discussion_comment`（后续回复），有评论即通过 QQ SMTP 自动发邮件通知作者（在发布仓运行）
 
 ### 📊 统计与分析
 
@@ -111,9 +111,10 @@ blog/
 │   └── butterfly/                    # Butterfly 主题（本地源码，配置在其 _config.yml）
 ├── scaffolds/                        # 文章 / 页面模板（post / page / draft）
 ├── .github/workflows/
-│   ├── deploy-from-source.yml        # push → 自动构建部署
-│   ├── comment-email-notify.yml      # Giscus 评论 → 邮件通知
-│   └── search-engine-ping.yml        # 部署后 ping 搜索引擎
+│   ├── deploy-from-source.yml        # push → 自动构建并部署到发布仓(设 exclude_assets="" 把 .github/workflows 一起带过去)
+│   ├── retry-pages-deploy.yml        # 每 10 分钟巡检,发布仓 pages 部署偶发失败则自动重跑(在源仓跨仓运行)
+│   ├── comment-email-notify.yml      # Giscus 评论(首评+回复)→ 邮件通知(在发布仓运行)
+│   └── search-engine-ping.yml        # 发布仓部署后 ping 搜索引擎(在发布仓运行)
 ├── docs/superpowers/                 # 设计文档与实现计划
 ├── fonts/                            # OG 字体（构建时下载，gitignore）
 └── public/                           # 生成产物（gitignore）
@@ -133,10 +134,13 @@ push 到 `blog-s-code` 的 `main` 分支 → GitHub Actions 自动构建 → 部
 3. `pnpm install --frozen-lockfile`
 4. **缓存 OG 字体**（`fonts/`，key 基于 `_config.yml`）
 5. `pnpm run build`（hexo generate，自动生成碎碎念页面、OG 图、RSS、sitemap 等）
-6. sync README 到 public
-7. push `public/` 到发布仓库（peaceiris/actions-gh-pages）
+6. sync README + 发布仓 workflow（comment-email-notify / search-engine-ping）到 public
+7. push `public/`（含 `.github/workflows`，通过 `exclude_assets: ""` 不再排除）到发布仓库（peaceiris/actions-gh-pages）
 
 触发条件：`main` 分支 push / 手动 `workflow_dispatch`。
+
+> 发布仓的 `pages-build-deployment` 偶发平台错误 "Deployment failed, try again later." 时，源仓的 `retry-pages-deploy.yml` 会每 10 分钟自动重跑（最多 3 次，防死循环），无需人工介入。
+> 注：`comment-email-notify` / `search-engine-ping` 同步到发布仓后在那里激活（均带 `if: github.repository=='SpeechlessPanda/SpeechlessPanda.github.io'` 守卫）；`retry-pages-deploy` 留在源仓跨仓操作（peaceiris 默认会排除 `.github`，故用 `exclude_assets: ""` 放行前两个，retry 不进同步集）。
 
 ---
 
