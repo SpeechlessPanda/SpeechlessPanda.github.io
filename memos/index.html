@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://speechlesspanda.github.io/img/avatar.png">
 <meta property="article:published_time" content="2026-06-24T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-04T08:59:03.783Z">
+<meta property="article:modified_time" content="2026-07-04T09:17:39.811Z">
 <meta property="article:author" content="SpeechlessPanda">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://speechlesspanda.github.io/img/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://speechlesspanda.github.io/memos/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.9/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
@@ -441,23 +441,15 @@
   }
 
   // 用独立 iframe 直嵌 giscus /widget(绕过 client.js 单例),支持同页多条独立评论区
-  window.createShuoshuoGiscusWidget = (el, key) => {
+  // session 只在 OAuth 回调那一瞬(window.__giscusPendingSession)传递,不写 localStorage、不做本地校验——
+  // 持久化/校验过的 session 会过期,过期后回传给 giscus 会触发 oauth/token 400 导致整条评论区空白。
+  window.createShuoshuoGiscusWidget = (el, key, session) => {
+    if (session === undefined) session = window.__giscusPendingSession || ''
     const build = cfg => {
       const currentTheme = document.documentElement.getAttribute('data-theme') || 'light'
       const isDark = currentTheme === 'dark'
       const __u = new URL(location.href)
       __u.searchParams.delete('giscus')
-      // 仅发送未过期的 giscus session(JWT)。过期/畸形的 session 一律不发并清掉,
-      // 否则 giscus 会去 oauth/token 换 token 报 400,导致整条评论区渲染失败(空白)。
-      let __session = localStorage.getItem('giscus-session') || ''
-      if (__session) {
-        let __ok = false
-        try {
-          const __p = JSON.parse(atob(__session.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')))
-          __ok = !!(__p && __p.exp && __p.exp * 1000 > Date.now())
-        } catch (e) { __ok = false }
-        if (!__ok) { localStorage.removeItem('giscus-session'); __session = '' }
-      }
       const params = new URLSearchParams({
         repo: cfg.repo,
         repoId: cfg.repoId,
@@ -471,7 +463,7 @@
         inputPosition: 'top',
         origin: __u.toString(),
         backLink: __u.toString(),
-        session: __session,
+        session: session,
         strict: '0'
       })
       el.innerHTML = ''
@@ -551,17 +543,14 @@
     })
   }, 'shuoshuo-giscus-theme')
 
-  // 处理 Giscus 登录回调(?giscus=session):存 session 并清掉 URL 参数,然后刷新已有 iframe 使其带上新 session
+  // 处理 Giscus 登录回调(?giscus=session):只在"本次加载"内保留 session(挂在 window 上),
+  // 由后续 createShuoshuoGiscusWidget 创建 iframe 时带上;不写 localStorage,避免残留过期 session。
   const __giscusCallback = new URL(location.href).searchParams.get('giscus')
   if (__giscusCallback) {
-    localStorage.setItem('giscus-session', __giscusCallback)
+    window.__giscusPendingSession = __giscusCallback
     const __u = new URL(location.href)
     __u.searchParams.delete('giscus')
     history.replaceState(null, document.title, __u.toString())
-    document.querySelectorAll('iframe.giscus-frame').forEach(f => {
-      const term = f.getAttribute('data-term')
-      if (term) window.createShuoshuoGiscusWidget(f.parentElement, term)
-    })
   }
 
 })()
