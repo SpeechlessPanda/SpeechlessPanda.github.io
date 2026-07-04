@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://speechlesspanda.github.io/img/avatar.png">
 <meta property="article:published_time" content="2026-06-24T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-04T02:57:31.145Z">
+<meta property="article:modified_time" content="2026-07-04T04:18:00.871Z">
 <meta property="article:author" content="SpeechlessPanda">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://speechlesspanda.github.io/img/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://speechlesspanda.github.io/memos/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.9/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
@@ -467,7 +467,6 @@
       const iframe = document.createElement('iframe')
       iframe.className = 'giscus-frame'
       iframe.title = 'Comments'
-      iframe.setAttribute('scrolling', 'no')
       iframe.setAttribute('data-theme', currentTheme)
       iframe.setAttribute('data-term', key)
       iframe.src = 'https://giscus.app/' + (cfg.lang || 'en') + '/widget?' + params.toString()
@@ -488,16 +487,16 @@
     wait()
   }
 
-  // 监听 Giscus iframe 高度消息,各自适应高度
+  // 监听 Giscus iframe 高度消息,按 event.source 精确匹配到对应 iframe 再各自适应高度
+  // (同页有多条独立评论区,不能用同一条消息的高度套到所有 iframe,否则较高的会被压扁、配合 scrolling 截断后只剩一个空框)
   window.addEventListener('message', e => {
     if (e.origin !== 'https://giscus.app') return
     const d = e.data
     if (!d || typeof d !== 'object' || !d.giscus) return
     const h = d.giscus.resizeHeight || d.giscus.height || d.setHeight
     if (!h) return
-    document.querySelectorAll('iframe[src*="giscus.app/"]').forEach(f => {
-      f.style.height = h + 'px'
-    })
+    const target = Array.from(document.querySelectorAll('iframe[src*="giscus.app/"]')).find(f => f.contentWindow === e.source)
+    if (target) target.style.height = h + 'px'
   })
 
   window.addCommentToShuoshuo = e => {
