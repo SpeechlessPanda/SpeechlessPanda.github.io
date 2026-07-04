@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://speechlesspanda.github.io/img/avatar.png">
 <meta property="article:published_time" content="2026-06-24T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-04T04:18:00.871Z">
+<meta property="article:modified_time" content="2026-07-04T06:24:20.166Z">
 <meta property="article:author" content="SpeechlessPanda">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://speechlesspanda.github.io/img/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://speechlesspanda.github.io/memos/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.9/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
@@ -464,16 +464,37 @@
         strict: '0'
       })
       el.innerHTML = ''
+      const widgetUrl = 'https://giscus.app/' + (cfg.lang || 'en') + '/widget?' + params.toString()
       const iframe = document.createElement('iframe')
       iframe.className = 'giscus-frame'
       iframe.title = 'Comments'
       iframe.setAttribute('data-theme', currentTheme)
       iframe.setAttribute('data-term', key)
-      iframe.src = 'https://giscus.app/' + (cfg.lang || 'en') + '/widget?' + params.toString()
-      iframe.loading = 'lazy'
+      iframe.src = widgetUrl
       iframe.allow = 'clipboard-write'
       iframe.style.cssText = 'border:0;width:100%;min-height:180px;height:600px;background:transparent;color-scheme:' + (currentTheme === 'dark' ? 'dark' : 'light')
+      iframe._giscusReady = false
       el.appendChild(iframe)
+
+      // 兜底:giscus 被拦截器/浏览器跟踪防护/网络阻断而长时间未渲染时,给出可读提示与"在新标签打开"链接,
+      // 避免只剩一个无声的空框;一旦 giscus 发来任何消息即视为成功并清掉提示。
+      iframe._giscusTimer = setTimeout(() => {
+        if (iframe._giscusReady) return
+        if (el.querySelector('.giscus-fallback-notice')) return
+        const notice = document.createElement('div')
+        notice.className = 'giscus-fallback-notice'
+        notice.style.cssText = 'padding:14px 16px;font-size:14px;line-height:1.7;border-radius:8px;background:rgba(125,125,125,.10);color:inherit;word-break:break-word'
+        const a = document.createElement('a')
+        a.href = widgetUrl
+        a.target = '_blank'
+        a.rel = 'noopener'
+        a.textContent = '在新标签页打开评论区'
+        a.style.cssText = 'color:var(--light-blue,#425aef);text-decoration:underline'
+        notice.appendChild(document.createTextNode('评论区加载失败。若开启了广告拦截(uBlock、AdGuard 等)、浏览器跟踪防护(Edge「跟踪防护」Strict),或当前网络无法访问 giscus.app,评论区将无法显示。可尝试 '))
+        notice.appendChild(a)
+        notice.appendChild(document.createTextNode(', 或对本站关闭拦截/跟踪防护后刷新。'))
+        el.appendChild(notice)
+      }, 12000)
     }
     const cfg = window.shuoshuoGiscusConfig
     if (cfg) { build(cfg); return }
@@ -493,10 +514,17 @@
     if (e.origin !== 'https://giscus.app') return
     const d = e.data
     if (!d || typeof d !== 'object' || !d.giscus) return
-    const h = d.giscus.resizeHeight || d.giscus.height || d.setHeight
-    if (!h) return
     const target = Array.from(document.querySelectorAll('iframe[src*="giscus.app/"]')).find(f => f.contentWindow === e.source)
-    if (target) target.style.height = h + 'px'
+    if (!target) return
+    // giscus 发来任意消息即视为已成功渲染:标记并清掉兜底提示与计时器
+    if (!target._giscusReady) {
+      target._giscusReady = true
+      if (target._giscusTimer) clearTimeout(target._giscusTimer)
+      const notice = target.parentElement && target.parentElement.querySelector('.giscus-fallback-notice')
+      if (notice) notice.remove()
+    }
+    const h = d.giscus.resizeHeight || d.giscus.height || d.setHeight
+    if (h) target.style.height = h + 'px'
   })
 
   window.addCommentToShuoshuo = e => {
