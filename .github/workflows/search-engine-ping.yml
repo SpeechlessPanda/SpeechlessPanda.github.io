@@ -1,0 +1,50 @@
+name: Search Engine Sitemap Ping
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  ping-sitemap:
+    runs-on: ubuntu-latest
+    if: github.repository == 'SpeechlessPanda/SpeechlessPanda.github.io'
+    permissions:
+      contents: read
+    env:
+      SITE_URL: https://speechlesspanda.github.io
+      SITEMAP_URL: https://speechlesspanda.github.io/sitemap.xml
+      BAIDU_SITE: ${{ secrets.BAIDU_SITE }}
+      BAIDU_TOKEN: ${{ secrets.BAIDU_TOKEN }}
+    steps:
+      - name: Ping common search engines
+        run: |
+          set +e
+          endpoints=(
+            "https://www.bing.com/ping?sitemap=${SITEMAP_URL}"
+            "https://www.google.com/ping?sitemap=${SITEMAP_URL}"
+            "https://yandex.com/ping?sitemap=${SITEMAP_URL}"
+          )
+
+          for endpoint in "${endpoints[@]}"; do
+            code=$(curl -L -s --max-time 20 -o /dev/null -w "%{http_code}" "$endpoint")
+            exit_code=$?
+            if [ "$exit_code" -ne 0 ]; then
+              echo "$endpoint -> CURL_ERROR $exit_code"
+            else
+              echo "$endpoint -> HTTP $code"
+            fi
+          done
+
+          exit 0
+
+      - name: Submit homepage to Baidu (optional)
+        run: |
+          if [ -z "$BAIDU_SITE" ] || [ -z "$BAIDU_TOKEN" ]; then
+            echo "Skip Baidu submit: BAIDU_SITE or BAIDU_TOKEN is empty"
+            exit 0
+          fi
+
+          response=$(curl -s --max-time 20 -H "Content-Type: text/plain" --data-binary "${SITE_URL}/" "http://data.zz.baidu.com/urls?site=${BAIDU_SITE}&token=${BAIDU_TOKEN}" || true)
+          echo "Baidu response: $response"

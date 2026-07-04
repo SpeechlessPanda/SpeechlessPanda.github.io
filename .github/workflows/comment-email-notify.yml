@@ -1,0 +1,44 @@
+name: Giscus Comment Email Notify
+
+on:
+  workflow_dispatch:
+  discussion_comment:
+    types:
+      - created
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    if: github.repository == 'SpeechlessPanda/SpeechlessPanda.github.io' && (github.event_name == 'workflow_dispatch' || github.event.action == 'created')
+    permissions:
+      contents: read
+    steps:
+      - name: Validate required secrets
+        run: |
+          test -n "${{ secrets.SMTP_SERVER }}" || (echo "Missing SMTP_SERVER" && exit 1)
+          test -n "${{ secrets.SMTP_PORT }}" || (echo "Missing SMTP_PORT" && exit 1)
+          test -n "${{ secrets.SMTP_USERNAME }}" || (echo "Missing SMTP_USERNAME" && exit 1)
+          test -n "${{ secrets.SMTP_PASSWORD }}" || (echo "Missing SMTP_PASSWORD" && exit 1)
+          test -n "${{ secrets.MAIL_FROM }}" || (echo "Missing MAIL_FROM" && exit 1)
+          test -n "${{ secrets.MAIL_TO }}" || (echo "Missing MAIL_TO" && exit 1)
+
+      - name: Send comment notification email
+        uses: dawidd6/action-send-mail@v4
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          secure: true
+          from: ${{ secrets.MAIL_FROM }}
+          to: ${{ secrets.MAIL_TO }}
+          subject: "[Blog评论提醒] ${{ github.event_name == 'workflow_dispatch' && '手动测试邮件' || format('{0} 评论了你的文章', github.event.comment.user.login) }}"
+          html_body: |
+            <h2>博客有新评论</h2>
+            <p><strong>评论人：</strong>${{ github.event_name == 'workflow_dispatch' && 'manual-test' || github.event.comment.user.login }}</p>
+            <p><strong>讨论标题：</strong>${{ github.event_name == 'workflow_dispatch' && 'GitHub Actions 手动测试' || github.event.discussion.title }}</p>
+            <p><strong>评论内容：</strong></p>
+            <blockquote>${{ github.event_name == 'workflow_dispatch' && '这是一封手动触发的测试邮件，用于验证 QQ SMTP 配置是否正常。' || github.event.comment.body }}</blockquote>
+            <p><a href="${{ github.event_name == 'workflow_dispatch' && format('https://github.com/{0}/actions/runs/{1}', github.repository, github.run_id) || github.event.comment.html_url }}">点击查看来源</a></p>
+            <hr/>
+            <p>Repository: ${{ github.repository }}</p>
