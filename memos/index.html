@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://speechlesspanda.github.io/img/avatar.png">
 <meta property="article:published_time" content="2026-06-24T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-03T14:13:57.848Z">
+<meta property="article:modified_time" content="2026-07-04T02:38:41.496Z">
 <meta property="article:author" content="SpeechlessPanda">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://speechlesspanda.github.io/img/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://speechlesspanda.github.io/memos/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.9/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
@@ -473,7 +473,7 @@
       iframe.src = 'https://giscus.app/' + (cfg.lang || 'en') + '/widget?' + params.toString()
       iframe.loading = 'lazy'
       iframe.allow = 'clipboard-write'
-      iframe.style.cssText = 'border:0;width:100%;min-height:180px;height:600px;background:transparent;color-scheme:normal'
+      iframe.style.cssText = 'border:0;width:100%;min-height:180px;height:600px;background:transparent;color-scheme:' + (currentTheme === 'dark' ? 'dark' : 'light')
       el.appendChild(iframe)
     }
     const cfg = window.shuoshuoGiscusConfig
@@ -523,6 +523,7 @@
     const theme = isDark ? tc.darkTheme : tc.lightTheme
     document.querySelectorAll('iframe.giscus-frame').forEach(f => {
       f.setAttribute('data-theme', currentTheme)
+      f.style.colorScheme = isDark ? 'dark' : 'light'
       try { f.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, 'https://giscus.app') } catch (e) {}
     })
   }, 'shuoshuo-giscus-theme')
@@ -745,6 +746,42 @@
     })
   }
 
+  // 碎碎念页内容动态加载，初始高度可能不足导致主题 main.js 的滚动监听提前退出，
+  // 因此单独监听滚动并为 header 添加/移除 nav-fixed / nav-visible，保证下滑后导航栏有背景。
+  const initShuoshuoHeaderScroll = () => {
+    if (window._shuoshuoScrollAttached) return
+    window._shuoshuoScrollAttached = true
+
+    let lastTop = 0
+    const handler = btf.throttle(() => {
+      const $header = document.getElementById('page-header')
+      if (!$header) return
+
+      const currentTop = window.scrollY || document.documentElement.scrollTop
+      const isDown = currentTop > lastTop
+      lastTop = currentTop
+
+      if (currentTop > 56) {
+        $header.classList.add('nav-fixed')
+        if (isDown) {
+          $header.classList.remove('nav-visible')
+        } else {
+          $header.classList.add('nav-visible')
+        }
+      } else {
+        $header.classList.remove('nav-fixed', 'nav-visible')
+      }
+    }, 300)
+
+    window.addEventListener('scroll', handler, { passive: true })
+    window.addEventListener('pjax:send', () => {
+      window.removeEventListener('scroll', handler)
+      window._shuoshuoScrollAttached = false
+    }, { once: true })
+
+    handler()
+  }
+
   window.shuoshuoPrevPage = () => {
     if (currentPage > 1) {
       currentPage--
@@ -829,6 +866,7 @@
       totalPages = Math.ceil(data.length / itemsPerPage)
 
       renderPage(currentPage)
+      initShuoshuoHeaderScroll()
     } catch (error) {
       console.error(error)
     }

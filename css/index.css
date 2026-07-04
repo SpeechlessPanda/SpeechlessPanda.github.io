@@ -3119,7 +3119,10 @@ figure.highlight pre .javascript .function {
 }
 #article-container .shuoshuo-comment .giscus-frame {
   background: transparent;
-  color-scheme: normal;
+  color-scheme: light;
+}
+[data-theme='dark'] #article-container .shuoshuo-comment .giscus-frame {
+  color-scheme: dark;
 }
 .shuoshuo-navigation {
   display: -webkit-box;
