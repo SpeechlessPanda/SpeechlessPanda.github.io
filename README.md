@@ -20,7 +20,7 @@
 ### 💬 评论与互动
 
 - **Giscus 评论**：基于 GitHub Discussions，支持 Reactions、多语言、暗色模式联动
-- **碎碎念每条可独立评论**：每条对应一个 Giscus discussion
+- **碎碎念每条可独立评论**：同页多条评论区用独立 iframe 直嵌 giscus `/widget`（绕过 client.js 单例），每条对应一个 Giscus discussion；登录态只在 OAuth 回调当次传递（不写 localStorage，避免过期 session 触发 `oauth/token` 400 导致整条评论区空白）；giscus.app 被广告拦截/跟踪防护屏蔽时，每条评论区常驻"在新标签页打开评论 ↗"一键出口
 - **评论邮件通知**：有人评论时通过 CI（`comment-email-notify.yml`）自动发邮件通知作者
 
 ### 📊 统计与分析
@@ -29,12 +29,12 @@
 
 ### 🔍 搜索
 
-- **本地搜索**：`hexo-generator-searchdb`，全文即时搜索，无外部服务依赖
+- **本地搜索**：`hexo-generator-searchdb`，全文即时搜索，无外部服务依赖（碎碎念也纳入搜索索引，由 `scripts/search-memos.js` 注入 `search.xml`）
 
 ### 🌐 SEO 与分发
 
 - **Open Graph meta** + 自动生成的 OG 图
-- **RSS 订阅**：`atom.xml`（`hexo-generator-feed`）
+- **RSS 订阅**：`atom.xml`（`hexo-generator-feed`），由 `scripts/feed-memos.js` 额外把碎碎念注入，订阅者可同时收到博客文章与碎碎念
 - **站点地图**：`sitemap.xml` + `baidusitemap.xml`（百度）+ `robots.txt`（`hexo-generator-robotstxt`）
 - **搜索引擎 ping**：CI 部署后自动通知搜索引擎（`search-engine-ping.yml`）
 - **分享按钮**：sharejs（微信 / X / 微博 / QQ / Facebook）
@@ -100,6 +100,10 @@ blog/
 │   └── img/                          # 静态图片（头像、打赏码等）
 ├── scripts/
 │   ├── og-image.js                   # OG 图生成（hexo generator + helper）
+│   ├── feed-memos.js                 # 把碎碎念注入 atom.xml（RSS）
+│   ├── memo-comment-count.js         # 构建时查 Giscus 评论数，控制碎碎念评论区自动展开
+│   ├── memo-helpers.js               # 碎碎念模板 helper（首页"最新碎碎念"等）
+│   ├── search-memos.js               # 把碎碎念注入 search.xml（本地搜索可命中）
 │   └── events/
 │       ├── sync_comment_notify_workflow.js   # 把发布仓 workflow 同步到 public
 │       └── sync_readme_to_public.js          # 把 README 同步到 public
