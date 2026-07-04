@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://speechlesspanda.github.io/img/avatar.png">
 <meta property="article:published_time" content="2026-06-24T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-04T08:12:49.004Z">
+<meta property="article:modified_time" content="2026-07-04T08:32:11.567Z">
 <meta property="article:author" content="SpeechlessPanda">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://speechlesspanda.github.io/img/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://speechlesspanda.github.io/memos/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.9/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
@@ -477,7 +477,6 @@
 
       // 常驻、中性的"在新标签打开评论"入口:正常加载时是个不起眼的小链接;
       // 当 giscus 被广告拦截/浏览器跟踪防护/网络阻断而显示空白时,它是用户能看到评论的一键出口。
-      // (不用定时弹"加载失败"提示——跨域无法可靠区分"被拦截"与"多评论区里非首条 iframe 正常渲染",会误伤。)
       const opener = document.createElement('a')
       opener.className = 'giscus-opener'
       opener.href = widgetUrl
@@ -487,6 +486,19 @@
       opener.title = '若评论区空白:多半是广告拦截(uBlock/AdGuard)、浏览器跟踪防护(Edge「跟踪防护」)屏蔽了 giscus.app,或当前网络无法访问;点此可在新标签查看评论,或对本站关闭拦截/跟踪防护后刷新。'
       opener.style.cssText = 'display:inline-block;margin-top:6px;font-size:12px;color:#858585;text-decoration:none;border-bottom:1px dashed #bbb'
       el.appendChild(opener)
+
+      // 兜底诊断:正常时 giscus 首条 iframe 会在约 2s 内回传消息并置真 window.__giscusAlive;
+      // 若 15s 内始终没有任何 giscus 消息(被广告拦截/跟踪防护/断网整段屏蔽),就在本框给出明确提示。
+      // 用全局标志而非按 iframe 判断:同页非首条 iframe 本就不回传消息,靠"首条已存活"来抑制,避免误伤正常加载。
+      setTimeout(() => {
+        if (window.__giscusAlive) return
+        if (el.querySelector('.giscus-fallback-notice')) return
+        const notice = document.createElement('div')
+        notice.className = 'giscus-fallback-notice'
+        notice.style.cssText = 'margin-top:8px;padding:12px 16px;font-size:14px;line-height:1.7;border-radius:8px;background:rgba(255,71,87,.08);border:1px solid rgba(255,71,87,.3);color:inherit;word-break:break-word'
+        notice.textContent = '评论区未能加载。你的浏览器(广告拦截扩展、Edge「跟踪防护」等)或网络屏蔽了 giscus.app。可点上方"在新标签页打开评论 ↗"直接查看,或对本站关闭拦截/跟踪防护后刷新。'
+        el.appendChild(notice)
+      }, 15000)
     }
     const cfg = window.shuoshuoGiscusConfig
     if (cfg) { build(cfg); return }
@@ -506,6 +518,7 @@
     if (e.origin !== 'https://giscus.app') return
     const d = e.data
     if (!d || typeof d !== 'object' || !d.giscus) return
+    window.__giscusAlive = true
     const h = d.giscus.resizeHeight || d.giscus.height || d.setHeight
     if (!h) return
     // 按 event.source 精确匹配到发送此消息的那一个 iframe(giscus 同页只会从首条 iframe 回传消息)
@@ -554,24 +567,6 @@
     })
   }
 
-  // 一次性诊断:本博客脚本主动 fetch giscus.app。若被广告拦截扩展、Edge「跟踪防护(严格)」或断网阻挡,
-  // 会在碎碎念顶部直接给出明确提示,免去用户猜测"为什么评论区是空的"。可达时不显示任何东西。
-  if (!window.__giscusReachProbed) {
-    window.__giscusReachProbed = true
-    const __ctrl = new AbortController()
-    const __timer = setTimeout(() => __ctrl.abort(), 8000)
-    fetch('https://giscus.app/', { mode: 'no-cors', cache: 'no-store', signal: __ctrl.signal })
-      .catch(() => {
-        const __box = document.getElementById('article-container')
-        if (!__box || document.querySelector('.giscus-blocked-notice')) return
-        const __n = document.createElement('div')
-        __n.className = 'giscus-blocked-notice'
-        __n.style.cssText = 'margin:10px 0;padding:12px 16px;font-size:14px;line-height:1.7;border-radius:8px;background:rgba(255,71,87,.08);border:1px solid rgba(255,71,87,.3);color:inherit'
-        __n.textContent = '检测到当前浏览器/网络无法访问 giscus.app(评论区托管方),评论区因此无法显示。常见原因:广告拦截扩展、Edge「跟踪防护」设为严格、或网络问题。请对本站关闭拦截/跟踪防护后刷新;每条碎碎念下方仍有"在新标签页打开评论 ↗"可直接打开评论区。'
-        __box.parentNode.insertBefore(__n, __box)
-      })
-      .finally(() => clearTimeout(__timer))
-  }
 })()
 
 </script><script type="application/json" id="shuoshuo-data">[{"author":"SpeechlessPanda","date":"2026-07-02 23:30:00","content":"<p>今天晚上点了个外卖，送到另一个地方去了，要去拿很远，我有点烦，人的劣根性发力，想要退款且拿货（我忏悔）。但是当时申请退款的时候没想到商家会拿回去，结果就是商家没同意，然后申请店铺客服介入，骑手就把餐拿回去了。但是那个时候店铺客服还没同意退款，等于我饭财两空，我就有点难绷。一气之下开始平台客服申请退款。一开始默认弹出来的订单，是我的午饭，我没有察觉到，然后就申请了这个的，把经过跟客服说了，客服找不到骑手核实，就给我退款了。结果退款金额比晚饭钱少我倒是发现了，这才意识到不对。然后想想不能亏，人的劣根性又发力（我忏悔一点吧），又去平台申请了晚饭的退款，结果又通过了……还有前情提要是，中午由于骑手送达超时，我还获赔了 3 元，退款的时候这 3 元并没有算进去。所以我今天，在赚了 3 元的情况下，白吃了一顿午饭，唯一的代价是晚饭只能吃零食（还有就是我内心的忏悔了）。也不知道我这是幸运还是不幸。</p>\n","tags":["生活小事"],"commentCount":1},{"author":"SpeechlessPanda","date":"2026-06-30 23:30:00","content":"<p>tzb 大学果然名不虚传，今天看报名人数居然 500 多个，而且居然能重复报名，有大约 40 个人报了两项及以上，我认识的一个佬各种挂名报了 5 个……我自己的项目创业未办而中道崩殂，还没考完试，只是在跑 baseline 就已经有一大堆问题了，不敢想后面该怎么办。头大，宁愿期末周更久一点，也不想面对那些神奇的问题。果然痛苦是比较出来的，在比赛面前期末周都显得和蔼可亲。</p>\n","tags":["比赛","期末周"],"commentCount":0},{"author":"SpeechlessPanda","date":"2026-06-26 23:30:00","content":"<p>服了，比赛报名临时说不行，有个地方有问题，要重新盖章这些的。虽然我支持周末放假，但是这个节骨眼周末找不到行政盖章也挺无力的。还有就是，明明一个月的报名窗口期，偏偏要等到后半个月甚至最后十天才把盖章流程说出来，刨开节假日后真是酣畅淋漓的与时间赛跑。也是体会到学校行政的恶心之处了，之前体感还没这么明显。</p>\n<p>昨天看上一届学长在群里求实习，看的我不自觉瑟瑟发抖，我要是保不上研，后面本科就业会不会也是这样呢。哎，焦虑。</p>\n<p>今天考完计组了，但晚上回来一点复习状态没有，后面是最重要的两个考试课。我还觉得自己没有找到考试的状态，不知道怎么才能好一点。没招。</p>\n","tags":["焦虑迷茫","期末周"],"commentCount":1},{"author":"SpeechlessPanda","date":"2026-06-25 11:00:00","content":"<p>改了三四个小时，博客新功能终于稳定下来了。虽然大部分时候都是 agent 在干，但也是在期末周抽出了一部分精力和时间。要是对复习有这个热情或许学分绩就能高高的了吧（悲）。对了，碎碎念下面是可以评论的，欢迎大家来互动。 </p>\n","tags":["博客更新","期末周"],"commentCount":0},{"author":"SpeechlessPanda","date":"2026-06-24 23:00:00","content":"<p>碎碎念上线啦!这里记录随手想法、短动态，和长文章分开。支持 <strong>markdown</strong>、<a href=\"https://speechlesspanda.github.io/\">链接</a> 和标签。今天还给博客加了 OG 图自动生成，中文用 LXGW WenKai 渲染，分享链接有预览图了。现在博客的功能越来越多了，非常满意（前段时间悄咪咪更新了一大波功能，不知道有没有老读者发现）。</p>\n<p>BTW ，今天终于提前完成了复习计划里 dsa 的部分，不像之前一样要奋战到十点前最后一刻了，所以顺利地看了会计组，然后头就开始晕了，难顶。怎样才能像一些大佬一样，同时能把三个大比赛、期末周和提前毕设都做好呢（认真）。 </p>\n","tags":["博客更新","期末周"],"commentCount":0}]</script><script>(() => {
