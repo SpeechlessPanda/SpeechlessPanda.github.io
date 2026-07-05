@@ -1,0 +1,53 @@
+name: retry-pages-deploy
+
+# 自动重跑失败的 GitHub Pages 部署。
+# 原因:actions/deploy-pages 偶发平台错误 "Deployment failed, try again later."
+#
+# 本 workflow 由 sync_comment_notify_workflow.js 同步到发布仓 SpeechlessPanda.github.io 并在那里激活
+# (带 if: github.repository=='SpeechlessPanda/SpeechlessPanda.github.io' 守卫,源仓里自动跳过)。
+# 在发布仓运行的好处:① 与 pages-build-deployment 同仓,可用 workflow_run 触发,失败**立即**重跑,
+#   不依赖被 GitHub 限流的定时任务;② 用同仓 GITHUB_TOKEN 即可重跑,不需要 PAT。
+#
+# 触发:workflow_run(pages-build-deployment 完成时,仅失败才跑)+ schedule(每 15 分钟兜底)。
+# 用 run_attempt<3 防死循环。
+
+on:
+  workflow_run:
+    workflows:
+      - pages build and deployment
+    types:
+      - completed
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  retry:
+    if: github.repository == 'SpeechlessPanda/SpeechlessPanda.github.io' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'failure')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rerun latest pages deployment if failed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -uo pipefail
+          LATEST=$(gh run list --workflow=pages-build-deployment --repo "$GITHUB_REPOSITORY" --limit 1 --json databaseId,status,conclusion --jq '.[0]')
+          if [ -z "$LATEST" ] || [ "$LATEST" = "null" ]; then
+            echo "未找到 pages-build-deployment 运行记录,跳过。"
+            exit 0
+          fi
+          STATUS=$(echo "$LATEST" | jq -r .status)
+          CONCLUSION=$(echo "$LATEST" | jq -r .conclusion)
+          RUN_ID=$(echo "$LATEST" | jq -r .databaseId)
+          echo "最近一次 pages 部署: id=$RUN_ID status=$STATUS conclusion=$CONCLUSION (触发: ${{ github.event_name }})"
+          if [ "$STATUS" != "completed" ]; then echo "仍在运行,跳过。"; exit 0; fi
+          if [ "$CONCLUSION" != "failure" ]; then echo "未失败,跳过。"; exit 0; fi
+          ATTEMPT=$(gh run view "$RUN_ID" --repo "$GITHUB_REPOSITORY" --json runAttempt --jq '.runAttempt')
+          echo "尝试次数: $ATTEMPT"
+          if [ "$ATTEMPT" -ge 3 ]; then echo "已尝试 $ATTEMPT 次,放弃以防死循环(请人工排查)。"; exit 0; fi
+          echo "重跑 $RUN_ID ..."
+          gh run rerun "$RUN_ID" --repo "$GITHUB_REPOSITORY"
