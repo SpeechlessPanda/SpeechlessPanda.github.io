@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, SpeechlessPanda</rights>
   <subtitle>A Blog</subtitle>
   <title>SpeechlessPanda</title>
-  <updated>2026-07-09T04:47:31.634Z</updated>
+  <updated>2026-07-10T23:30:00.000Z</updated>
   <entry>
     <author>
       <name>SpeechlessPanda</name>
@@ -27,7 +27,7 @@
       <![CDATA[<p>刚刚阅读了 <a href="https://luminousmen.com/post/design-patterns-suck/">Design Patterns Suck</a> 这篇文章，对设计模式有了些新的思考，且发现在之前<a href="https://spee]]>
     </summary>
     <title>代码品味≈设计模式？</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
   <entry>
     <author>
@@ -48,7 +48,7 @@
 <li>我在不久之前尝试 vibe 了一个]]>
     </summary>
     <title>代码品味与架构设计</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
   <entry>
     <author>
@@ -68,7 +68,7 @@
 <p>收集 GitHub 上值得关注的优质开源项目，按类别整理，持续更新。Star 数截至 2026-06-30（每半个月更新一次）。🆕 标记表示最近一次同步新增的项目，点击下方分类标题可展开查看详情。</p>]]>
     </summary>
     <title>项目收藏</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
   <entry>
     <author>
@@ -86,7 +86,7 @@
       <![CDATA[<p>这几天，阴差阳错将一个保研来我们学校的学姐（不是我们专业的）带上了学习 claude code 怎么使用的路，看着她兴致勃勃的探索，并逐渐掌握我大部分日常用的内容，我不由得感叹原来 agent 的普及率没我想的那么高，以及会用 agent 真的不能算一个多么有优势的点。两个]]>
     </summary>
     <title>原来还可以不是 fomo</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
   <entry>
     <author>
@@ -104,7 +104,7 @@
       <![CDATA[<p>昨晚由于一些原因，深入了解了一下之前就听过的 Warp ，看完之后非常心动，非常迫切想试一下。但是由于之前的 Powershell 已经有各种配置了，改用 Warp 同样的东西要再配一次，还要改各种软件的终端，虽然这可能是很快的事，但是我事太多了，多到哪怕时间不用花太多，我]]>
     </summary>
     <title>快与慢</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
   <entry>
     <author>
@@ -125,7 +125,7 @@
 <p>今天过的真]]>
     </summary>
     <title>我的苦难定理</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
   <entry>
     <author>
@@ -146,7 +146,7 @@
 <p]]>
     </summary>
     <title>初谈从 rust 到 cpp</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
   <entry>
     <author>
@@ -165,7 +165,7 @@
       <![CDATA[<p>在<a href="https://speechlesspanda.github.io/2026/04/06/vibe%20coding%20%E5%BC%80%E5%8F%91%20BFE%20%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D%E4]]>
     </summary>
     <title>对 BFE 构建思路的重思考</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
   <entry>
     <author>
@@ -184,7 +184,7 @@
       <![CDATA[<h2 id="项目简单介绍"><a href="#项目简单介绍" class="headerlink" title="项目简单介绍"></a>项目简单介绍</h2><p>BFE 全称 BlogForEveryone ，是一个专为小白设计的面向 GitHub 部署的一站式博客搭建]]>
     </summary>
     <title>vibe coding 开发 BFE 后的反思与总结</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
   <entry>
     <author>
@@ -203,7 +203,7 @@
 <h2 id="有关项目"><a href="#有关项目" class="headerlink" title="有关项目"></a>有]]>
     </summary>
     <title>vibe coding 前传，看想做后记</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
   <entry>
     <author>
@@ -221,7 +221,7 @@
       <![CDATA[<p>今天又要写博客了，真是痛苦又享受的过程。每次写的内容都是我想写的，而且在写的过程中，我能把一些脑子里零散的不知道什么时候就会消失的想法串联记录下来，这个过程是美妙的。但是每次做这种文字创作工作就会高度集中注意力，而且持续相当一段时间，写的时候是爽了，写完之后不亚于肾透支，导]]>
     </summary>
     <title>一点碎碎念</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
   <entry>
     <author>
@@ -241,7 +241,7 @@
 <p>基]]>
     </summary>
     <title>多看之后，有关idea</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
   <entry>
     <author>
@@ -259,7 +259,7 @@
       <![CDATA[<p>本文写于开学一周后的周日。这是一个浑浑噩噩的一周，在合理的上课策略之下，我拥有了许多课外时间，但当我想把这些课外时间利用起来的时候，发现自己不知道要做什么。一开始想着学完一套 Java 课程，但是跟课上内容重合了，我想着课件加 AI 应该就能勉强达到要用的时候能马上上手的程]]>
     </summary>
     <title>多看，多想，少做</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
   <entry>
     <author>
@@ -277,7 +277,7 @@
       <![CDATA[<p>我高考专业是在知道自己不想选什么，然后在剩下的里面挑一个的情况下，选择了计算机。一开始并没有什么兴趣可言，直到我接触了很多种语言之后，反复在每种语言学习的一开始，输出一个“ hello world ”。我开始觉得技术是一件很有意思的事，甚至有一瞬间觉得是神圣的。这算是我对计]]>
     </summary>
     <title>hello world</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
   <entry>
     <author>
@@ -295,9 +295,11 @@
       <![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇文章写于我大二寒假的末尾，动笔的契机是寒假末尾不知道能干点什么，然后在一个交流群里有人做了个能把群友发过的博客转发到群里的机器人，看着群]]>
     </summary>
     <title>练习时长一年半大学生有感</title>
-    <updated>2026-07-09T04:47:31.634Z</updated>
+    <updated>2026-07-10T15:59:23.449Z</updated>
   </entry>
-<entry><author><name>SpeechlessPanda</name></author><category term="假期"/><content type="html"><![CDATA[<p>颓废的三天，完全不像我预想的一样进入了比赛的状态。与其说在断断续续的推进比赛，不如说在各种其他活动中抽空做了一下比赛的内容。所以，我要立个 flag ，明天开始认真干活。主线比赛，支线学语言和看书。</p>
+<entry><author><name>SpeechlessPanda</name></author><category term="假期"/><category term="有趣"/><category term="技术"/><content type="html"><![CDATA[<p>今天看书看到上世纪八九十年代的一个 Wirth 定律：软件变慢的速度比硬件变快的速度更快。这句话挺有启发性的，但除了这点以外，让我非常想在这里分享这句话的另一个原因是，它另一个版本的表述：Intel给予的，Microsoft拿走。太有趣了。</p>
+<p>今天也是终于彻底进入干活的状态了，回到期末考前的作息。可喜可贺。下周小学期更是另一种意义上回到期末考前的状态。希望 CPU 不要太难搓，希望 jzm 是善良人格。</p>
+]]></content><id>https://speechlesspanda.github.io/memos/#2026-07-10T23:30:00.000Z</id><link href="https://speechlesspanda.github.io/memos/"/><published>2026-07-10T23:30:00.000Z</published><title>碎碎念 · 2026-07-10</title><updated>2026-07-10T23:30:00.000Z</updated></entry><entry><author><name>SpeechlessPanda</name></author><category term="假期"/><content type="html"><![CDATA[<p>颓废的三天，完全不像我预想的一样进入了比赛的状态。与其说在断断续续的推进比赛，不如说在各种其他活动中抽空做了一下比赛的内容。所以，我要立个 flag ，明天开始认真干活。主线比赛，支线学语言和看书。</p>
 <p>今天小学期课程安排出来了，怎么能既是 jzm ，又要上早八的。我都上了三次 jzm 了。人怎么能同时占这么多好事。</p>
 ]]></content><id>https://speechlesspanda.github.io/memos/#2026-07-06T23:30:00.000Z</id><link href="https://speechlesspanda.github.io/memos/"/><published>2026-07-06T23:30:00.000Z</published><title>碎碎念 · 2026-07-06</title><updated>2026-07-06T23:30:00.000Z</updated></entry><entry><author><name>SpeechlessPanda</name></author><category term="博客更新"/><category term="假期"/><content type="html"><![CDATA[<p>哈哈哈哈哈哈哈， this semester is over ！终于考完试了，感觉还行（要是砸了就是我感觉错了）。然后博客迎来了最新一次的更新，这次会像 pyq 一样，有评论的碎碎念就会显示评论出来，没有的则隐藏评论区。这个功能好像 giscus 原生是不支持的，实现用了一点小小的逆向，所以有想要做这个效果的朋友可以让 ai 读读我的仓库原码。这个小功能干了我一天，最后发现不行和浏览器缓存刷新机制有关，神秘了。</p>
 <p>今天较为颓废，明天开始要好好做和比赛有关的事了，或者有空学学 cpp 。今天甚至没锻炼，哎。</p>
