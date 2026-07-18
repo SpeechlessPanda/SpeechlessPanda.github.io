@@ -206,38 +206,6 @@
       </tags>
   </entry>
   <entry>
-    <title>代码品味≈设计模式？</title>
-    <url>/2026/07/05/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E2%89%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F/</url>
-    <content><![CDATA[<p>刚刚阅读了 <a href="https://luminousmen.com/post/design-patterns-suck/">Design Patterns Suck</a> 这篇文章，对设计模式有了些新的思考，且发现在之前<a href="https://speechlesspanda.github.io/2026/06/06/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">代码品味与架构设计</a>中可能给了些错误的引导，出于对本博客为数不多读者的负责，我快马加鞭写了这一个小短篇。</p>
-<p>里面让我对设计模式有了重新思考的一个观点是：设计模式并不是在解决你的问题，而是让你解决语言本身的问题。我们这学期学习的 java 之所以这么推崇设计模式，是因为 java 本身的语言特性不足。 java 设计者认为，如果你给开发者太多权力，他们会自毁前程。但现在大部分语言都不是这样，尤其是 python 和 cpp 。因此设计模式就会显得冗余和过度包装，为了使用设计模式而使用设计模式，就像刚拿到什么高级工具的小孩，在解决一个简单问题时也想用所谓的高级工具（说的就是我）。</p>
-<p>其实我早应该发现这个问题的，本人一向是质疑复杂度，推崇奥卡姆剃刀原理的。我反思了这次我被设计模式冲昏头脑的原因，有以下两点。一是，对于刚入门的程序员来说，设计模式实在显得太高级了，一度被我认为是我的大学课堂中为数不多以后能用上的内容。二是，之前和佬的交谈中，将设计模式与代码品味关联在一起，更是为其蒙上了神秘的面纱，让我直接默认了奥卡姆剃刀在写代码这件事上不成立，写代码就应该冗余设计。</p>
-<p>现在想来，当时的自己居然一度放弃了自己最推崇的思考，因为佬和我的对话中，有能让我清醒过来的内容，但我没把握住（佬终究还是佬）。佬曾说过，应该关注的是设计模式要解决的问题，而不是具体的表现形式，也曾说过并不是所有情况都要使用设计模式，到后面要像庖丁解牛一样，自如地、知道什么时候合适地使用设计模式。只不过，真的必须要使用设计模式的地方，比我想的要少得多。</p>
-<p>那代码品味呢？没有了设计模式这一具体的入门砖后，我们又该怎么培养代码品味呢。以我的拙见，这就不得不提到，设计模式落伍的原因：现代语言本身丰富的特性。设计模式是在一个特性有限的语言里，将部分特性以某种逻辑固定的组合在一起，但在现代语言中，特性是丰富的，因此在每个具体的、不同的场景，都可以有不同的特性以不同的方式组合在一起，甚至一个特性就能实现一个设计模式的功能。在能完成需求的情况下，不要放弃对灵活和简单的追求，不要遗漏任何一种语言的特性，这或许是现代唯一正确的“设计模式”。套用设计模式可能是一种无错的选择，但是学会自己组合特性，使用特性，灵活变通，才是在向代码品味迈进。</p>
-<blockquote>
-<p>据我的观察，代码品味可能还和类型有关，但在这方面我还没有太深的见解，先挖个坑。</p>
-</blockquote>
-<p>最重要的是，不能放弃思考。这次某种意义上有点像 ai hype ，我能想明白不要 ai hype ，却被自己一直所渴求的代码品味给 hype 了一回，这下能理解 ai hype 了。但既然有了前车之鉴，后面更应该保持清醒，知道思考的可贵。</p>
-]]></content>
-      <tags>
-        <tag>技术</tag>
-        <tag>短篇</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>原来还可以不是 fomo</title>
-    <url>/2026/05/30/%E5%8E%9F%E6%9D%A5%E8%BF%98%E5%8F%AF%E4%BB%A5%E4%B8%8D%E6%98%AF%20fomo%20/</url>
-    <content><![CDATA[<p>这几天，阴差阳错将一个保研来我们学校的学姐（不是我们专业的）带上了学习 claude code 怎么使用的路，看着她兴致勃勃的探索，并逐渐掌握我大部分日常用的内容，我不由得感叹原来 agent 的普及率没我想的那么高，以及会用 agent 真的不能算一个多么有优势的点。两个舍友也恰巧开始摸索如何使用 claude code 了，无时无刻不震惊于 claude code 的强大，就像我一年前一样（有一说一，看着挺好玩）。水群确实害人不浅啊，我以为我身边早已经被 agent 包围了。</p>
-<p>但是最感慨的两点是，原来还可以不是 fomo ，原来真的没必要 fomo 。我能感觉到他们学习使用 agent 的时候是快乐的，那是一种发现 agent 真的帮助自己提升效率，和省去一些琐事的时间的快乐。他们没有担忧自己会被 agent 替代，也没有想过自己和 agent 比竞争优势在哪里。讲真我很羡慕。虽然我猜一方面有可能是还不知道 agent 到底有多强（用的还只是 dsv4 和 mimo ），但另一方面，也因为我舍友和这位学姐，已经是短暂不用担心“前途”的阶段了。学姐不用说，舍友也是大概率能保研或留学。</p>
-<p>我从一开始接触 agent ，就没有这么轻松过，没有体会过这种比较纯粹的快乐。哪怕到现在，看着周围的越来越多人会用 agent ，我依然还会焦虑。原来学习新技术完全可以不是因为担心自己被落下，可以单纯只是因为自己需要。原来就算提前学了很多新技术，也不抵一个确定的前途，或是真正的护城河。我想这两个事例确实部分证明了我前面博客里的观点是对的（不用担心误人子弟了）。如果你还没有 fomo ，那希望你看到这篇博客后能坚定的保持下去。如果你已经在 fomo 了，希望你看到这篇博客能够宽慰一些（如果还不行，可以去看看我前面的博客 doge ）。</p>
-<p>我希望有一天，我也能纯粹的为技术的进步感到开心一次，不用担心被取代，不用害怕学不会会怎样，不用疲于奔命地去追赶。</p>
-<p><code>“慢慢走，欣赏啊！”——朱光潜《谈美》</code></p>
-]]></content>
-      <tags>
-        <tag>短篇</tag>
-        <tag>思考</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>初谈从 rust 到 cpp</title>
     <url>/2026/04/16/%E5%88%9D%E8%B0%88%E4%BB%8E%20rust%20%E5%88%B0%20cpp/</url>
     <content><![CDATA[<p>最近在学 rust 。事情的起因是，有人跟我说：“学完 rust 之后你就自动会写安全现代的 cpp 了”。我对于这种能提高编程思维和品味之类的事，由于本就缺乏，所以会更感兴趣。加上那段时间还算清闲，我很快就开始了 rust 的学习。</p>
@@ -274,6 +242,20 @@
 ]]></content>
       <tags>
         <tag>技术</tag>
+        <tag>短篇</tag>
+        <tag>思考</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>原来还可以不是 fomo</title>
+    <url>/2026/05/30/%E5%8E%9F%E6%9D%A5%E8%BF%98%E5%8F%AF%E4%BB%A5%E4%B8%8D%E6%98%AF%20fomo%20/</url>
+    <content><![CDATA[<p>这几天，阴差阳错将一个保研来我们学校的学姐（不是我们专业的）带上了学习 claude code 怎么使用的路，看着她兴致勃勃的探索，并逐渐掌握我大部分日常用的内容，我不由得感叹原来 agent 的普及率没我想的那么高，以及会用 agent 真的不能算一个多么有优势的点。两个舍友也恰巧开始摸索如何使用 claude code 了，无时无刻不震惊于 claude code 的强大，就像我一年前一样（有一说一，看着挺好玩）。水群确实害人不浅啊，我以为我身边早已经被 agent 包围了。</p>
+<p>但是最感慨的两点是，原来还可以不是 fomo ，原来真的没必要 fomo 。我能感觉到他们学习使用 agent 的时候是快乐的，那是一种发现 agent 真的帮助自己提升效率，和省去一些琐事的时间的快乐。他们没有担忧自己会被 agent 替代，也没有想过自己和 agent 比竞争优势在哪里。讲真我很羡慕。虽然我猜一方面有可能是还不知道 agent 到底有多强（用的还只是 dsv4 和 mimo ），但另一方面，也因为我舍友和这位学姐，已经是短暂不用担心“前途”的阶段了。学姐不用说，舍友也是大概率能保研或留学。</p>
+<p>我从一开始接触 agent ，就没有这么轻松过，没有体会过这种比较纯粹的快乐。哪怕到现在，看着周围的越来越多人会用 agent ，我依然还会焦虑。原来学习新技术完全可以不是因为担心自己被落下，可以单纯只是因为自己需要。原来就算提前学了很多新技术，也不抵一个确定的前途，或是真正的护城河。我想这两个事例确实部分证明了我前面博客里的观点是对的（不用担心误人子弟了）。如果你还没有 fomo ，那希望你看到这篇博客后能坚定的保持下去。如果你已经在 fomo 了，希望你看到这篇博客能够宽慰一些（如果还不行，可以去看看我前面的博客 doge ）。</p>
+<p>我希望有一天，我也能纯粹的为技术的进步感到开心一次，不用担心被取代，不用害怕学不会会怎样，不用疲于奔命地去追赶。</p>
+<p><code>“慢慢走，欣赏啊！”——朱光潜《谈美》</code></p>
+]]></content>
+      <tags>
         <tag>短篇</tag>
         <tag>思考</tag>
       </tags>
@@ -324,6 +306,26 @@
       <tags>
         <tag>思考</tag>
         <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>对 BFE 构建思路的重思考</title>
+    <url>/2026/04/12/%E5%AF%B9%20BFE%20%E6%9E%84%E5%BB%BA%E6%80%9D%E8%B7%AF%E7%9A%84%E9%87%8D%E6%80%9D%E8%80%83/</url>
+    <content><![CDATA[<p>在<a href="https://speechlesspanda.github.io/2026/04/06/vibe%20coding%20%E5%BC%80%E5%8F%91%20BFE%20%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D%E4%B8%8E%E6%80%BB%E7%BB%93/">前文</a>中，我们曾提到过， BFE 比同量级的项目多花了多得多的 token ，这固然有第一次 vibe 不太有方法论和策略，整体规划做的不太好和 token 是免费的用起来不心疼的原因，但就算将上述原因全部纳入考虑，如此庞大的 token 消耗数依旧是不太正常的。所以，我猜测， BFE 中可能有部分需求触及到了 agent 能力的边界。目前我想到最有可能的就是，对十个主题的适配。由于我的项目定位更像是一个辅助平台，所以他是从现有的两个博客框架 hexo 和 hugo 中各挑了五个主题，辅助用户搭建这十个主题的博客。由于主题都是个人创作者发布并维护的，加上框架并没有规定官方的统一格式，所以每个主题的格式和配置基本都不一样。这就需要 agent 从网上下载十个主题的源码，浏览并学会如何使用，辨别出每个主题的不同，再用适配的脚本将用户的配置填入到特定的主题中。事实上，这是我理想中 agent 应该干的事，但是我的 agent 似乎在搜索和辨别这方面偷了懒，十个主题有些一次就能过，有些就不行。有些配置有的主题支持，有的不支持， agent 也未识别出来。</p>
+<p>但，将这个可能性列出来之后，我发现这似乎并不是 agent 能力的边界，而是由于前面提过的原因，导致 agent 在我的使用下，发挥不出全部的能力。“我”降低了 agent 的能力边界。这很正常，事实上大部分人使用 agent 都会这样，只是有些明显有些不明显。不过我在这里想讨论的并不是这个问题，相关的反思在前文中也已详细的叙述过。至于反思的到不到位，有没有效，都要经过下次 vibe 的检验。</p>
+<p>我想探讨的是，如何通过对需求的设计和转化，将其变为哪怕 agent 在被人降低能力边界的情况下，依旧能够很好的胜任。具体到这个项目，我想的是，能不能让 agent 重写这十个主题，使他们都符合某种设计好的格式，这样就不用后续对十个主题做格式之类的适配，相当于将“适配”提前。这里显然的缺点是， agent 重写的主题不一定和原本的主题相一致，看上去也增加了工作量和整个项目的风险与不稳定性。</p>
+<p>好处也是显而易见的，首先，使用同样多 token 的情况下，我觉得 agent 能在重写任务完成的不错的前提下，提升整个项目的可靠性（上文提到的风险是由于重写可能不成功导致项目失败，这里的可靠性是指， agent 一旦重写成功，后续功能的构建将有极大可能成功）。重写这十个主题对于 agent 完成这个项目来说，并不会比上面那样提到的去做更难，相当于将一个难完成的需求，通过增加工作量，变成一个易完成的需求，并提高成功的概率和整个项目的可靠性。还有第二个好处，是我们可以将重写主题的格式开源，从而来构建起一套新的主题生态，增加用户对项目的黏性。虽然这个在 BFE 上不太可能看到（毕竟只是一个不成熟的小玩具），但是思想非常值得学习。我们能在很多地方看到这种类似思想的使用，构建一套自己的标准，然后强兼别人的标准。</p>
+<p>至于工作量的增加，似乎也是一个伪命题。我就是一个很好的例子，毕竟我用看似更简单的方式去构建这个项目，但 token 数花的出奇的多。或许换成上面重写的思路，还不需要花这么多 token ，这种情况下，工作量的多少还真不好说。</p>
+<blockquote>
+<p>如果以后真的有人使用这个项目，或许我会考虑将项目迭代成重写主题的这种形式。如果没有就不折腾了。</p>
+</blockquote>
+<p>至于如何设计和转化需求，就是各位天才程序员目前的价值所在了。对此我也还在探索之中，并没有很多想法。但是可以将我对本文中思路的重思考分享一下。在正式开始项目之前，我其实未必想不到这个思路，但是，由于它可以预见的工作量，在还没开始之前，就被我不带任何其他思考的否决掉了。这么做放在 agent 出现以前，当然是合理的，可以让项目仅用很少的工作，就达到落地的效果。这对于项目后续的开发和开发者在这个项目上的收获都是很重要的。更别提重写主题是一个带有很大不确定性的活，比起这个，人类开发者肯定更擅长也更喜欢去一个一个主题的做适配。但是，大人，时代变了。在 agent 出来之后，二者在工作量上的差异在好的使用者手中被无限缩小， agent 的能力也让重写的成功性大大提高。我们以前可能更倾向于敏捷开发，让产品能很快有一个能给用户使用的版本，而放弃掉一些锦上添花的功能，甚至放弃一些明显有无可替代优势的方案。但在 agent 的时代，不妨给这些功能和方案一个机会。当我们迈一小步和一大步所需要的努力差不多的时候，我觉得后者会是更好的选择。</p>
+<p>agent 的冲击不止在技术的使用上，更在想法上。</p>
+]]></content>
+      <tags>
+        <tag>短篇</tag>
+        <tag>思考</tag>
+        <tag>项目</tag>
       </tags>
   </entry>
   <entry>
@@ -380,26 +382,6 @@
         <tag>短篇</tag>
         <tag>思考</tag>
         <tag>情绪</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数学是最好的算法</title>
-    <url>/2026/07/15/%E6%95%B0%E5%AD%A6%E6%98%AF%E6%9C%80%E5%A5%BD%E7%9A%84%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>今天刷 leetcode 每日一题，题面如下：给你一个整数 n ，请你计算以下两个值的最大公约数（ GCD ）： sumOdd ：最小的 n 个正奇数的总和； sumEven ：最小的 n 个正偶数的总和；返回 sumOdd 和 sumEven 的 GCD 。</p>
-<p>给大伙看看用辗转相除法怎么做。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> y == <span class="number">0</span> ? x : <span class="built_in">gcd</span>(y, x % y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">gcdOfOddEvenSums</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">gcd</span>(n * n, n * (n + <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>事实上，要是用上 <code>&lt;numeric&gt;</code> 库里自带的 gcd 函数，这道题将会更简单。但是今天分享的重点不在这里，让我们关注一下最后一条语句。学过高中数学的都知道，这是由等差数列求和公式算出来的奇数和和偶数和。具体公式如下：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>s</mi><mi>u</mi><mi>m</mi><mi>O</mi><mi>d</mi><mi>d</mi><mo>=</mo><mn>1</mn><mo>+</mo><mn>3</mn><mo>+</mo><mo>⋯</mo><mo>+</mo><mo stretchy="false">(</mo><mn>2</mn><mtext>∗</mtext><mi>n</mi><mtext>−</mtext><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">sumOdd=1+3+⋯+(2∗n−1)=n^2
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">u</span><span class="mord mathnormal">m</span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mord mathnormal">d</span><span class="mord mathnormal">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">2</span><span class="mord">∗</span><span class="mord mathnormal">n</span><span class="mord">−</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8641079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>s</mi><mi>u</mi><mi>m</mi><mi>E</mi><mi>v</mi><mi>e</mi><mi>n</mi><mo>=</mo><mn>2</mn><mo>+</mo><mn>4</mn><mo>+</mo><mo>⋯</mo><mo>+</mo><mo stretchy="false">(</mo><mn>2</mn><mtext>∗</mtext><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi>n</mi><mtext>∗</mtext><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">sumEven=2+4+⋯+(2∗n)=n∗(n+1)
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">u</span><span class="mord mathnormal">m</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">2</span><span class="mord">∗</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mord">∗</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span></p>
-<p>那么问题来了，我们并不需要拉马努金那样的注意力也能发现，这两个结果里面，是不是都有个 n 呢。所以有一个时间和空间复杂度都是 O(1) 的解法如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">gcdOfOddEvenSums</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>数学是最好的算法。</p>
-]]></content>
-      <tags>
-        <tag>技术</tag>
-        <tag>短篇</tag>
       </tags>
   </entry>
   <entry>
@@ -467,124 +449,104 @@
       </tags>
   </entry>
   <entry>
-    <title>对 BFE 构建思路的重思考</title>
-    <url>/2026/04/12/%E5%AF%B9%20BFE%20%E6%9E%84%E5%BB%BA%E6%80%9D%E8%B7%AF%E7%9A%84%E9%87%8D%E6%80%9D%E8%80%83/</url>
-    <content><![CDATA[<p>在<a href="https://speechlesspanda.github.io/2026/04/06/vibe%20coding%20%E5%BC%80%E5%8F%91%20BFE%20%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D%E4%B8%8E%E6%80%BB%E7%BB%93/">前文</a>中，我们曾提到过， BFE 比同量级的项目多花了多得多的 token ，这固然有第一次 vibe 不太有方法论和策略，整体规划做的不太好和 token 是免费的用起来不心疼的原因，但就算将上述原因全部纳入考虑，如此庞大的 token 消耗数依旧是不太正常的。所以，我猜测， BFE 中可能有部分需求触及到了 agent 能力的边界。目前我想到最有可能的就是，对十个主题的适配。由于我的项目定位更像是一个辅助平台，所以他是从现有的两个博客框架 hexo 和 hugo 中各挑了五个主题，辅助用户搭建这十个主题的博客。由于主题都是个人创作者发布并维护的，加上框架并没有规定官方的统一格式，所以每个主题的格式和配置基本都不一样。这就需要 agent 从网上下载十个主题的源码，浏览并学会如何使用，辨别出每个主题的不同，再用适配的脚本将用户的配置填入到特定的主题中。事实上，这是我理想中 agent 应该干的事，但是我的 agent 似乎在搜索和辨别这方面偷了懒，十个主题有些一次就能过，有些就不行。有些配置有的主题支持，有的不支持， agent 也未识别出来。</p>
-<p>但，将这个可能性列出来之后，我发现这似乎并不是 agent 能力的边界，而是由于前面提过的原因，导致 agent 在我的使用下，发挥不出全部的能力。“我”降低了 agent 的能力边界。这很正常，事实上大部分人使用 agent 都会这样，只是有些明显有些不明显。不过我在这里想讨论的并不是这个问题，相关的反思在前文中也已详细的叙述过。至于反思的到不到位，有没有效，都要经过下次 vibe 的检验。</p>
-<p>我想探讨的是，如何通过对需求的设计和转化，将其变为哪怕 agent 在被人降低能力边界的情况下，依旧能够很好的胜任。具体到这个项目，我想的是，能不能让 agent 重写这十个主题，使他们都符合某种设计好的格式，这样就不用后续对十个主题做格式之类的适配，相当于将“适配”提前。这里显然的缺点是， agent 重写的主题不一定和原本的主题相一致，看上去也增加了工作量和整个项目的风险与不稳定性。</p>
-<p>好处也是显而易见的，首先，使用同样多 token 的情况下，我觉得 agent 能在重写任务完成的不错的前提下，提升整个项目的可靠性（上文提到的风险是由于重写可能不成功导致项目失败，这里的可靠性是指， agent 一旦重写成功，后续功能的构建将有极大可能成功）。重写这十个主题对于 agent 完成这个项目来说，并不会比上面那样提到的去做更难，相当于将一个难完成的需求，通过增加工作量，变成一个易完成的需求，并提高成功的概率和整个项目的可靠性。还有第二个好处，是我们可以将重写主题的格式开源，从而来构建起一套新的主题生态，增加用户对项目的黏性。虽然这个在 BFE 上不太可能看到（毕竟只是一个不成熟的小玩具），但是思想非常值得学习。我们能在很多地方看到这种类似思想的使用，构建一套自己的标准，然后强兼别人的标准。</p>
-<p>至于工作量的增加，似乎也是一个伪命题。我就是一个很好的例子，毕竟我用看似更简单的方式去构建这个项目，但 token 数花的出奇的多。或许换成上面重写的思路，还不需要花这么多 token ，这种情况下，工作量的多少还真不好说。</p>
-<blockquote>
-<p>如果以后真的有人使用这个项目，或许我会考虑将项目迭代成重写主题的这种形式。如果没有就不折腾了。</p>
-</blockquote>
-<p>至于如何设计和转化需求，就是各位天才程序员目前的价值所在了。对此我也还在探索之中，并没有很多想法。但是可以将我对本文中思路的重思考分享一下。在正式开始项目之前，我其实未必想不到这个思路，但是，由于它可以预见的工作量，在还没开始之前，就被我不带任何其他思考的否决掉了。这么做放在 agent 出现以前，当然是合理的，可以让项目仅用很少的工作，就达到落地的效果。这对于项目后续的开发和开发者在这个项目上的收获都是很重要的。更别提重写主题是一个带有很大不确定性的活，比起这个，人类开发者肯定更擅长也更喜欢去一个一个主题的做适配。但是，大人，时代变了。在 agent 出来之后，二者在工作量上的差异在好的使用者手中被无限缩小， agent 的能力也让重写的成功性大大提高。我们以前可能更倾向于敏捷开发，让产品能很快有一个能给用户使用的版本，而放弃掉一些锦上添花的功能，甚至放弃一些明显有无可替代优势的方案。但在 agent 的时代，不妨给这些功能和方案一个机会。当我们迈一小步和一大步所需要的努力差不多的时候，我觉得后者会是更好的选择。</p>
-<p>agent 的冲击不止在技术的使用上，更在想法上。</p>
-]]></content>
-      <tags>
-        <tag>短篇</tag>
-        <tag>思考</tag>
-        <tag>项目</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>项目收藏</title>
     <url>/2026/06/06/%E9%A1%B9%E7%9B%AE%E6%94%B6%E8%97%8F/</url>
     <content><![CDATA[<blockquote>
 <p>这篇博客是由 AI 编写，但里面的项目是由我选取。后续会持续更新。</p>
 </blockquote>
-<p>收集 GitHub 上值得关注的优质开源项目，按类别整理，持续更新。Star 数截至 2026-06-30（每半个月更新一次）。🆕 标记表示最近一次同步新增的项目，点击下方分类标题可展开查看详情。</p>
+<p>收集 GitHub 上值得关注的优质开源项目，按类别整理，持续更新。Star 数截至 2026-07-18（每月更新一次）。🆕 标记表示最近一次同步新增的项目，点击下方分类标题可展开查看详情。</p>
 <span id="more"></span>
 <details class="toggle" ><summary class="toggle-button" style="">AI 编码代理</summary><div class="toggle-content"><p>这类项目是当前最火的赛道——让 AI 直接在终端里帮你写代码、跑任务。</p>
 <ul>
 <li>
-<p><a href="https://github.com/CherryHQ/cherry-studio">Cherry Studio</a> ⭐ 48.0k — AI 生产力工作室，集成智能对话、自主代理和 300+ 助手，统一接入前沿 LLM。桌面 GUI 应用，适合非终端用户高效使用 AI。亮点是开箱即用的丰富助手生态和跨平台桌面体验。</p>
+<p><a href="https://github.com/CherryHQ/cherry-studio">Cherry Studio</a> ⭐ 48.7k — AI 生产力工作室，集成智能对话、自主代理和 300+ 助手，统一接入前沿 LLM。桌面 GUI 应用，适合非终端用户高效使用 AI。亮点是开箱即用的丰富助手生态和跨平台桌面体验。</p>
 </li>
 <li>
-<p><a href="https://github.com/aaif-goose/goose">Goose</a> ⭐ 50.5k — 开源可扩展 AI 代理。超越简单的代码建议，支持安装、执行、编辑和测试，可搭配任意 LLM 使用。亮点在于高度可扩展的插件架构，面向终端和自动化场景。</p>
+<p><a href="https://github.com/aaif-goose/goose">Goose</a> ⭐ 51.2k — 开源可扩展 AI 代理。超越简单的代码建议，支持安装、执行、编辑和测试，可搭配任意 LLM 使用。亮点在于高度可扩展的插件架构，面向终端和自动化场景。</p>
 </li>
 <li>
-<p><a href="https://github.com/warpdotdev/warp">Warp</a> ⭐ 62.6k — 诞生于终端的智能开发环境。将传统终端升级为 AI 驱动的 agentic 开发环境，集成了智能补全、命令搜索和工作流自动化。</p>
+<p><a href="https://github.com/warpdotdev/warp">Warp</a> ⭐ 63.3k — 诞生于终端的智能开发环境。将传统终端升级为 AI 驱动的 agentic 开发环境，集成了智能补全、命令搜索和工作流自动化。</p>
 </li>
 <li>
 <p><a href="https://github.com/batrachianai/toad">Toad</a> ⭐ 3.3k — 终端 AI 统一接口。用一个工具统一管理不同的 AI 服务，解决终端环境下多 AI 后端切换的痛点。</p>
 </li>
 <li>
-<p><a href="https://github.com/farion1231/cc-switch">CC-Switch</a> ⭐ 111.1k — 跨平台桌面 All-in-One 助手。统一管理 Claude Code、Codex、OpenCode、OpenClaw、Gemini CLI 等多种 AI 编码工具，一站式切换。亮点是真正做到了多工具统一管理。</p>
+<p><a href="https://github.com/farion1231/cc-switch">CC-Switch</a> ⭐ 118.5k — 跨平台桌面 All-in-One 助手。统一管理 Claude Code、Codex、OpenCode、OpenClaw、Gemini CLI 等多种 AI 编码工具，一站式切换。亮点是真正做到了多工具统一管理。</p>
 </li>
 <li>
-<p><a href="https://github.com/0xcaff/codex-web">Codex Web</a> ⭐ 163 — Codex Desktop 的浏览器前端。让你通过网页界面远程控制本机的 Codex，解决了纯终端交互不够直观的问题。</p>
+<p><a href="https://github.com/0xcaff/codex-web">Codex Web</a> ⭐ 198 — Codex Desktop 的浏览器前端。让你通过网页界面远程控制本机的 Codex，解决了纯终端交互不够直观的问题。</p>
 </li>
 <li>
-<p><a href="https://github.com/earendil-works/pi">Pi</a> ⭐ 66.7k — AI 代理工具包，包含交互式编码代理 CLI、统一多提供商 LLM API（支持 OpenAI、Anthropic、Google 等）、Agent 运行时、TUI 终端 UI 库和 Slack 机器人。亮点是单体仓库架构，从底层 LLM 调用到上层编码代理全链路自研，供应链安全做得非常严格（依赖锁定、签名审计、shrinkwrap）。</p>
+<p><a href="https://github.com/earendil-works/pi">Pi</a> ⭐ 72.3k — AI 代理工具包，包含交互式编码代理 CLI、统一多提供商 LLM API（支持 OpenAI、Anthropic、Google 等）、Agent 运行时、TUI 终端 UI 库和 Slack 机器人。亮点是单体仓库架构，从底层 LLM 调用到上层编码代理全链路自研，供应链安全做得非常严格（依赖锁定、签名审计、shrinkwrap）。</p>
 </li>
 </ul>
 </div></details>
 <details class="toggle" ><summary class="toggle-button" style="">AI 代理技能与框架</summary><div class="toggle-content"><p>这类项目关注 AI 代理的能力扩展和编排方式。</p>
 <ul>
 <li>
-<p><a href="https://github.com/obra/superpowers">Superpowers</a> ⭐ 242.1k — 代理技能框架与软件开发方法论。提供一套完整的 agentic skills 框架，让 AI 编码工具遵循结构化的开发流程。亮点是经过实战验证的方法论，而非理论框架。</p>
+<p><a href="https://github.com/obra/superpowers">Superpowers</a> ⭐ 256.8k — 代理技能框架与软件开发方法论。提供一套完整的 agentic skills 框架，让 AI 编码工具遵循结构化的开发流程。亮点是经过实战验证的方法论，而非理论框架。</p>
 </li>
 <li>
-<p><a href="https://github.com/mattpocock/skills">Matt Pocock Skills</a> ⭐ 151.2k — 面向&quot;真实工程&quot;的实战代理技能集。来自 Total TypeScript 作者 Matt Pocock 的 .claude 目录，提供 /grill-me、/grill-with-docs 等需求对齐技能，解决代理与用户需求错位的核心痛点。亮点是技能小巧、可组合、易改造，适配任意模型。</p>
+<p><a href="https://github.com/mattpocock/skills">Matt Pocock Skills</a> ⭐ 176.0k — 面向&quot;真实工程&quot;的实战代理技能集。来自 Total TypeScript 作者 Matt Pocock 的 .claude 目录，提供 /grill-me、/grill-with-docs 等需求对齐技能，解决代理与用户需求错位的核心痛点。亮点是技能小巧、可组合、易改造，适配任意模型。</p>
 </li>
 <li>
-<p>🆕 <a href="https://github.com/microsoft/SkillOpt">SkillOpt</a> ⭐ 10.1k — 微软出品的文本空间技能优化器。通过轨迹驱动编辑和验证门控更新，为冻结的 LLM 代理训练可复用的自然语言技能，输出 best_skill.md 制品。解决手写 agent 技能难以调优、效果不稳定的问题。亮点是学术级方法论与可直接部署的技能制品相结合。</p>
+<p><a href="https://github.com/microsoft/SkillOpt">SkillOpt</a> ⭐ 13.0k — 微软出品的文本空间技能优化器。通过轨迹驱动编辑和验证门控更新，为冻结的 LLM 代理训练可复用的自然语言技能，输出 best_skill.md 制品。解决手写 agent 技能难以调优、效果不稳定的问题。亮点是学术级方法论与可直接部署的技能制品相结合。</p>
 </li>
 <li>
-<p>🆕 <a href="https://github.com/DietrichGebert/ponytail">Ponytail</a> ⭐ 68.4k — 让 AI 代理像&quot;最懒的资深工程师&quot;一样思考的技能。核心理念是&quot;最好的代码是你永远不用写的代码&quot;，引导代理优先复用、删除、减少改动。解决代理过度生成代码、引入不必要复杂度的问题。亮点是反直觉的&quot;少即是多&quot;工程哲学。</p>
+<p><a href="https://github.com/DietrichGebert/ponytail">Ponytail</a> ⭐ 85.3k — 让 AI 代理像&quot;最懒的资深工程师&quot;一样思考的技能。核心理念是&quot;最好的代码是你永远不用写的代码&quot;，引导代理优先复用、删除、减少改动。解决代理过度生成代码、引入不必要复杂度的问题。亮点是反直觉的&quot;少即是多&quot;工程哲学。</p>
 </li>
 <li>
-<p><a href="https://github.com/jackwener/OpenCLI">OpenCLI</a> ⭐ 25.7k — 将任意网站变成 CLI 工具。借助 AI 代理使用你已登录的浏览器，把 Web 操作转化为命令行交互。亮点是支持已登录状态的浏览器复用，绕过认证难题。</p>
+<p><a href="https://github.com/jackwener/OpenCLI">OpenCLI</a> ⭐ 26.9k — 将任意网站变成 CLI 工具。借助 AI 代理使用你已登录的浏览器，把 Web 操作转化为命令行交互。亮点是支持已登录状态的浏览器复用，绕过认证难题。</p>
 </li>
 <li>
-<p><a href="https://github.com/MemPalace/mempalace">MemPalace</a> ⭐ 56.8k — 开源 AI 记忆系统。目前基准测试表现最好的开源 AI 记忆方案，且完全免费。解决了 AI 代理缺乏长期记忆的核心问题。</p>
+<p><a href="https://github.com/MemPalace/mempalace">MemPalace</a> ⭐ 57.4k — 开源 AI 记忆系统。目前基准测试表现最好的开源 AI 记忆方案，且完全免费。解决了 AI 代理缺乏长期记忆的核心问题。</p>
 </li>
 <li>
-<p><a href="https://github.com/ogulcancelik/herdr">Herdr</a> ⭐ 8.7k — 终端代理多路复用器。像一个&quot;代理管理器&quot;，可以同时调度多个 AI 代理协同工作，适合复杂的多步骤任务场景。</p>
+<p><a href="https://github.com/ogulcancelik/herdr">Herdr</a> ⭐ 17.8k — 终端代理多路复用器。像一个&quot;代理管理器&quot;，可以同时调度多个 AI 代理协同工作，适合复杂的多步骤任务场景。</p>
 </li>
 <li>
-<p><a href="https://github.com/xixu-me/awesome-persona-distill-skills">Awesome Persona Distill Skills</a> ⭐ 4.5k — 以人物关系、纪念场景和方法论视角为主题的代理技能集合。解决的是 AI 在人际交往和情感场景下的表达能力问题。</p>
+<p><a href="https://github.com/xixu-me/awesome-persona-distill-skills">Awesome Persona Distill Skills</a> ⭐ 4.6k — 以人物关系、纪念场景和方法论视角为主题的代理技能集合。解决的是 AI 在人际交往和情感场景下的表达能力问题。</p>
 </li>
 </ul>
 </div></details>
 <details class="toggle" ><summary class="toggle-button" style="">AI 设计与前端</summary><div class="toggle-content"><p>这类项目用 AI 提升设计质量和前端开发效率。</p>
 <ul>
 <li>
-<p><a href="https://github.com/nexu-io/open-design">Open Design</a> ⭐ 73.2k — 本地优先的开源 Claude Design 替代品。原生桌面应用，内置 259+ 技能和 142+ 设计系统，支持 Web/桌面/移动端原型、幻灯片、图片、视频，可导出 HTML/PDF/PPTX/MP4。亮点是设计系统生态极其丰富，适配几乎所有主流 AI 编码工具。</p>
+<p><a href="https://github.com/nexu-io/open-design">Open Design</a> ⭐ 79.4k — 本地优先的开源 Claude Design 替代品。原生桌面应用，内置 259+ 技能和 142+ 设计系统，支持 Web/桌面/移动端原型、幻灯片、图片、视频，可导出 HTML/PDF/PPTX/MP4。亮点是设计系统生态极其丰富，适配几乎所有主流 AI 编码工具。</p>
 </li>
 <li>
-<p><a href="https://github.com/pbakaus/impeccable">Impeccable</a> ⭐ 42.4k — 让 AI 更擅长设计的设计语言。提供一套设计规范，显著提升 AI 生成 UI 的视觉质量，解决 AI 输出&quot;看起来像 AI 做的&quot;这个普遍问题。</p>
+<p><a href="https://github.com/pbakaus/impeccable">Impeccable</a> ⭐ 47.7k — 让 AI 更擅长设计的设计语言。提供一套设计规范，显著提升 AI 生成 UI 的视觉质量，解决 AI 输出&quot;看起来像 AI 做的&quot;这个普遍问题。</p>
 </li>
 <li>
-<p><a href="https://github.com/VoltAgent/awesome-design-md">Awesome Design MD</a> ⭐ 94.5k — 知名品牌设计系统的 <a href="http://DESIGN.md">DESIGN.md</a> 文件合集。将设计系统以 AI 可读的方式呈现，让编码代理能生成符合品牌规范的 UI。</p>
+<p><a href="https://github.com/VoltAgent/awesome-design-md">Awesome Design MD</a> ⭐ 102.8k — 知名品牌设计系统的 <a href="http://DESIGN.md">DESIGN.md</a> 文件合集。将设计系统以 AI 可读的方式呈现，让编码代理能生成符合品牌规范的 UI。</p>
 </li>
 <li>
-<p><a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill">UI/UX Pro Max Skill</a> ⭐ 98.4k — 为 AI 提供专业级 UI/UX 设计智能的技能包。覆盖多平台设计规范，让 AI 在生成界面时具备专业设计师的判断力。</p>
+<p><a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill">UI/UX Pro Max Skill</a> ⭐ 107.1k — 为 AI 提供专业级 UI/UX 设计智能的技能包。覆盖多平台设计规范，让 AI 在生成界面时具备专业设计师的判断力。</p>
 </li>
 <li>
-<p><a href="https://github.com/Leonxlnx/taste-skill">Taste Skill</a> ⭐ 53.6k — 给 AI 注入&quot;好品味&quot;。阻止 AI 生成无聊、通用的设计输出，让结果更具个性和辨识度。</p>
+<p><a href="https://github.com/Leonxlnx/taste-skill">Taste Skill</a> ⭐ 64.7k — 给 AI 注入&quot;好品味&quot;。阻止 AI 生成无聊、通用的设计输出，让结果更具个性和辨识度。</p>
 </li>
 <li>
-<p><a href="https://github.com/zarazhangrui/frontend-slides">Frontend Slides</a> ⭐ 24.0k — 利用编码代理的前端技能在 Web 上创建精美幻灯片。巧妙地将 AI 的前端编码能力转化为演示文稿制作能力。</p>
+<p><a href="https://github.com/zarazhangrui/frontend-slides">Frontend Slides</a> ⭐ 25.9k — 利用编码代理的前端技能在 Web 上创建精美幻灯片。巧妙地将 AI 的前端编码能力转化为演示文稿制作能力。</p>
 </li>
 <li>
-<p><a href="https://github.com/1weiho/open-slide">Open Slide</a> ⭐ 5.6k — 专为 AI 代理打造的幻灯片框架。将幻灯片制作抽象为代理可执行的标准化流程，适合自动化生成演示内容。</p>
+<p><a href="https://github.com/1weiho/open-slide">Open Slide</a> ⭐ 5.8k — 专为 AI 代理打造的幻灯片框架。将幻灯片制作抽象为代理可执行的标准化流程，适合自动化生成演示内容。</p>
 </li>
 <li>
-<p>🆕 <a href="https://github.com/MoveCloudROY/knowledge-html-learning-page">Knowledge HTML Learning Page</a> ⭐ 4 — 从 PDF、Office、Markdown、代码库生成有据可查的中文 HTML 学习页面的代理技能。核心流程为收集证据→草稿→规划→人工评审门→逐章生成 HTML，解决把零散课件和代码整理成系统化中文教程的痛点。亮点是源可追溯、review-gate 把关内容质量。</p>
+<p><a href="https://github.com/MoveCloudROY/knowledge-html-learning-page">Knowledge HTML Learning Page</a> ⭐ 5 — 从 PDF、Office、Markdown、代码库生成有据可查的中文 HTML 学习页面的代理技能。核心流程为收集证据→草稿→规划→人工评审门→逐章生成 HTML，解决把零散课件和代码整理成系统化中文教程的痛点。亮点是源可追溯、review-gate 把关内容质量。</p>
 </li>
 <li>
-<p><a href="https://github.com/helloianneo/ian-xiaohei-illustrations">Ian Xiaohei Illustrations</a> ⭐ 6.6k — 中文小黑怪诞风格正文配图生成 Skill。16:9 白底手绘风格，搭配少量红橙蓝批注色彩，专为文章配图场景设计。亮点是将独特的怪诞美学风格标准化为可复用的 AI 技能，一键生成风格一致的插图。</p>
+<p><a href="https://github.com/helloianneo/ian-xiaohei-illustrations">Ian Xiaohei Illustrations</a> ⭐ 8.1k — 中文小黑怪诞风格正文配图生成 Skill。16:9 白底手绘风格，搭配少量红橙蓝批注色彩，专为文章配图场景设计。亮点是将独特的怪诞美学风格标准化为可复用的 AI 技能，一键生成风格一致的插图。</p>
 </li>
 </ul>
 </div></details>
 <details class="toggle" ><summary class="toggle-button" style="">AI 提效与优化</summary><div class="toggle-content"><p>这类项目关注如何让 AI 工具跑得更快、用得更省。</p>
 <ul>
 <li>
-<p><a href="https://github.com/rtk-ai/rtk">RTK</a> ⭐ 67.2k — CLI 代理，在常见开发命令的输出传入 LLM 之前进行过滤和压缩，减少 60-90% 的 token 消耗。单个 Rust 二进制文件，零依赖，支持 100+ 命令，开销 &lt;10ms。亮点是极低性能开销和零侵入接入（只需设为代理即可生效）。</p>
+<p><a href="https://github.com/rtk-ai/rtk">RTK</a> ⭐ 71.6k — CLI 代理，在常见开发命令的输出传入 LLM 之前进行过滤和压缩，减少 60-90% 的 token 消耗。单个 Rust 二进制文件，零依赖，支持 100+ 命令，开销 &lt;10ms。亮点是极低性能开销和零侵入接入（只需设为代理即可生效）。</p>
 </li>
 <li>
-<p><a href="https://github.com/chopratejas/headroom">Headroom</a> ⭐ 54.3k — 在工具输出、日志和 RAG 数据传入 LLM 之前进行压缩，减少 60-95% 的 token 消耗且不影响回答质量。提供库、代理和 MCP Server 三种接入方式。亮点是显著的 token 成本节省。</p>
+<p><a href="https://github.com/chopratejas/headroom">Headroom</a> ⭐ 59.7k — 在工具输出、日志和 RAG 数据传入 LLM 之前进行压缩，减少 60-95% 的 token 消耗且不影响回答质量。提供库、代理和 MCP Server 三种接入方式。亮点是显著的 token 成本节省。</p>
 </li>
 <li>
 <p><a href="https://github.com/eli64s/readme-ai">Readme AI</a> ⭐ 2.9k — AI 驱动的 README 文件生成器。自动分析项目结构和代码，生成专业规范的 README 文档，省去手动编写的繁琐工作。</p>
@@ -594,22 +556,22 @@
 <details class="toggle" ><summary class="toggle-button" style="">学术科研工具</summary><div class="toggle-content"><p>面向研究人员的效率工具，覆盖论文写作、绘图、灵感获取等环节。</p>
 <ul>
 <li>
-<p><a href="https://github.com/Paper2Poster/Paper2Poster">Paper2Poster</a> ⭐ 3.8k — NeurIPS 2025 发表的多代理论文海报生成系统。输入一篇论文，自动输出专业级学术海报。亮点是多代理协作架构，质量远超模板填充方案。</p>
+<p><a href="https://github.com/Paper2Poster/Paper2Poster">Paper2Poster</a> ⭐ 3.9k — NeurIPS 2025 发表的多代理论文海报生成系统。输入一篇论文，自动输出专业级学术海报。亮点是多代理协作架构，质量远超模板填充方案。</p>
 </li>
 <li>
-<p><a href="https://github.com/yutao1024/PaperX">PaperX</a> ⭐ 70 — 论文写作辅助工具。帮助研究人员提升论文写作效率，专注于解决学术写作中的痛点问题。</p>
+<p><a href="https://github.com/yutao1024/PaperX">PaperX</a> ⭐ 72 — 论文写作辅助工具。帮助研究人员提升论文写作效率，专注于解决学术写作中的痛点问题。</p>
 </li>
 <li>
-<p><a href="https://github.com/Yuan1z0825/nature-skills">Nature Skills</a> ⭐ 24.6k — 让 AI 具备 Nature 级别的学术表达能力。包含符合顶级期刊要求的学术写作风格和科研绘图技能，解决 AI 写论文&quot;不够学术&quot;的问题。</p>
+<p><a href="https://github.com/Yuan1z0825/nature-skills">Nature Skills</a> ⭐ 29.5k — 让 AI 具备 Nature 级别的学术表达能力。包含符合顶级期刊要求的学术写作风格和科研绘图技能，解决 AI 写论文&quot;不够学术&quot;的问题。</p>
 </li>
 <li>
-<p><a href="https://github.com/5eqn/idea-stream">Idea Stream</a> ⭐ 5 — 按主题从 arXiv 获取研究灵感，自动按质量、相关性和时效性排序。帮助研究者高效跟踪前沿进展，发现研究空白。</p>
+<p><a href="https://github.com/5eqn/idea-stream">Idea Stream</a> ⭐ 10 — 按主题从 arXiv 获取研究灵感，自动按质量、相关性和时效性排序。帮助研究者高效跟踪前沿进展，发现研究空白。</p>
 </li>
 <li>
-<p><a href="https://github.com/janosh/diagrams">Diagrams</a> ⭐ 652 — 物理学、化学和机器学习核心概念的精美示意图集。使用 Typst 编写，适合直接用于论文、教学和学术演示。</p>
+<p><a href="https://github.com/janosh/diagrams">Diagrams</a> ⭐ 661 — 物理学、化学和机器学习核心概念的精美示意图集。使用 Typst 编写，适合直接用于论文、教学和学术演示。</p>
 </li>
 <li>
-<p><a href="https://github.com/touying-typ/touying-exporter">Touying Exporter</a> ⭐ 133 — 为 Touying 演示框架提供多格式导出支持。解决 Typst/Touying 生态中导出格式受限的问题。</p>
+<p><a href="https://github.com/touying-typ/touying-exporter">Touying Exporter</a> ⭐ 135 — 为 Touying 演示框架提供多格式导出支持。解决 Typst/Touying 生态中导出格式受限的问题。</p>
 </li>
 </ul>
 </div></details>
@@ -621,99 +583,103 @@
 <li>
 <p><a href="https://github.com/a31474/quite-elegant-typ">Quite Elegant Typ</a> ⭐ 21 — 基于 Typst 的 ElegantBook 复刻模板。将 LaTeX 生态中广受欢迎的 ElegantBook 书籍风格移植到 Typst，适合制作精美笔记和技术文档。</p>
 </li>
-<li>
-<p>🆕 <a href="https://github.com/typst-doc-cn/tutorial">Typst 中文教程</a> ⭐ 215 — 社区编写的 Typst 排版语言中文教程。系统讲解 Typst 语法与排版实践，解决 Typst 官方文档中文资源稀缺、入门门槛高的问题。亮点是贴近中文用户习惯，适合作为 Typst 上手首选资料。</p>
-</li>
 </ul>
 </div></details>
 <details class="toggle" ><summary class="toggle-button" style="">学习资源与教程</summary><div class="toggle-content"><p>优质的编程学习资源和教程合集。</p>
 <ul>
 <li>
-<p><a href="https://github.com/krahets/hello-algo">Hello 算法</a> ⭐ 128.0k — 动画图解、一键运行的数据结构与算法教程。支持十余种编程语言实现，以可视化方式降低算法学习门槛。亮点是动画演示质量极高。</p>
+<p><a href="https://github.com/krahets/hello-algo">Hello 算法</a> ⭐ 128.6k — 动画图解、一键运行的数据结构与算法教程。支持十余种编程语言实现，以可视化方式降低算法学习门槛。亮点是动画演示质量极高。</p>
 </li>
 <li>
 <p><a href="https://github.com/krahets/LeetCode-Book">LeetCode Book</a> ⭐ 8.4k — 《剑指 Offer》和《图解算法数据结构》配套代码合集。提供 Python、Java、C++ 三种语言实现，是面试刷题的经典参考。</p>
 </li>
 <li>
-<p><a href="https://github.com/codecrafters-io/build-your-own-x">Build Your Own X</a> ⭐ 521.0k — 通过重建你喜爱的技术来掌握编程。涵盖从数据库到操作系统到编译器的各种&quot;造轮子&quot;教程，是深入理解计算机系统原理的最佳实践路径。</p>
+<p><a href="https://github.com/codecrafters-io/build-your-own-x">Build Your Own X</a> ⭐ 527.8k — 通过重建你喜爱的技术来掌握编程。涵盖从数据库到操作系统到编译器的各种&quot;造轮子&quot;教程，是深入理解计算机系统原理的最佳实践路径。</p>
 </li>
 <li>
-<p><a href="https://github.com/practical-tutorials/project-based-learning">Project Based Learning</a> ⭐ 271.4k — 项目驱动学习教程合集。按编程语言分类，每个项目都有明确的学习目标和完整的实现步骤。</p>
+<p><a href="https://github.com/practical-tutorials/project-based-learning">Project Based Learning</a> ⭐ 273.8k — 项目驱动学习教程合集。按编程语言分类，每个项目都有明确的学习目标和完整的实现步骤。</p>
 </li>
 <li>
-<p><a href="https://github.com/shareAI-lab/learn-claude-code">Learn Claude Code</a> ⭐ 69.2k — 从零构建类 Claude Code 的代理框架。以 “Bash is all you need” 为理念，手把手教你搭建一个 nano 级 agent harness，适合理解 agentic coding 的底层逻辑。</p>
+<p><a href="https://github.com/shareAI-lab/learn-claude-code">Learn Claude Code</a> ⭐ 71.4k — 从零构建类 Claude Code 的代理框架。以 “Bash is all you need” 为理念，手把手教你搭建一个 nano 级 agent harness，适合理解 agentic coding 的底层逻辑。</p>
 </li>
 <li>
-<p><a href="https://github.com/PKUFlyingPig/cs-self-learning">计算机自学指南</a> ⭐ 73.4k — 北京大学同学整理的计算机科学自学路径。涵盖从入门到进阶的完整课程体系，是 CS 自学者的路线图。</p>
+<p><a href="https://github.com/duoan/TorchCode">TorchCode</a> ⭐ 4.4k — PyTorch 版 LeetCode。通过从零实现 softmax、注意力机制、GPT-2 等核心组件来深度学习深度学习，自带自动评分。亮点是 Jupyter 交互式学习体验。</p>
 </li>
 <li>
-<p><a href="https://github.com/duoan/TorchCode">TorchCode</a> ⭐ 4.3k — PyTorch 版 LeetCode。通过从零实现 softmax、注意力机制、GPT-2 等核心组件来深度学习深度学习，自带自动评分。亮点是 Jupyter 交互式学习体验。</p>
+<p><a href="https://github.com/jingyaogong/minimind">MiniMind</a> ⭐ 53.5k — 2 小时从零训练一个 64M 参数的大语言模型。将 LLM 训练的完整流程浓缩到最小规模，是理解大模型原理的最佳入门项目。</p>
 </li>
 <li>
-<p><a href="https://github.com/jingyaogong/minimind">MiniMind</a> ⭐ 52.4k — 2 小时从零训练一个 64M 参数的大语言模型。将 LLM 训练的完整流程浓缩到最小规模，是理解大模型原理的最佳入门项目。</p>
+<p><a href="https://github.com/alvinreal/awesome-opensource-ai">Awesome OpenSource AI</a> ⭐ 4.2k — 精选真正开源的 AI 项目、模型、工具和基础设施合集。帮助快速了解开源 AI 生态全貌。</p>
 </li>
 <li>
-<p><a href="https://github.com/alvinreal/awesome-opensource-ai">Awesome OpenSource AI</a> ⭐ 4.0k — 精选真正开源的 AI 项目、模型、工具和基础设施合集。帮助快速了解开源 AI 生态全貌。</p>
-</li>
-<li>
-<p>🆕 <a href="https://github.com/Totoro-jam/battle-tested-patterns">Battle Tested Patterns</a> ⭐ 308 — 来自生产代码库的实战编程模式集。覆盖 React、Linux、Go、Chromium 等真实项目，附精确源码链接、多语言示例和可运行练习。解决&quot;设计模式学了不会用&quot;的问题。亮点是每个模式都有工业级出处佐证，而非教科书空谈。</p>
-</li>
-<li>
-<p>🆕 <a href="https://github.com/KaiserY/trpl-zh-cn">Rust 程序设计语言（中文版）</a> ⭐ 5.5k — 《Rust 程序设计语言》中文翻译（2024 edition）。Rust 官方入门书的权威中译版，解决 Rust 学习门槛高、英文阅读吃力的问题。亮点是紧跟官方版本更新、翻译质量经社区长期打磨。</p>
+<p><a href="https://github.com/KaiserY/trpl-zh-cn">Rust 程序设计语言（中文版）</a> ⭐ 5.5k — 《Rust 程序设计语言》中文翻译（2024 edition）。Rust 官方入门书的权威中译版，解决 Rust 学习门槛高、英文阅读吃力的问题。亮点是紧跟官方版本更新、翻译质量经社区长期打磨。</p>
 </li>
 </ul>
 </div></details>
 <details class="toggle" ><summary class="toggle-button" style="">实用工具</summary><div class="toggle-content"><p>解决日常开发和工作中的实际需求。</p>
 <ul>
 <li>
-<p><a href="https://github.com/hmjz100/LinkSwift">LinkSwift</a> ⭐ 17.4k — 八大网盘下载地址获取工具。支持百度网盘、阿里云盘、中国移动云盘、天翼云盘、迅雷云盘、夸克网盘、UC 网盘、123 云盘，一键获取直链。</p>
+<p><a href="https://github.com/hmjz100/LinkSwift">LinkSwift</a> ⭐ 18.2k — 八大网盘下载地址获取工具。支持百度网盘、阿里云盘、中国移动云盘、天翼云盘、迅雷云盘、夸克网盘、UC 网盘、123 云盘，一键获取直链。</p>
 </li>
 <li>
-<p><a href="https://github.com/larksuite/cli">Lark CLI</a> ⭐ 14.9k — 飞书/Lark 官方命令行工具。覆盖消息、文档、多维表格、日历、邮件等核心业务场景，提供 200+ 命令和 20+ AI 代理技能，是飞书深度用户的效率神器。</p>
+<p><a href="https://github.com/larksuite/cli">Lark CLI</a> ⭐ 15.6k — 飞书/Lark 官方命令行工具。覆盖消息、文档、多维表格、日历、邮件等核心业务场景，提供 200+ 命令和 20+ AI 代理技能，是飞书深度用户的效率神器。</p>
 </li>
 <li>
-<p><a href="https://github.com/abgox/InputTip">InputTip</a> ⭐ 3.2k — 输入法状态管理工具。实时提示当前输入法状态（中/英），并支持快速切换。解决 Windows 下频繁误输入中英文的问题。</p>
+<p><a href="https://github.com/abgox/InputTip">InputTip</a> ⭐ 3.3k — 输入法状态管理工具。实时提示当前输入法状态（中/英），并支持快速切换。解决 Windows 下频繁误输入中英文的问题。</p>
 </li>
 <li>
 <p><a href="https://github.com/VaalaCat/frp-panel">FRP Panel</a> ⭐ 1.8k — 多节点 FRP 内网穿透管理面板。提供可视化 Web UI 管理 FRP 服务端和客户端，可作为 Cloudflare Tunnel、Tailscale Funnel 等方案的开源替代。</p>
 </li>
 <li>
-<p><a href="https://github.com/public-apis/public-apis">Public APIs</a> ⭐ 445.2k — 免费 API 合集。涵盖几乎所有类别的公开 API 列表，是开发者寻找第三方服务接入点的首选参考。</p>
+<p><a href="https://github.com/public-apis/public-apis">Public APIs</a> ⭐ 451.1k — 免费 API 合集。涵盖几乎所有类别的公开 API 列表，是开发者寻找第三方服务接入点的首选参考。</p>
 </li>
 <li>
-<p>🆕 <a href="https://github.com/ripienaar/free-for-dev">Free For Dev</a> ⭐ 127.1k — 面向开发者的免费服务清单。汇总对 devops 和后端有价值的 SaaS/PaaS/IaaS 免费额度，解决&quot;哪些云服务能白嫖&quot;的信息分散问题。亮点是分类极其详尽、社区持续维护，是省钱选型的首选参考。</p>
+<p><a href="https://github.com/ripienaar/free-for-dev">Free For Dev</a> ⭐ 129.7k — 面向开发者的免费服务清单。汇总对 devops 和后端有价值的 SaaS/PaaS/IaaS 免费额度，解决&quot;哪些云服务能白嫖&quot;的信息分散问题。亮点是分类极其详尽、社区持续维护，是省钱选型的首选参考。</p>
 </li>
 <li>
-<p><a href="https://github.com/santifer/career-ops">Career Ops</a> ⭐ 56.7k — 基于 Claude Code 的 AI 求职系统。提供 14 种技能模式、Go 驱动的仪表盘、PDF 生成和批量处理，覆盖简历优化到面试准备的全流程。亮点是将 AI 代理能力系统性地应用于求职场景。</p>
+<p><a href="https://github.com/santifer/career-ops">Career Ops</a> ⭐ 60.4k — 基于 Claude Code 的 AI 求职系统。提供 14 种技能模式、Go 驱动的仪表盘、PDF 生成和批量处理，覆盖简历优化到面试准备的全流程。亮点是将 AI 代理能力系统性地应用于求职场景。</p>
 </li>
 <li>
-<p><a href="https://github.com/ianho7/maptoposter-online">MapPoster Online</a> ⭐ 812 — 把你爱的城市变成精美海报。浏览器端地图海报生成器，无需安装即可将任意城市生成极简风格的地图艺术海报，适合做家居装饰或独特礼物。亮点是基于 maptoposter Python CLI 的网页升级版，开箱即用。</p>
+<p><a href="https://github.com/ianho7/maptoposter-online">MapPoster Online</a> ⭐ 856 — 把你爱的城市变成精美海报。浏览器端地图海报生成器，无需安装即可将任意城市生成极简风格的地图艺术海报，适合做家居装饰或独特礼物。亮点是基于 maptoposter Python CLI 的网页升级版，开箱即用。</p>
 </li>
 <li>
-<p><a href="https://github.com/termux/termux-app">Termux</a> ⭐ 57.0k — Android 终端模拟器和 Linux 环境。在手机上获得完整的 Linux 命令行体验，通过 apt 包管理安装 Python、Node.js、Git 等开发工具链。亮点是无需 root 即可运行，让移动设备瞬间变成便携开发环境。</p>
+<p><a href="https://github.com/termux/termux-app">Termux</a> ⭐ 57.8k — Android 终端模拟器和 Linux 环境。在手机上获得完整的 Linux 命令行体验，通过 apt 包管理安装 Python、Node.js、Git 等开发工具链。亮点是无需 root 即可运行，让移动设备瞬间变成便携开发环境。</p>
 </li>
 <li>
-<p>🆕 <a href="https://github.com/iconify/iconify">Iconify</a> ⭐ 6.2k — 统一图标框架。用一套语法接入 FontAwesome、Material、Feather 等 200+ 图标集（约 30 万个图标），提供 SVG 框架和 React/Vue/Svelte 组件。解决项目里多图标库混用、格式不统一的问题。亮点是海量图标统一调用且按需加载，不增加打包体积。</p>
+<p><a href="https://github.com/iconify/iconify">Iconify</a> ⭐ 6.2k — 统一图标框架。用一套语法接入 FontAwesome、Material、Feather 等 200+ 图标集（约 30 万个图标），提供 SVG 框架和 React/Vue/Svelte 组件。解决项目里多图标库混用、格式不统一的问题。亮点是海量图标统一调用且按需加载，不增加打包体积。</p>
 </li>
 <li>
-<p>🆕 <a href="https://github.com/antfu-collective/icones">Icones</a> ⭐ 7.4k — 基于 Iconify 的即时图标搜索浏览器。让设计师和开发者按关键词秒级检索、预览海量图标并一键导出 SVG，解决&quot;找图标难&quot;的痛点。亮点是离线可用、支持收藏与多格式复制，Vue 核心团队成员 Anthony Fu 出品。</p>
+<p><a href="https://github.com/antfu-collective/icones">Icones</a> ⭐ 7.4k — 基于 Iconify 的即时图标搜索浏览器。让设计师和开发者按关键词秒级检索、预览海量图标并一键导出 SVG，解决&quot;找图标难&quot;的痛点。亮点是离线可用、支持收藏与多格式复制，Vue 核心团队成员 Anthony Fu 出品。</p>
 </li>
 <li>
-<p>🆕 <a href="https://github.com/usememos/memos">Memos</a> ⭐ 61.2k — 开源自托管的轻量速记工具。Markdown 原生、主打快速捕捉灵感，数据完全自有。解决云端笔记的隐私和锁定问题。亮点是极简、可自建、部署门槛低。</p>
+<p><a href="https://github.com/usememos/memos">Memos</a> ⭐ 61.6k — 开源自托管的轻量速记工具。Markdown 原生、主打快速捕捉灵感，数据完全自有。解决云端笔记的隐私和锁定问题。亮点是极简、可自建、部署门槛低。</p>
 </li>
 </ul>
 </div></details>
 <details class="toggle" ><summary class="toggle-button" style="">安全研究</summary><div class="toggle-content"><ul>
-<li><a href="https://github.com/Unclecheng-li/poc-lab">PoC Lab</a> ⭐ 674 — 最新 CVE 漏洞的 PoC 和复现脚本合集。聚焦 Linux 内核、Windows、macOS 等平台的高危漏洞，适合安全研究人员跟踪最新漏洞动态和进行漏洞复现实验。</li>
+<li><a href="https://github.com/Unclecheng-li/poc-lab">PoC Lab</a> ⭐ 743 — 最新 CVE 漏洞的 PoC 和复现脚本合集。聚焦 Linux 内核、Windows、macOS 等平台的高危漏洞，适合安全研究人员跟踪最新漏洞动态和进行漏洞复现实验。</li>
 </ul>
 </div></details>
 <details class="toggle" ><summary class="toggle-button" style="">创业与营销</summary><div class="toggle-content"><ul>
-<li><a href="https://github.com/EdoStra/Marketing-for-Founders">Marketing for Founders</a> ⭐ 6.4k — 面向独立开发者和创业者的实战营销资源。从获取前 10 个用户到 1000 个用户，提供分阶段的可执行策略，适合技术背景的创始人补齐营销短板。</li>
+<li><a href="https://github.com/EdoStra/Marketing-for-Founders">Marketing for Founders</a> ⭐ 6.5k — 面向独立开发者和创业者的实战营销资源。从获取前 10 个用户到 1000 个用户，提供分阶段的可执行策略，适合技术背景的创始人补齐营销短板。</li>
 </ul>
 </div></details>
 <details class="toggle" ><summary class="toggle-button" style="">程序员生活</summary><div class="toggle-content"><p>技术人也需要好好生活。这里收录程序员文化相关的趣味项目。</p>
 <ul>
-<li>🆕 <a href="https://github.com/Anduin2017/HowToCook">程序员在家做饭方法指南</a> ⭐ 101.0k — 程序员社区协作编写的&quot;程序化&quot;菜谱合集。用精确到克和分钟的工科思维教做菜，解决&quot;程序员不会做饭、外卖吃腻&quot;的生活痛点。亮点是极强的社区参与度和工程化的烹饪步骤，堪称程序员文化名场面。</li>
+<li><a href="https://github.com/Anduin2017/HowToCook">程序员在家做饭方法指南</a> ⭐ 101.2k — 程序员社区协作编写的&quot;程序化&quot;菜谱合集。用精确到克和分钟的工科思维教做菜，解决&quot;程序员不会做饭、外卖吃腻&quot;的生活痛点。亮点是极强的社区参与度和工程化的烹饪步骤，堪称程序员文化名场面。</li>
+</ul>
+</div></details>
+<details class="toggle" ><summary class="toggle-button" style="">即时通讯与机器人</summary><div class="toggle-content"><p>这类项目围绕 QQ / IM 平台的协议端、机器人框架与生态，解决消息平台接入与自动化的问题。</p>
+<ul>
+<li>
+<p>🆕 <a href="https://github.com/NapNeko/NapCatQQ">NapCat</a> ⭐ 9.9k — 基于 NTQQ 的现代化 Bot 协议端实现。完整实现了大部分标准 OneBot 接口，作为初学者也能轻松上手，在低内存系统上可长时稳定运行。解决在 NTQQ 时代缺少稳定可用的 QQ 机器人协议端的问题。亮点是持续稳定开发维护、接口完整，是当前 QQ 机器人生态的事实标准之一。</p>
+</li>
+<li>
+<p>🆕 <a href="https://github.com/SnowLuma/SnowLuma">SnowLuma</a> ⭐ 605 — 将 QQ 原生会话桥接到 OneBot、WebUI 与自动化工具的远程协议框架。作为 NapCat 的现代 GUI 替代品，提供开箱即用的图形管理界面，官方在 NapCat README 中直接推荐。解决协议端缺少友好图形管理界面的问题。亮点是配套 SDK 与 MCP 包，可把 QQ 会话直接接入自动化工作流和 AI 代理。</p>
+</li>
+<li>
+<p>🆕 <a href="https://github.com/AstrBotDevs/AstrBot">AstrBot</a> ⭐ 36.5k — 易上手的多平台即时通讯 AI 代理助手与开发框架。集成 QQ、微信、Telegram、钉钉、飞书、Discord 等多种 IM 平台，统一接入各类 LLM 与插件，可作为 OpenClaw 等方案的开源替代。解决要在多个 IM 平台同时部署 AI 助手、各自适配协议繁琐的问题。亮点是多平台一套代码、插件生态丰富、自带 WebUI 可视化管理。</p>
+</li>
 </ul>
 </div></details>
 <hr />
@@ -896,10 +862,95 @@
 </tr>
 </tbody>
 </table>
+<h2 id="qq-协议端napcat-vs-snowluma"><a class="markdownIt-Anchor" href="#qq-协议端napcat-vs-snowluma"></a> QQ 协议端：NapCat vs SnowLuma</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>NapCat</th>
+<th>SnowLuma</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>形态</td>
+<td>协议端（无头服务）</td>
+<td>协议端 + GUI 管理界面</td>
+</tr>
+<tr>
+<td>交互形式</td>
+<td>命令行/容器部署</td>
+<td>桌面图形界面，开箱即用</td>
+</tr>
+<tr>
+<td>定位</td>
+<td>提供完整 OneBot 协议实现</td>
+<td>NapCat 的现代 GUI 替代品，官方推荐</td>
+</tr>
+<tr>
+<td>目标用户</td>
+<td>运维/开发者，长期稳定运行</td>
+<td>想要图形化管理、上手更简单的用户</td>
+</tr>
+<tr>
+<td>扩展方式</td>
+<td>标准 OneBot 接口对接各种机器人框架</td>
+<td>配套 SDK + MCP，桥接到 WebUI 与自动化工具</td>
+</tr>
+<tr>
+<td>适合人群</td>
+<td>需要稳定协议端、长期运行的后端部署</td>
+<td>想要可视化操作、快速把 QQ 接入自动化流程</td>
+</tr>
+<tr>
+<td>选择建议</td>
+<td>要稳定无头运行、对接现有机器人框架 → <strong>NapCat</strong></td>
+<td>要图形界面、把 QQ 会话接入自动化/AI 代理 → <strong>SnowLuma</strong></td>
+</tr>
+</tbody>
+</table>
 </div></details>
 ]]></content>
       <tags>
         <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数学是最好的算法</title>
+    <url>/2026/07/15/%E6%95%B0%E5%AD%A6%E6%98%AF%E6%9C%80%E5%A5%BD%E7%9A%84%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>今天刷 leetcode 每日一题，题面如下：给你一个整数 n ，请你计算以下两个值的最大公约数（ GCD ）： sumOdd ：最小的 n 个正奇数的总和； sumEven ：最小的 n 个正偶数的总和；返回 sumOdd 和 sumEven 的 GCD 。</p>
+<p>给大伙看看用辗转相除法怎么做。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> y == <span class="number">0</span> ? x : <span class="built_in">gcd</span>(y, x % y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">gcdOfOddEvenSums</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">gcd</span>(n * n, n * (n + <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>事实上，要是用上 <code>&lt;numeric&gt;</code> 库里自带的 gcd 函数，这道题将会更简单。但是今天分享的重点不在这里，让我们关注一下最后一条语句。学过高中数学的都知道，这是由等差数列求和公式算出来的奇数和和偶数和。具体公式如下：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>s</mi><mi>u</mi><mi>m</mi><mi>O</mi><mi>d</mi><mi>d</mi><mo>=</mo><mn>1</mn><mo>+</mo><mn>3</mn><mo>+</mo><mo>⋯</mo><mo>+</mo><mo stretchy="false">(</mo><mn>2</mn><mtext>∗</mtext><mi>n</mi><mtext>−</mtext><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">sumOdd=1+3+⋯+(2∗n−1)=n^2
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">u</span><span class="mord mathnormal">m</span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mord mathnormal">d</span><span class="mord mathnormal">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">2</span><span class="mord">∗</span><span class="mord mathnormal">n</span><span class="mord">−</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8641079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>s</mi><mi>u</mi><mi>m</mi><mi>E</mi><mi>v</mi><mi>e</mi><mi>n</mi><mo>=</mo><mn>2</mn><mo>+</mo><mn>4</mn><mo>+</mo><mo>⋯</mo><mo>+</mo><mo stretchy="false">(</mo><mn>2</mn><mtext>∗</mtext><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi>n</mi><mtext>∗</mtext><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">sumEven=2+4+⋯+(2∗n)=n∗(n+1)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">u</span><span class="mord mathnormal">m</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">2</span><span class="mord">∗</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mord">∗</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span></p>
+<p>那么问题来了，我们并不需要拉马努金那样的注意力也能发现，这两个结果里面，是不是都有个 n 呢。所以有一个时间和空间复杂度都是 O(1) 的解法如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">gcdOfOddEvenSums</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>数学是最好的算法。</p>
+]]></content>
+      <tags>
+        <tag>技术</tag>
+        <tag>短篇</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>代码品味≈设计模式？</title>
+    <url>/2026/07/05/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E2%89%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F/</url>
+    <content><![CDATA[<p>刚刚阅读了 <a href="https://luminousmen.com/post/design-patterns-suck/">Design Patterns Suck</a> 这篇文章，对设计模式有了些新的思考，且发现在之前<a href="https://speechlesspanda.github.io/2026/06/06/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">代码品味与架构设计</a>中可能给了些错误的引导，出于对本博客为数不多读者的负责，我快马加鞭写了这一个小短篇。</p>
+<p>里面让我对设计模式有了重新思考的一个观点是：设计模式并不是在解决你的问题，而是让你解决语言本身的问题。我们这学期学习的 java 之所以这么推崇设计模式，是因为 java 本身的语言特性不足。 java 设计者认为，如果你给开发者太多权力，他们会自毁前程。但现在大部分语言都不是这样，尤其是 python 和 cpp 。因此设计模式就会显得冗余和过度包装，为了使用设计模式而使用设计模式，就像刚拿到什么高级工具的小孩，在解决一个简单问题时也想用所谓的高级工具（说的就是我）。</p>
+<p>其实我早应该发现这个问题的，本人一向是质疑复杂度，推崇奥卡姆剃刀原理的。我反思了这次我被设计模式冲昏头脑的原因，有以下两点。一是，对于刚入门的程序员来说，设计模式实在显得太高级了，一度被我认为是我的大学课堂中为数不多以后能用上的内容。二是，之前和佬的交谈中，将设计模式与代码品味关联在一起，更是为其蒙上了神秘的面纱，让我直接默认了奥卡姆剃刀在写代码这件事上不成立，写代码就应该冗余设计。</p>
+<p>现在想来，当时的自己居然一度放弃了自己最推崇的思考，因为佬和我的对话中，有能让我清醒过来的内容，但我没把握住（佬终究还是佬）。佬曾说过，应该关注的是设计模式要解决的问题，而不是具体的表现形式，也曾说过并不是所有情况都要使用设计模式，到后面要像庖丁解牛一样，自如地、知道什么时候合适地使用设计模式。只不过，真的必须要使用设计模式的地方，比我想的要少得多。</p>
+<p>那代码品味呢？没有了设计模式这一具体的入门砖后，我们又该怎么培养代码品味呢。以我的拙见，这就不得不提到，设计模式落伍的原因：现代语言本身丰富的特性。设计模式是在一个特性有限的语言里，将部分特性以某种逻辑固定的组合在一起，但在现代语言中，特性是丰富的，因此在每个具体的、不同的场景，都可以有不同的特性以不同的方式组合在一起，甚至一个特性就能实现一个设计模式的功能。在能完成需求的情况下，不要放弃对灵活和简单的追求，不要遗漏任何一种语言的特性，这或许是现代唯一正确的“设计模式”。套用设计模式可能是一种无错的选择，但是学会自己组合特性，使用特性，灵活变通，才是在向代码品味迈进。</p>
+<blockquote>
+<p>据我的观察，代码品味可能还和类型有关，但在这方面我还没有太深的见解，先挖个坑。</p>
+</blockquote>
+<p>最重要的是，不能放弃思考。这次某种意义上有点像 ai hype ，我能想明白不要 ai hype ，却被自己一直所渴求的代码品味给 hype 了一回，这下能理解 ai hype 了。但既然有了前车之鉴，后面更应该保持清醒，知道思考的可贵。</p>
+]]></content>
+      <tags>
+        <tag>技术</tag>
+        <tag>短篇</tag>
       </tags>
   </entry>
 <entry><title>碎碎念 · 2026-07-12</title><url>/memos/</url><content><![CDATA[今天和一个很久没联系的朋友深聊了一下。她有一些很有启发的观点，在此记录一下：“无论什么时候你都有改变自己想法的权利，只要能鼓励你继续前进，我觉得就是对的。”“改变是随时的，向前是一直的。”我的朋友们总是能给我一些观点来促进我的思考，感谢他们。 还有一件事很感慨，我和我的朋友们属于是平常不怎么联系的类型。今天翻了下聊天记录，发现很多以前说好的事都没做到，比如见一面什么的，成年人的有心无力和迫不得已越来越多，但我不希望友谊因此淡下去，更希望这让我们更珍惜这份友谊以及偶尔来之不易的如约的约定。 btw ，比赛的队里出了点小问题，头疼。今天我妈过来，陪了她一天，虽然也因此难得好吃好喝了一天。]]></content><tags><tag>假期</tag><tag>感慨</tag></tags></entry><entry><title>碎碎念 · 2026-07-11</title><url>/memos/</url><content><![CDATA[全局变量的最佳命名前缀是什么？答案：//。 cpp 教程说，这个笑话值得所有评论。所以，交出你们的评论。]]></content><tags><tag>假期</tag><tag>有趣</tag><tag>技术</tag></tags></entry><entry><title>碎碎念 · 2026-07-10</title><url>/memos/</url><content><![CDATA[今天看书看到上世纪八九十年代的一个 Wirth 定律：软件变慢的速度比硬件变快的速度更快。这句话挺有启发性的，但除了这点以外，让我非常想在这里分享这句话的另一个原因是，它另一个版本的表述： Intel 给予的， Microsoft 拿走。太有趣了。 今天也是终于彻底进入干活的状态了，回到期末考前的作息。可喜可贺。下周小学期更是另一种意义上回到期末考前的状态。希望 CPU 不要太难搓，希望 jzm 是善良人格。]]></content><tags><tag>假期</tag><tag>有趣</tag><tag>技术</tag></tags></entry><entry><title>碎碎念 · 2026-07-06</title><url>/memos/</url><content><![CDATA[颓废的三天，完全不像我预想的一样进入了比赛的状态。与其说在断断续续的推进比赛，不如说在各种其他活动中抽空做了一下比赛的内容。所以，我要立个 flag ，明天开始认真干活。主线比赛，支线学语言和看书。 今天小学期课程安排出来了，怎么能既是 jzm ，又要上早八的。我都上了三次 jzm 了。人怎么能同时占这么多好事。]]></content><tags><tag>假期</tag></tags></entry><entry><title>碎碎念 · 2026-07-04</title><url>/memos/</url><content><![CDATA[哈哈哈哈哈哈哈， this semester is over ！终于考完试了，感觉还行（要是砸了就是我感觉错了）。然后博客迎来了最新一次的更新，这次会像 pyq 一样，有评论的碎碎念就会显示评论出来，没有的则隐藏评论区。这个功能好像 giscus 原生是不支持的，实现用了一点小小的逆向，所以有想要做这个效果的朋友可以让 ai 读读我的仓库原码。这个小功能干了我一天，最后发现不行和浏览器缓存刷新机制有关，神秘了。 今天较为颓废，明天开始要好好做和比赛有关的事了，或者有空学学 cpp 。今天甚至没锻炼，哎。]]></content><tags><tag>博客更新</tag><tag>假期</tag></tags></entry><entry><title>碎碎念 · 2026-07-02</title><url>/memos/</url><content><![CDATA[今天晚上点了个外卖，送到另一个地方去了，要去拿很远，我有点烦，人的劣根性发力，想要退款且拿货（我忏悔）。但是当时申请退款的时候没想到商家会拿回去，结果就是商家没同意，然后申请店铺客服介入，骑手就把餐拿回去了。但是那个时候店铺客服还没同意退款，等于我饭财两空，我就有点难绷。一气之下开始平台客服申请退款。一开始默认弹出来的订单，是我的午饭，我没有察觉到，然后就申请了这个的，把经过跟客服说了，客服找不到骑手核实，就给我退款了。结果退款金额比晚饭钱少我倒是发现了，这才意识到不对。然后想想不能亏，人的劣根性又发力（我忏悔一点吧），又去平台申请了晚饭的退款，结果又通过了……还有前情提要是，中午由于骑手送达超时，我还获赔了 3 元，退款的时候这 3 元并没有算进去。所以我今天，在赚了 3 元的情况下，白吃了一顿午饭，唯一的代价是晚饭只能吃零食（还有就是我内心的忏悔了）。也不知道我这是幸运还是不幸。]]></content><tags><tag>生活小事</tag></tags></entry><entry><title>碎碎念 · 2026-06-30</title><url>/memos/</url><content><![CDATA[tzb 大学果然名不虚传，今天看报名人数居然 500 多个，而且居然能重复报名，有大约 40 个人报了两项及以上，我认识的一个佬各种挂名报了 5 个……我自己的项目创业未办而中道崩殂，还没考完试，只是在跑 baseline 就已经有一大堆问题了，不敢想后面该怎么办。头大，宁愿期末周更久一点，也不想面对那些神奇的问题。果然痛苦是比较出来的，在比赛面前期末周都显得和蔼可亲。]]></content><tags><tag>比赛</tag><tag>期末周</tag></tags></entry><entry><title>碎碎念 · 2026-06-26</title><url>/memos/</url><content><![CDATA[服了，比赛报名临时说不行，有个地方有问题，要重新盖章这些的。虽然我支持周末放假，但是这个节骨眼周末找不到行政盖章也挺无力的。还有就是，明明一个月的报名窗口期，偏偏要等到后半个月甚至最后十天才把盖章流程说出来，刨开节假日后真是酣畅淋漓的与时间赛跑。也是体会到学校行政的恶心之处了，之前体感还没这么明显。 昨天看上一届学长在群里求实习，看的我不自觉瑟瑟发抖，我要是保不上研，后面本科就业会不会也是这样呢。哎，焦虑。 今天考完计组了，但晚上回来一点复习状态没有，后面是最重要的两个考试课。我还觉得自己没有找到考试的状态，不知道怎么才能好一点。没招。]]></content><tags><tag>焦虑迷茫</tag><tag>期末周</tag></tags></entry><entry><title>碎碎念 · 2026-06-25</title><url>/memos/</url><content><![CDATA[改了三四个小时，博客新功能终于稳定下来了。虽然大部分时候都是 agent 在干，但也是在期末周抽出了一部分精力和时间。要是对复习有这个热情或许学分绩就能高高的了吧（悲）。对了，碎碎念下面是可以评论的，欢迎大家来互动。]]></content><tags><tag>博客更新</tag><tag>期末周</tag></tags></entry><entry><title>碎碎念 · 2026-06-24</title><url>/memos/</url><content><![CDATA[碎碎念上线啦!这里记录随手想法、短动态，和长文章分开。支持 markdown 、 链接 和标签。今天还给博客加了 OG 图自动生成，中文用 LXGW WenKai 渲染，分享链接有预览图了。现在博客的功能越来越多了，非常满意（前段时间悄咪咪更新了一大波功能，不知道有没有老读者发现）。 BTW ，今天终于提前完成了复习计划里 dsa 的部分，不像之前一样要奋战到十点前最后一刻了，所以顺利地看了会计组，然后头就开始晕了，难顶。怎样才能像一些大佬一样，同时能把三个大比赛、期末周和提前毕设都做好呢（认真）。]]></content><tags><tag>博客更新</tag><tag>期末周</tag></tags></entry></search>
