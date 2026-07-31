@@ -22,6 +22,7 @@
 - **Giscus 评论**：基于 GitHub Discussions，支持 Reactions、多语言、暗色模式联动
 - **碎碎念每条可独立评论**：同页多条评论区用独立 iframe 直嵌 giscus `/widget`（绕过 client.js 单例），每条对应一个 Giscus discussion；登录态只在 OAuth 回调当次传递（不写 localStorage，避免过期 session 触发 `oauth/token` 400 导致整条评论区空白）；giscus.app 被广告拦截/跟踪防护屏蔽时，每条评论区常驻"在新标签页打开评论 ↗"一键出口
 - **评论邮件通知**：`comment-email-notify.yml` 监听 `discussion`（首评/新建讨论）与 `discussion_comment`（后续回复），有评论即通过 QQ SMTP 自动发邮件通知作者（在发布仓运行）
+- **评论触发重建**：新评论到达时，`comment-email-notify.yml` 还会向源仓派发 `repository_dispatch`（`rebuild-on-comment`），`deploy-from-source.yml` 监听该事件自动重建，刷新碎碎念/文章的 `commentCount`，让有评论的碎碎念评论区自动展开（否则要等下次推送）。需在发布仓配置 `SOURCE_DEPLOY_PAT`（对源仓有 Actions:write 权限的 PAT）；未配置则跳过，不影响邮件通知
 
 ### 📊 统计与分析
 
@@ -137,7 +138,7 @@ push 到 `blog-s-code` 的 `main` 分支 → GitHub Actions 自动构建 → 部
 6. sync README + 发布仓 workflow（comment-email-notify / search-engine-ping）到 public
 7. push `public/`（含 `.github/workflows`，通过 `exclude_assets: ""` 不再排除）到发布仓库（peaceiris/actions-gh-pages）
 
-触发条件：`main` 分支 push / 手动 `workflow_dispatch`。
+触发条件：`main` 分支 push / 手动 `workflow_dispatch` / 发布仓收到新评论时派发的 `repository_dispatch`（`rebuild-on-comment`，用于刷新 `commentCount`，详见「评论触发重建」）。
 
 > 发布仓的 `pages-build-deployment` 偶发平台错误 "Deployment failed, try again later." 时，源仓的 `retry-pages-deploy.yml` 会每 10 分钟自动重跑（最多 3 次，防死循环），无需人工介入。
 > 注：`comment-email-notify` / `search-engine-ping` 同步到发布仓后在那里激活（均带 `if: github.repository=='SpeechlessPanda/SpeechlessPanda.github.io'` 守卫）；`retry-pages-deploy` 留在源仓跨仓操作（peaceiris 默认会排除 `.github`，故用 `exclude_assets: ""` 放行前两个，retry 不进同步集）。

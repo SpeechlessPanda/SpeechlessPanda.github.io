@@ -5,6 +5,8 @@ name: Giscus Comment Email Notify
 #   - discussion_comment(created):对已有 discussion 的后续回复
 # 两者字段不同(comment.* vs discussion.*),下面用 github.event_name 三元表达式分流取值。
 # 仅在发布仓 SpeechlessPanda.github.io 运行(Discussions 与 SMTP secrets 都在此仓)。
+#
+# 收到评论后还会触发源仓(blog-s-code)重建,刷新 commentCount,让评论区自动展开。
 
 on:
   workflow_dispatch:
@@ -51,3 +53,29 @@ jobs:
             <p><a href="${{ github.event_name == 'workflow_dispatch' && format('https://github.com/{0}/actions/runs/{1}', github.repository, github.run_id) || (github.event_name == 'discussion_comment' && github.event.comment.html_url || github.event.discussion.html_url) }}">点击查看来源</a></p>
             <hr/>
             <p>Repository: ${{ github.repository }}</p>
+
+  trigger-rebuild:
+    # 收到新评论/新讨论时,触发源仓重新构建,刷新 memos 等页的 commentCount,
+    # 让对应碎碎念/文章的评论区自动展开。需要发布仓 secret SOURCE_DEPLOY_PAT
+    # (对源仓 SpeechlessPanda/blog-s-code 有 Actions:write 的 classic PAT,
+    #  或 fine-grained PAT 授予 Actions 读写权限)。
+    # 未配置则仅告警跳过,不影响邮件发送,评论区将在下次推送时刷新。
+    runs-on: ubuntu-latest
+    if: github.repository == 'SpeechlessPanda/SpeechlessPanda.github.io'
+    permissions:
+      contents: read
+    steps:
+      - name: Dispatch rebuild-on-comment to source repo
+        env:
+          GH_TOKEN: ${{ secrets.SOURCE_DEPLOY_PAT }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::warning::SOURCE_DEPLOY_PAT 未配置,跳过触发源仓重建(评论自动展开将延迟到下次推送)"
+            exit 0
+          fi
+          echo "触发源仓 rebuild-on-comment ..."
+          gh api repos/SpeechlessPanda/blog-s-code/dispatches \
+            -f event_type=rebuild-on-comment \
+            -F "client_payload[source]=comment-notify" \
+            -F "client_payload[event]=${{ github.event_name }}" \
+            || echo "::warning::触发源仓重建失败,请检查 SOURCE_DEPLOY_PAT 权限"
