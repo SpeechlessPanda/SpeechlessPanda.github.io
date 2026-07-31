@@ -36,22 +36,6 @@
       </tags>
   </entry>
   <entry>
-    <title>cpp 数组有趣之一</title>
-    <url>/2026/07/13/cpp%20%E6%95%B0%E7%BB%84%E6%9C%89%E8%B6%A3%E4%B9%8B%E4%B8%80/</url>
-    <content><![CDATA[<p>今天刷 leetcode 遇到一个很神奇的问题：给你一个整数数组 nums 和一个整数 k ，请你统计并返回该数组中和为 k 的子数组的个数 ，子数组是数组中元素的连续非空序列。</p>
-<p>单看问题本身并不神奇，但是它的题解非常有趣。我把两个题解放在下面，读者不妨猜猜看，哪个题解是官方的能通过的题解。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;<span class="comment">//题解1</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">subarraySum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="type">const</span> <span class="type">int</span> n = nums.<span class="built_in">size</span>();   </span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;               </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> start = <span class="number">0</span>; start &lt; n; ++start) &#123;</span><br><span class="line">            <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> end = start; end &gt;= <span class="number">0</span>; --end) &#123;</span><br><span class="line">                sum += nums[end];         </span><br><span class="line">                <span class="keyword">if</span> (sum == k) &#123;</span><br><span class="line">                    ++count;              </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;<span class="comment">//题解2</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">subarraySum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="type">const</span> <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> arr[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            arr[i] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> start = <span class="number">0</span>; start &lt; nums.<span class="built_in">size</span>(); ++start) &#123;</span><br><span class="line">            <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> end = start; end &gt;= <span class="number">0</span>; --end) &#123;</span><br><span class="line">                sum += arr[end];</span><br><span class="line">                <span class="keyword">if</span> (sum == k) &#123;</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>既然我都说了题解有趣，那想来大家不难猜到，看上去非常冗余繁琐的题解 2 才是最终的正确答案。而题解 1 则会在某个测试用例上超时。题解 2 不仅用了多余的空间，还有额外用来赋值的 O(n) 时间复杂度，但是它依然比题解 1 快。敏锐的读者已经发现了，题解 1 后续操作的是一个不标准变长数组 <code>int arr[n]</code> ，而题解 2 则是 <code>vector&lt;int&gt;&amp; nums</code> 。问题就出在这里，前者是栈上的数组，后者是堆上的一个容器。 vector 的访问是通过内部指针的间接访问，而 <code>int arr[n]</code> 则能做到直接寻址。再加上 cpp 的编译器对原生数组的优化更激进，最终造成了这个结果。真有趣， cpp 不愧是注重性能的语言。</p>
-<p>话说回来，我本人还是更推崇第一种写法。在代码的编写中，应减少冗余变量的出现，以及冗余的操作，这既为了可读性，也为了强迫症（或者代码品味）。再加上本来这两者带来的时间上的差距其实并不大，只有有特殊需求或在特定场景的情况下（比如数据爆炸多）才有必要追求题解 2 的写法。但是 leetcode 里超时的测试用例，数组里只有 4 个元素，这点差别就是超时和通过的天堑了，我认为这并不妥。</p>
-<p>这道题并不难，可能今天写在这里的内容对于大佬来说也不算什么新颖的东西。就当我新手就是爱记录好了（<s>还有水博客</s>）。最后给大家展示另一种时间复杂度仅为 O(n) 的更优雅的题解（思路详情详见<a href="https://leetcode.cn/problems/subarray-sum-equals-k/solutions/238572/he-wei-kde-zi-shu-zu-by-leetcode-solution/?envType=study-plan-v2&amp;envId=top-100-liked">官方题解</a>）。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">subarraySum</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; mp;</span><br><span class="line">        mp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>; </span><br><span class="line">        <span class="type">int</span> pre = <span class="number">0</span>;   </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;x : nums)</span><br><span class="line">        &#123;</span><br><span class="line">            pre += x;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (mp.<span class="built_in">find</span>(pre - k) != mp.<span class="built_in">end</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                count += mp[pre - k];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            mp[pre]++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>短篇</tag>
-        <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hello world</title>
     <url>/2026/03/08/hello%20world/</url>
     <content><![CDATA[<p>我高考专业是在知道自己不想选什么，然后在剩下的里面挑一个的情况下，选择了计算机。一开始并没有什么兴趣可言，直到我接触了很多种语言之后，反复在每种语言学习的一开始，输出一个“ hello world ”。我开始觉得技术是一件很有意思的事，甚至有一瞬间觉得是神圣的。这算是我对计算机的热情和兴趣被点燃的时刻，为了纪念这一时刻，有了这一短篇。我将在这里，用各种我学过的语言输出一遍“ hello world ”。</p>
@@ -67,6 +51,22 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello world&quot;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight rust"><table><tr><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>短篇</tag>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cpp 数组有趣之一</title>
+    <url>/2026/07/13/cpp%20%E6%95%B0%E7%BB%84%E6%9C%89%E8%B6%A3%E4%B9%8B%E4%B8%80/</url>
+    <content><![CDATA[<p>今天刷 leetcode 遇到一个很神奇的问题：给你一个整数数组 nums 和一个整数 k ，请你统计并返回该数组中和为 k 的子数组的个数 ，子数组是数组中元素的连续非空序列。</p>
+<p>单看问题本身并不神奇，但是它的题解非常有趣。我把两个题解放在下面，读者不妨猜猜看，哪个题解是官方的能通过的题解。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;<span class="comment">//题解1</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">subarraySum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="type">const</span> <span class="type">int</span> n = nums.<span class="built_in">size</span>();   </span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;               </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> start = <span class="number">0</span>; start &lt; n; ++start) &#123;</span><br><span class="line">            <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> end = start; end &gt;= <span class="number">0</span>; --end) &#123;</span><br><span class="line">                sum += nums[end];         </span><br><span class="line">                <span class="keyword">if</span> (sum == k) &#123;</span><br><span class="line">                    ++count;              </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;<span class="comment">//题解2</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">subarraySum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="type">const</span> <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> arr[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            arr[i] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> start = <span class="number">0</span>; start &lt; nums.<span class="built_in">size</span>(); ++start) &#123;</span><br><span class="line">            <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> end = start; end &gt;= <span class="number">0</span>; --end) &#123;</span><br><span class="line">                sum += arr[end];</span><br><span class="line">                <span class="keyword">if</span> (sum == k) &#123;</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>既然我都说了题解有趣，那想来大家不难猜到，看上去非常冗余繁琐的题解 2 才是最终的正确答案。而题解 1 则会在某个测试用例上超时。题解 2 不仅用了多余的空间，还有额外用来赋值的 O(n) 时间复杂度，但是它依然比题解 1 快。敏锐的读者已经发现了，题解 1 后续操作的是一个不标准变长数组 <code>int arr[n]</code> ，而题解 2 则是 <code>vector&lt;int&gt;&amp; nums</code> 。问题就出在这里，前者是栈上的数组，后者是堆上的一个容器。 vector 的访问是通过内部指针的间接访问，而 <code>int arr[n]</code> 则能做到直接寻址。再加上 cpp 的编译器对原生数组的优化更激进，最终造成了这个结果。真有趣， cpp 不愧是注重性能的语言。</p>
+<p>话说回来，我本人还是更推崇第一种写法。在代码的编写中，应减少冗余变量的出现，以及冗余的操作，这既为了可读性，也为了强迫症（或者代码品味）。再加上本来这两者带来的时间上的差距其实并不大，只有有特殊需求或在特定场景的情况下（比如数据爆炸多）才有必要追求题解 2 的写法。但是 leetcode 里超时的测试用例，数组里只有 4 个元素，这点差别就是超时和通过的天堑了，我认为这并不妥。</p>
+<p>这道题并不难，可能今天写在这里的内容对于大佬来说也不算什么新颖的东西。就当我新手就是爱记录好了（<s>还有水博客</s>）。最后给大家展示另一种时间复杂度仅为 O(n) 的更优雅的题解（思路详情详见<a href="https://leetcode.cn/problems/subarray-sum-equals-k/solutions/238572/he-wei-kde-zi-shu-zu-by-leetcode-solution/?envType=study-plan-v2&amp;envId=top-100-liked">官方题解</a>）。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">subarraySum</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; mp;</span><br><span class="line">        mp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>; </span><br><span class="line">        <span class="type">int</span> pre = <span class="number">0</span>;   </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;x : nums)</span><br><span class="line">        &#123;</span><br><span class="line">            pre += x;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (mp.<span class="built_in">find</span>(pre - k) != mp.<span class="built_in">end</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                count += mp[pre - k];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            mp[pre]++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
         <tag>短篇</tag>
@@ -214,6 +214,65 @@
       </tags>
   </entry>
   <entry>
+    <title>代码品味与架构设计</title>
+    <url>/2026/06/06/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</url>
+    <content><![CDATA[<h2 id="前情提要"><a class="markdownIt-Anchor" href="#前情提要"></a> 前情提要</h2>
+<p>这篇博客的思考来源于两个方面，一个提出了问题，一个解决了问题:</p>
+<ol>
+<li>我在不久之前尝试 vibe 了一个 AI 游戏，在很好的遵守了我之前摸索出来的大部分经验的情况下，项目依旧理我的理想预期差很远（但是情况比上次好了，说明上次的经验是有用的）。</li>
+<li>加到了一个在架构设计和代码品味两方面都表现相当好的佬的 QQ ，和他聊了一下相关的问题，收获颇丰，某种程度上知道了如何解决上面的情况。</li>
+</ol>
+<blockquote>
+<p>之前的经验详情请看<a href="https://speechlesspanda.github.io/2026/04/06/vibe%20coding%20%E5%BC%80%E5%8F%91%20BFE%20%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D%E4%B8%8E%E6%80%BB%E7%BB%93/">vibe coding 开发 BFE 后的反思与总结</a>，先看这篇可以获得最佳食用体验，且里面干货同样满满（我自夸中，不符当没看到，谢谢您嘞）。</p>
+</blockquote>
+<blockquote>
+<p>第一点中遇到的问题，颇有点像我上次推荐的<a href="https://blog.wh1isper.top/2026/02/01/2026-02-01-Agent-Software-Rot/#%E8%85%90%E5%8C%96%E7%9A%84%E5%87%A0%E7%A7%8D%E5%BD%A2%E6%80%81">当规则堆积成为智能的坟墓</a>中提到的项目的腐化和不 review 代码导致的智能技术债务的堆积（这个博客的作者也是大佬来的，自己在开发一个 harness <a href="https://github.com/Wh1isper/ya-mono">项目</a>）。 k10s 的负责人，最近删掉了目前所有的该项目的代码，也跟这个有关。虽然这篇博客更面向团队，但是由于我经验和能力都不太足，这个债务堆积的特别快。</p>
+</blockquote>
+<h2 id="代码品味"><a class="markdownIt-Anchor" href="#代码品味"></a> 代码品味</h2>
+<p>必须承认，我并没有 100% 按照上次的准则去做。我省略掉了最耗时间但是其实也是最重要的一步——开始之前对项目有整体了解的 chat 。我也在思考做了这一步会不会更好，但是缺乏实践，不能给出答案。但是我认为，我没有 chat ，一部分的原因也是不知道该 chat 些什么，前一篇博客在这方面略有不足，这篇博客，某种程度上解决了这个问题。</p>
+<p>先说代码品味，一开始我以为佬会和我说，这是个很抽象回答不了的问题，只能靠自己的实践摸索。但是，佬并没有这么说，而是说了<strong>设计模式</strong>。由于本人接触设计模式是在学校的 Java 课程上，所以一开始并没有很明白，在我看来，我学过的那些设计模式，与 Java 面向对象编程这个特性密不可分，但不是所有语言都是以此为基础设计的，我认为代码品味应该是超脱于具体语言之上的一个东西。我提出了我的疑惑，佬也给了解答。真正要关注的是，这个设计模式为什么被提出，解决什么问题，而不是以什么具体的形式存在。是我没有悟性了，不得不承认确实设计模式对我来说还是抽象， Java 作为一门考察课，我图方便高效（因为我事太多了），理所当然的通过与具体的实现形式绑定来理解了。佬的话确实醍醐灌顶，虽然理解了之后，我反而开始认为，具体语言的代码品味可能并不能完全相通了，毕竟代码品味是要通过具体的实现展现出来的，但是这不妨碍设计模式是一个很好的切入口，无论对任何语言来说。只需要了解一下，一般设计模式要解决的问题，在这个语言里要怎么实现，就能开始逐步积累代码品味。</p>
+<p>落实到 vibe coding 上来说，我的想法是，如果你真的奔着把这个项目做好，或者从项目的 vibe 过程中积累代码品味，亦或者项目本身具有一定复杂度的情况下，我都建议每次给 agent 的任务不要太多（比如逐功能添加）。并且每次让 agent 开始工作前，先和他探讨，这个任务最好用什么设计模式，有什么优缺点，有什么替代方案等，然后让他实现之后，跟你讲讲具体是要怎么实现，如果有不懂的可以接着问下去，刚刚 agent 的实践会成为你学习最好的例子和养料。</p>
+<blockquote>
+<p>这个方案不一定好，也不一定对甚至，只是我个人的摸索，而我的定位是小白和萌新。所以对于大佬来说，这个方案无疑是低效的；对于其他小白和萌新，我也积极鼓励你们摸索其他方案，毕竟我这篇还在打上篇的补丁，说不定下篇就直接推翻这篇了。适合自己的才是最好的，保持思考。</p>
+</blockquote>
+<p>但是还有但是，代码品味也确实没这么简单，终究是部分符合我对它的想象。佬还说，<strong>并不是使用了设计模式就是有代码品味，真正懂代码品味的人，是能够判断什么时候需要使用的人，甚至不使用也可以是有代码品味的一种体现</strong>。我翻译翻译，这有点像庖丁解牛。一开始当然做不到这样，甚至如果没有设计模式作为中间过渡，甚至连怎么变成这样都会毫无头绪。但只要不断地练习实践，就可以从一开始的学会使用设计模式，到判断什么时候该使用，到最后或许能做到对每个遇到的场景都能设计出针对性的模式。第三步当然有点理想，但是做到第二步就能算很有代码品味了。就像庖丁，一开始需要看着牛，到后面可以做到目无全牛，他就是一个很有屠牛品味的人（<s>未成年牛请在成年牛的陪同下阅读本博客</s>）。</p>
+<h2 id="架构设计"><a class="markdownIt-Anchor" href="#架构设计"></a> 架构设计</h2>
+<p>后面还和佬聊了聊架构设计。这其实要比代码品味具体的多，但还比代码品味还要难培养。因为在小白的小项目上，架构设计不会带来特别明显的不同，自然也会被大部分人忽略，大部分项目只能说有架构，却缺乏有意识地去设计架构。小白又很难有什么大项目，一般只有进公司之后，才能接触到大项目，但是在大项目的构建流程中，大部分人都是在架构设计好之后，负责实现的，很难说能够培养到自己架构设计的能力（说不定连其他整体架构是怎样的都无从得知，只能接触到自己要实现的部分）。还有一种方法是主动去看开源大项目的架构设计，然后通过思考培养这个能力。但是在没有 AI 的时候，大项目的体量是非常恐怖的，架构设计能力的培养并不是看形而上的抽象就够的，要深入到项目源码的细节里去体会，导致看大项目是一个非常费力不讨好的事情。在有了 AI 之后，确实让我们能够更快的了解一个大项目和它的源码细节，但是这利好的是那些非 AI native 者。对于我们这一代来说， AI 的出现让我们随着惰性避开了那些痛苦成长的时候，让我们哪怕有了 AI 读懂代码细节也不是易事。某种程度上也是吃力不讨好的事，所以很少有人主动去做。然而，人总不能一点痛苦不经历就获得成长。以后写代码的能力不再会是护城河，不想吃苦就算了，但架构设计这些以后的安身立命之本，哪怕痛苦也得主动去学去了解。<strong>痛苦和成长不会消失，只会转移。</strong></p>
+<p>佬推荐多去看看大项目的架构和相关博客，说出名的小初创公司的项目都可以看看。像 <a href="https://tailscale.com/blog/how-tailscale-works">tailscale</a> 就非常值得去看（这里还推荐这位佬的两个项目，虽然不大，但是在架构设计方面非常有巧思，分别是 <a href="https://vaala.cat/posts/frp-panel-doc/">frp-panel</a> 和 <a href="https://vaala.cat/posts/vibe-ai-gateway-oss/">Vaala AI Gateway</a> ）。多关注各种公司的博客，坚持读下来，总会有所收获。这里还推荐一个读项目的项目，叫做 <a href="https://deepwiki.com/">deepwiki</a> ，想认真读项目的读者可以了解一下。</p>
+<p>好了，接下来是 vibe coding 部分！尽管对个人项目来说，架构设计确实可能无关紧要，但是为了培养能力，哪怕再小再简单的项目，我们也可以有意识的去做这一步。在我们提完项目需求之后，可以先问问 agent ，这个项目的架构可以怎么设计，有什么方案，如何抉择。这是一个非常好的学习架构设计，培养自己架构设计思维的过程。我不好说具体能起到多么显著的成效，但是起码能有所收获，坚持多了做到从 0 到 1 入门应该没有问题，很多时候其实我们缺的也只是这一块敲门砖。</p>
+<h2 id="有机结合"><a class="markdownIt-Anchor" href="#有机结合"></a> 有机结合</h2>
+<p>别看好像并没有往 vibe coding 这个流程中添加很多动作，但已经足以有一套比较不一样的实践思路出来。先提需求，不断通过交流或者其他方式明确需求。然后设计架构。再然后，就是和之前有点不同的地方。<strong>先把每个模块和其他模块的接口、协作方式和任务划分定义好，然后给每一个模块（或者耦合度低的几个部分），新开一个 session ，将之前的上下文 + 这个 session 要完成的模块需求输入进去</strong>。这么做的原因是，大名鼎鼎的上下文灾难。我之前 vibe 项目时也喜欢一个 session 用到死，觉得这里面包含了所有的上下文，是最懂我这个项目的 session ，重开 session 面临着很大的沉默成本。但事实上，虽然绝大部分 agent 平台都有压缩机制，并且不断完善，上下文灾难依旧无法避免。可能一次 compact 表现还不错，但是多次 compact 之后不出现偏移基本是不可能的。分模块开 session 虽然确实看不到其他模块的上下文，但是通过之前定好的接口和写作方式可以最小化这个的影响，并且由于每个模块的上下文都很干净，对于 agent 实际的提升完全可以覆盖掉前面那个影响。之后在每个模块的 session 内，再来交流使用什么设计模式。</p>
+<blockquote>
+<p>如果你订阅了 GPT plus 这样的套餐，强烈建议你在做什么大项目之前，先在网页端走一遍“前置”流程，单纯只是生成项目需求文档等任务，网页端可以比 agent 做的更好（如果你还用 deep research 的话，那就更是如此）。后面等到真的要开始做了，可以让网页端给你总的和每个模块的 prompt ，这个 prompt 会更完善，项目也会更高质量。诚然会增加输入的 prompt 但我认为比后面反反复复修改增加输出 prompt ，这样显然更划算。</p>
+</blockquote>
+<blockquote>
+<p>分 session 的模式，貌似非常像派 subagent ，我仔细想了想，确实可以做到，甚至可以做的更好。只要符合以下三点： subagent 是持续存在而不是用完就丢的，否则上下文缺失会很严重； subagent 的职责划分要明确清晰，主 agent 对于他们的调用和分派工作也应该分明；主 agent 和 subagent 之间应该保持最小信息交流，否则就是在同时污染两边的上下文。这三点并没有那么容易做到，当上下文越长时越难做到，人为去划分 session 更适合小白入门，或者直接去用设计成类似这样的产品。</p>
+</blockquote>
+<h2 id="额外内容"><a class="markdownIt-Anchor" href="#额外内容"></a> 额外内容</h2>
+<p>一个纠错：之前那篇博客中，我建议大家在项目开始之前写清楚项目级 instructions ，但这有两个问题，一个是遗漏，一个是冗余。没人能说自己在项目开始之前就能想到所有要注意的内容，和所有有价值提供给 agent 的内容。在项目开始之后，哪怕发现了遗漏了什么，也不一定能判断是否值得写入，以及能意识到这个可以写入。还有就是， instructions 某种程度上和 skills 一样，并不是一成不变的，要更新维护，以及检验是否真的有效，不然就是白费 token 。但是项目开始之前，是否有效不好验证，项目开始之后，更新不一定及时，也不一定有人去做。因此， claude code 官方更推荐在项目已经有一定规模之后，执行 /init 命令，让 agent 自动生成 <a href="http://Claude.md">Claude.md</a> 文件（即项目级 instructions ）。大部分前面提到的问题，都能通过这种方式缓解或者解决，对于小项目来说已经可以说是没有缺点，大项目则还需要定期维护。</p>
+<p>一个补充：个人创作 skills 不只可以积累遇到问题时的解决方式，还可以先彻底跑通一次某个流程，再让 agent 把这个工作流固化成 skills 。</p>
+]]></content>
+      <tags>
+        <tag>思考</tag>
+        <tag>技术</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>原来还可以不是 fomo</title>
+    <url>/2026/05/30/%E5%8E%9F%E6%9D%A5%E8%BF%98%E5%8F%AF%E4%BB%A5%E4%B8%8D%E6%98%AF%20fomo%20/</url>
+    <content><![CDATA[<p>这几天，阴差阳错将一个保研来我们学校的学姐（不是我们专业的）带上了学习 claude code 怎么使用的路，看着她兴致勃勃的探索，并逐渐掌握我大部分日常用的内容，我不由得感叹原来 agent 的普及率没我想的那么高，以及会用 agent 真的不能算一个多么有优势的点。两个舍友也恰巧开始摸索如何使用 claude code 了，无时无刻不震惊于 claude code 的强大，就像我一年前一样（有一说一，看着挺好玩）。水群确实害人不浅啊，我以为我身边早已经被 agent 包围了。</p>
+<p>但是最感慨的两点是，原来还可以不是 fomo ，原来真的没必要 fomo 。我能感觉到他们学习使用 agent 的时候是快乐的，那是一种发现 agent 真的帮助自己提升效率，和省去一些琐事的时间的快乐。他们没有担忧自己会被 agent 替代，也没有想过自己和 agent 比竞争优势在哪里。讲真我很羡慕。虽然我猜一方面有可能是还不知道 agent 到底有多强（用的还只是 dsv4 和 mimo ），但另一方面，也因为我舍友和这位学姐，已经是短暂不用担心“前途”的阶段了。学姐不用说，舍友也是大概率能保研或留学。</p>
+<p>我从一开始接触 agent ，就没有这么轻松过，没有体会过这种比较纯粹的快乐。哪怕到现在，看着周围的越来越多人会用 agent ，我依然还会焦虑。原来学习新技术完全可以不是因为担心自己被落下，可以单纯只是因为自己需要。原来就算提前学了很多新技术，也不抵一个确定的前途，或是真正的护城河。我想这两个事例确实部分证明了我前面博客里的观点是对的（不用担心误人子弟了）。如果你还没有 fomo ，那希望你看到这篇博客后能坚定的保持下去。如果你已经在 fomo 了，希望你看到这篇博客能够宽慰一些（如果还不行，可以去看看我前面的博客 doge ）。</p>
+<p>我希望有一天，我也能纯粹的为技术的进步感到开心一次，不用担心被取代，不用害怕学不会会怎样，不用疲于奔命地去追赶。</p>
+<p><code>“慢慢走，欣赏啊！”——朱光潜《谈美》</code></p>
+]]></content>
+      <tags>
+        <tag>思考</tag>
+        <tag>短篇</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>初谈从 rust 到 cpp</title>
     <url>/2026/04/16/%E5%88%9D%E8%B0%88%E4%BB%8E%20rust%20%E5%88%B0%20cpp/</url>
     <content><![CDATA[<p>最近在学 rust 。事情的起因是，有人跟我说：“学完 rust 之后你就自动会写安全现代的 cpp 了”。我对于这种能提高编程思维和品味之类的事，由于本就缺乏，所以会更感兴趣。加上那段时间还算清闲，我很快就开始了 rust 的学习。</p>
@@ -282,65 +341,6 @@
       </tags>
   </entry>
   <entry>
-    <title>代码品味与架构设计</title>
-    <url>/2026/06/06/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</url>
-    <content><![CDATA[<h2 id="前情提要"><a class="markdownIt-Anchor" href="#前情提要"></a> 前情提要</h2>
-<p>这篇博客的思考来源于两个方面，一个提出了问题，一个解决了问题:</p>
-<ol>
-<li>我在不久之前尝试 vibe 了一个 AI 游戏，在很好的遵守了我之前摸索出来的大部分经验的情况下，项目依旧理我的理想预期差很远（但是情况比上次好了，说明上次的经验是有用的）。</li>
-<li>加到了一个在架构设计和代码品味两方面都表现相当好的佬的 QQ ，和他聊了一下相关的问题，收获颇丰，某种程度上知道了如何解决上面的情况。</li>
-</ol>
-<blockquote>
-<p>之前的经验详情请看<a href="https://speechlesspanda.github.io/2026/04/06/vibe%20coding%20%E5%BC%80%E5%8F%91%20BFE%20%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D%E4%B8%8E%E6%80%BB%E7%BB%93/">vibe coding 开发 BFE 后的反思与总结</a>，先看这篇可以获得最佳食用体验，且里面干货同样满满（我自夸中，不符当没看到，谢谢您嘞）。</p>
-</blockquote>
-<blockquote>
-<p>第一点中遇到的问题，颇有点像我上次推荐的<a href="https://blog.wh1isper.top/2026/02/01/2026-02-01-Agent-Software-Rot/#%E8%85%90%E5%8C%96%E7%9A%84%E5%87%A0%E7%A7%8D%E5%BD%A2%E6%80%81">当规则堆积成为智能的坟墓</a>中提到的项目的腐化和不 review 代码导致的智能技术债务的堆积（这个博客的作者也是大佬来的，自己在开发一个 harness <a href="https://github.com/Wh1isper/ya-mono">项目</a>）。 k10s 的负责人，最近删掉了目前所有的该项目的代码，也跟这个有关。虽然这篇博客更面向团队，但是由于我经验和能力都不太足，这个债务堆积的特别快。</p>
-</blockquote>
-<h2 id="代码品味"><a class="markdownIt-Anchor" href="#代码品味"></a> 代码品味</h2>
-<p>必须承认，我并没有 100% 按照上次的准则去做。我省略掉了最耗时间但是其实也是最重要的一步——开始之前对项目有整体了解的 chat 。我也在思考做了这一步会不会更好，但是缺乏实践，不能给出答案。但是我认为，我没有 chat ，一部分的原因也是不知道该 chat 些什么，前一篇博客在这方面略有不足，这篇博客，某种程度上解决了这个问题。</p>
-<p>先说代码品味，一开始我以为佬会和我说，这是个很抽象回答不了的问题，只能靠自己的实践摸索。但是，佬并没有这么说，而是说了<strong>设计模式</strong>。由于本人接触设计模式是在学校的 Java 课程上，所以一开始并没有很明白，在我看来，我学过的那些设计模式，与 Java 面向对象编程这个特性密不可分，但不是所有语言都是以此为基础设计的，我认为代码品味应该是超脱于具体语言之上的一个东西。我提出了我的疑惑，佬也给了解答。真正要关注的是，这个设计模式为什么被提出，解决什么问题，而不是以什么具体的形式存在。是我没有悟性了，不得不承认确实设计模式对我来说还是抽象， Java 作为一门考察课，我图方便高效（因为我事太多了），理所当然的通过与具体的实现形式绑定来理解了。佬的话确实醍醐灌顶，虽然理解了之后，我反而开始认为，具体语言的代码品味可能并不能完全相通了，毕竟代码品味是要通过具体的实现展现出来的，但是这不妨碍设计模式是一个很好的切入口，无论对任何语言来说。只需要了解一下，一般设计模式要解决的问题，在这个语言里要怎么实现，就能开始逐步积累代码品味。</p>
-<p>落实到 vibe coding 上来说，我的想法是，如果你真的奔着把这个项目做好，或者从项目的 vibe 过程中积累代码品味，亦或者项目本身具有一定复杂度的情况下，我都建议每次给 agent 的任务不要太多（比如逐功能添加）。并且每次让 agent 开始工作前，先和他探讨，这个任务最好用什么设计模式，有什么优缺点，有什么替代方案等，然后让他实现之后，跟你讲讲具体是要怎么实现，如果有不懂的可以接着问下去，刚刚 agent 的实践会成为你学习最好的例子和养料。</p>
-<blockquote>
-<p>这个方案不一定好，也不一定对甚至，只是我个人的摸索，而我的定位是小白和萌新。所以对于大佬来说，这个方案无疑是低效的；对于其他小白和萌新，我也积极鼓励你们摸索其他方案，毕竟我这篇还在打上篇的补丁，说不定下篇就直接推翻这篇了。适合自己的才是最好的，保持思考。</p>
-</blockquote>
-<p>但是还有但是，代码品味也确实没这么简单，终究是部分符合我对它的想象。佬还说，<strong>并不是使用了设计模式就是有代码品味，真正懂代码品味的人，是能够判断什么时候需要使用的人，甚至不使用也可以是有代码品味的一种体现</strong>。我翻译翻译，这有点像庖丁解牛。一开始当然做不到这样，甚至如果没有设计模式作为中间过渡，甚至连怎么变成这样都会毫无头绪。但只要不断地练习实践，就可以从一开始的学会使用设计模式，到判断什么时候该使用，到最后或许能做到对每个遇到的场景都能设计出针对性的模式。第三步当然有点理想，但是做到第二步就能算很有代码品味了。就像庖丁，一开始需要看着牛，到后面可以做到目无全牛，他就是一个很有屠牛品味的人（<s>未成年牛请在成年牛的陪同下阅读本博客</s>）。</p>
-<h2 id="架构设计"><a class="markdownIt-Anchor" href="#架构设计"></a> 架构设计</h2>
-<p>后面还和佬聊了聊架构设计。这其实要比代码品味具体的多，但还比代码品味还要难培养。因为在小白的小项目上，架构设计不会带来特别明显的不同，自然也会被大部分人忽略，大部分项目只能说有架构，却缺乏有意识地去设计架构。小白又很难有什么大项目，一般只有进公司之后，才能接触到大项目，但是在大项目的构建流程中，大部分人都是在架构设计好之后，负责实现的，很难说能够培养到自己架构设计的能力（说不定连其他整体架构是怎样的都无从得知，只能接触到自己要实现的部分）。还有一种方法是主动去看开源大项目的架构设计，然后通过思考培养这个能力。但是在没有 AI 的时候，大项目的体量是非常恐怖的，架构设计能力的培养并不是看形而上的抽象就够的，要深入到项目源码的细节里去体会，导致看大项目是一个非常费力不讨好的事情。在有了 AI 之后，确实让我们能够更快的了解一个大项目和它的源码细节，但是这利好的是那些非 AI native 者。对于我们这一代来说， AI 的出现让我们随着惰性避开了那些痛苦成长的时候，让我们哪怕有了 AI 读懂代码细节也不是易事。某种程度上也是吃力不讨好的事，所以很少有人主动去做。然而，人总不能一点痛苦不经历就获得成长。以后写代码的能力不再会是护城河，不想吃苦就算了，但架构设计这些以后的安身立命之本，哪怕痛苦也得主动去学去了解。<strong>痛苦和成长不会消失，只会转移。</strong></p>
-<p>佬推荐多去看看大项目的架构和相关博客，说出名的小初创公司的项目都可以看看。像 <a href="https://tailscale.com/blog/how-tailscale-works">tailscale</a> 就非常值得去看（这里还推荐这位佬的两个项目，虽然不大，但是在架构设计方面非常有巧思，分别是 <a href="https://vaala.cat/posts/frp-panel-doc/">frp-panel</a> 和 <a href="https://vaala.cat/posts/vibe-ai-gateway-oss/">Vaala AI Gateway</a> ）。多关注各种公司的博客，坚持读下来，总会有所收获。这里还推荐一个读项目的项目，叫做 <a href="https://deepwiki.com/">deepwiki</a> ，想认真读项目的读者可以了解一下。</p>
-<p>好了，接下来是 vibe coding 部分！尽管对个人项目来说，架构设计确实可能无关紧要，但是为了培养能力，哪怕再小再简单的项目，我们也可以有意识的去做这一步。在我们提完项目需求之后，可以先问问 agent ，这个项目的架构可以怎么设计，有什么方案，如何抉择。这是一个非常好的学习架构设计，培养自己架构设计思维的过程。我不好说具体能起到多么显著的成效，但是起码能有所收获，坚持多了做到从 0 到 1 入门应该没有问题，很多时候其实我们缺的也只是这一块敲门砖。</p>
-<h2 id="有机结合"><a class="markdownIt-Anchor" href="#有机结合"></a> 有机结合</h2>
-<p>别看好像并没有往 vibe coding 这个流程中添加很多动作，但已经足以有一套比较不一样的实践思路出来。先提需求，不断通过交流或者其他方式明确需求。然后设计架构。再然后，就是和之前有点不同的地方。<strong>先把每个模块和其他模块的接口、协作方式和任务划分定义好，然后给每一个模块（或者耦合度低的几个部分），新开一个 session ，将之前的上下文 + 这个 session 要完成的模块需求输入进去</strong>。这么做的原因是，大名鼎鼎的上下文灾难。我之前 vibe 项目时也喜欢一个 session 用到死，觉得这里面包含了所有的上下文，是最懂我这个项目的 session ，重开 session 面临着很大的沉默成本。但事实上，虽然绝大部分 agent 平台都有压缩机制，并且不断完善，上下文灾难依旧无法避免。可能一次 compact 表现还不错，但是多次 compact 之后不出现偏移基本是不可能的。分模块开 session 虽然确实看不到其他模块的上下文，但是通过之前定好的接口和写作方式可以最小化这个的影响，并且由于每个模块的上下文都很干净，对于 agent 实际的提升完全可以覆盖掉前面那个影响。之后在每个模块的 session 内，再来交流使用什么设计模式。</p>
-<blockquote>
-<p>如果你订阅了 GPT plus 这样的套餐，强烈建议你在做什么大项目之前，先在网页端走一遍“前置”流程，单纯只是生成项目需求文档等任务，网页端可以比 agent 做的更好（如果你还用 deep research 的话，那就更是如此）。后面等到真的要开始做了，可以让网页端给你总的和每个模块的 prompt ，这个 prompt 会更完善，项目也会更高质量。诚然会增加输入的 prompt 但我认为比后面反反复复修改增加输出 prompt ，这样显然更划算。</p>
-</blockquote>
-<blockquote>
-<p>分 session 的模式，貌似非常像派 subagent ，我仔细想了想，确实可以做到，甚至可以做的更好。只要符合以下三点： subagent 是持续存在而不是用完就丢的，否则上下文缺失会很严重； subagent 的职责划分要明确清晰，主 agent 对于他们的调用和分派工作也应该分明；主 agent 和 subagent 之间应该保持最小信息交流，否则就是在同时污染两边的上下文。这三点并没有那么容易做到，当上下文越长时越难做到，人为去划分 session 更适合小白入门，或者直接去用设计成类似这样的产品。</p>
-</blockquote>
-<h2 id="额外内容"><a class="markdownIt-Anchor" href="#额外内容"></a> 额外内容</h2>
-<p>一个纠错：之前那篇博客中，我建议大家在项目开始之前写清楚项目级 instructions ，但这有两个问题，一个是遗漏，一个是冗余。没人能说自己在项目开始之前就能想到所有要注意的内容，和所有有价值提供给 agent 的内容。在项目开始之后，哪怕发现了遗漏了什么，也不一定能判断是否值得写入，以及能意识到这个可以写入。还有就是， instructions 某种程度上和 skills 一样，并不是一成不变的，要更新维护，以及检验是否真的有效，不然就是白费 token 。但是项目开始之前，是否有效不好验证，项目开始之后，更新不一定及时，也不一定有人去做。因此， claude code 官方更推荐在项目已经有一定规模之后，执行 /init 命令，让 agent 自动生成 <a href="http://Claude.md">Claude.md</a> 文件（即项目级 instructions ）。大部分前面提到的问题，都能通过这种方式缓解或者解决，对于小项目来说已经可以说是没有缺点，大项目则还需要定期维护。</p>
-<p>一个补充：个人创作 skills 不只可以积累遇到问题时的解决方式，还可以先彻底跑通一次某个流程，再让 agent 把这个工作流固化成 skills 。</p>
-]]></content>
-      <tags>
-        <tag>思考</tag>
-        <tag>技术</tag>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>原来还可以不是 fomo</title>
-    <url>/2026/05/30/%E5%8E%9F%E6%9D%A5%E8%BF%98%E5%8F%AF%E4%BB%A5%E4%B8%8D%E6%98%AF%20fomo%20/</url>
-    <content><![CDATA[<p>这几天，阴差阳错将一个保研来我们学校的学姐（不是我们专业的）带上了学习 claude code 怎么使用的路，看着她兴致勃勃的探索，并逐渐掌握我大部分日常用的内容，我不由得感叹原来 agent 的普及率没我想的那么高，以及会用 agent 真的不能算一个多么有优势的点。两个舍友也恰巧开始摸索如何使用 claude code 了，无时无刻不震惊于 claude code 的强大，就像我一年前一样（有一说一，看着挺好玩）。水群确实害人不浅啊，我以为我身边早已经被 agent 包围了。</p>
-<p>但是最感慨的两点是，原来还可以不是 fomo ，原来真的没必要 fomo 。我能感觉到他们学习使用 agent 的时候是快乐的，那是一种发现 agent 真的帮助自己提升效率，和省去一些琐事的时间的快乐。他们没有担忧自己会被 agent 替代，也没有想过自己和 agent 比竞争优势在哪里。讲真我很羡慕。虽然我猜一方面有可能是还不知道 agent 到底有多强（用的还只是 dsv4 和 mimo ），但另一方面，也因为我舍友和这位学姐，已经是短暂不用担心“前途”的阶段了。学姐不用说，舍友也是大概率能保研或留学。</p>
-<p>我从一开始接触 agent ，就没有这么轻松过，没有体会过这种比较纯粹的快乐。哪怕到现在，看着周围的越来越多人会用 agent ，我依然还会焦虑。原来学习新技术完全可以不是因为担心自己被落下，可以单纯只是因为自己需要。原来就算提前学了很多新技术，也不抵一个确定的前途，或是真正的护城河。我想这两个事例确实部分证明了我前面博客里的观点是对的（不用担心误人子弟了）。如果你还没有 fomo ，那希望你看到这篇博客后能坚定的保持下去。如果你已经在 fomo 了，希望你看到这篇博客能够宽慰一些（如果还不行，可以去看看我前面的博客 doge ）。</p>
-<p>我希望有一天，我也能纯粹的为技术的进步感到开心一次，不用担心被取代，不用害怕学不会会怎样，不用疲于奔命地去追赶。</p>
-<p><code>“慢慢走，欣赏啊！”——朱光潜《谈美》</code></p>
-]]></content>
-      <tags>
-        <tag>思考</tag>
-        <tag>短篇</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>多看，多想，少做</title>
     <url>/2026/03/15/%E5%A4%9A%E7%9C%8B%EF%BC%8C%E5%A4%9A%E6%83%B3%EF%BC%8C%E5%B0%91%E5%81%9A/</url>
     <content><![CDATA[<p>本文写于开学一周后的周日。这是一个浑浑噩噩的一周，在合理的上课策略之下，我拥有了许多课外时间，但当我想把这些课外时间利用起来的时候，发现自己不知道要做什么。一开始想着学完一套 Java 课程，但是跟课上内容重合了，我想着课件加 AI 应该就能勉强达到要用的时候能马上上手的程度。加上我问了问 AI ，开发岗需要什么技能的时候，它提到了数据库，所以我又转去学习 MySQL 。但是这个网上的教程又参差不齐，最终挑选许久，找了一个偏入门的教程看完了。后面又想复现一个别人的项目，又挑了许久，本来以为找到一个合适的，但是去咨询了其他大佬的意见之后，发现这个项目并没有我想象的那么合适。最后在某位大佬的建议下，开始学习 Rust 。本来昨晚还了解到了 Dev Container 这个概念，然后作为技术小白的我开始美好的幻想，是不是可以创建一个容器，把所有我需要用到的语言环境都放进去，然后电脑本地就不需要这些，以后换电脑也方便。我甚至已经想好今天就做这个了，不过本着了解清楚的想法，又去咨询了大佬们（幸好我这么做了），结果想法一经提出又被狠狠地批评，虽然有佬帮我说话，不过我觉得他把我想的厉害了点，反而是批评者更有道理。于是，又一个想法夭折，感觉这一周就没干什么，一直在犹豫，在想要干点什么。</p>
@@ -359,6 +359,26 @@
       <tags>
         <tag>思考</tag>
         <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>对 BFE 构建思路的重思考</title>
+    <url>/2026/04/12/%E5%AF%B9%20BFE%20%E6%9E%84%E5%BB%BA%E6%80%9D%E8%B7%AF%E7%9A%84%E9%87%8D%E6%80%9D%E8%80%83/</url>
+    <content><![CDATA[<p>在<a href="https://speechlesspanda.github.io/2026/04/06/vibe%20coding%20%E5%BC%80%E5%8F%91%20BFE%20%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D%E4%B8%8E%E6%80%BB%E7%BB%93/">前文</a>中，我们曾提到过， BFE 比同量级的项目多花了多得多的 token ，这固然有第一次 vibe 不太有方法论和策略，整体规划做的不太好和 token 是免费的用起来不心疼的原因，但就算将上述原因全部纳入考虑，如此庞大的 token 消耗数依旧是不太正常的。所以，我猜测， BFE 中可能有部分需求触及到了 agent 能力的边界。目前我想到最有可能的就是，对十个主题的适配。由于我的项目定位更像是一个辅助平台，所以他是从现有的两个博客框架 hexo 和 hugo 中各挑了五个主题，辅助用户搭建这十个主题的博客。由于主题都是个人创作者发布并维护的，加上框架并没有规定官方的统一格式，所以每个主题的格式和配置基本都不一样。这就需要 agent 从网上下载十个主题的源码，浏览并学会如何使用，辨别出每个主题的不同，再用适配的脚本将用户的配置填入到特定的主题中。事实上，这是我理想中 agent 应该干的事，但是我的 agent 似乎在搜索和辨别这方面偷了懒，十个主题有些一次就能过，有些就不行。有些配置有的主题支持，有的不支持， agent 也未识别出来。</p>
+<p>但，将这个可能性列出来之后，我发现这似乎并不是 agent 能力的边界，而是由于前面提过的原因，导致 agent 在我的使用下，发挥不出全部的能力。“我”降低了 agent 的能力边界。这很正常，事实上大部分人使用 agent 都会这样，只是有些明显有些不明显。不过我在这里想讨论的并不是这个问题，相关的反思在前文中也已详细的叙述过。至于反思的到不到位，有没有效，都要经过下次 vibe 的检验。</p>
+<p>我想探讨的是，如何通过对需求的设计和转化，将其变为哪怕 agent 在被人降低能力边界的情况下，依旧能够很好的胜任。具体到这个项目，我想的是，能不能让 agent 重写这十个主题，使他们都符合某种设计好的格式，这样就不用后续对十个主题做格式之类的适配，相当于将“适配”提前。这里显然的缺点是， agent 重写的主题不一定和原本的主题相一致，看上去也增加了工作量和整个项目的风险与不稳定性。</p>
+<p>好处也是显而易见的，首先，使用同样多 token 的情况下，我觉得 agent 能在重写任务完成的不错的前提下，提升整个项目的可靠性（上文提到的风险是由于重写可能不成功导致项目失败，这里的可靠性是指， agent 一旦重写成功，后续功能的构建将有极大可能成功）。重写这十个主题对于 agent 完成这个项目来说，并不会比上面那样提到的去做更难，相当于将一个难完成的需求，通过增加工作量，变成一个易完成的需求，并提高成功的概率和整个项目的可靠性。还有第二个好处，是我们可以将重写主题的格式开源，从而来构建起一套新的主题生态，增加用户对项目的黏性。虽然这个在 BFE 上不太可能看到（毕竟只是一个不成熟的小玩具），但是思想非常值得学习。我们能在很多地方看到这种类似思想的使用，构建一套自己的标准，然后强兼别人的标准。</p>
+<p>至于工作量的增加，似乎也是一个伪命题。我就是一个很好的例子，毕竟我用看似更简单的方式去构建这个项目，但 token 数花的出奇的多。或许换成上面重写的思路，还不需要花这么多 token ，这种情况下，工作量的多少还真不好说。</p>
+<blockquote>
+<p>如果以后真的有人使用这个项目，或许我会考虑将项目迭代成重写主题的这种形式。如果没有就不折腾了。</p>
+</blockquote>
+<p>至于如何设计和转化需求，就是各位天才程序员目前的价值所在了。对此我也还在探索之中，并没有很多想法。但是可以将我对本文中思路的重思考分享一下。在正式开始项目之前，我其实未必想不到这个思路，但是，由于它可以预见的工作量，在还没开始之前，就被我不带任何其他思考的否决掉了。这么做放在 agent 出现以前，当然是合理的，可以让项目仅用很少的工作，就达到落地的效果。这对于项目后续的开发和开发者在这个项目上的收获都是很重要的。更别提重写主题是一个带有很大不确定性的活，比起这个，人类开发者肯定更擅长也更喜欢去一个一个主题的做适配。但是，大人，时代变了。在 agent 出来之后，二者在工作量上的差异在好的使用者手中被无限缩小， agent 的能力也让重写的成功性大大提高。我们以前可能更倾向于敏捷开发，让产品能很快有一个能给用户使用的版本，而放弃掉一些锦上添花的功能，甚至放弃一些明显有无可替代优势的方案。但在 agent 的时代，不妨给这些功能和方案一个机会。当我们迈一小步和一大步所需要的努力差不多的时候，我觉得后者会是更好的选择。</p>
+<p>agent 的冲击不止在技术的使用上，更在想法上。</p>
+]]></content>
+      <tags>
+        <tag>思考</tag>
+        <tag>短篇</tag>
+        <tag>项目</tag>
       </tags>
   </entry>
   <entry>
@@ -415,26 +435,6 @@
         <tag>思考</tag>
         <tag>短篇</tag>
         <tag>情绪</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>对 BFE 构建思路的重思考</title>
-    <url>/2026/04/12/%E5%AF%B9%20BFE%20%E6%9E%84%E5%BB%BA%E6%80%9D%E8%B7%AF%E7%9A%84%E9%87%8D%E6%80%9D%E8%80%83/</url>
-    <content><![CDATA[<p>在<a href="https://speechlesspanda.github.io/2026/04/06/vibe%20coding%20%E5%BC%80%E5%8F%91%20BFE%20%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D%E4%B8%8E%E6%80%BB%E7%BB%93/">前文</a>中，我们曾提到过， BFE 比同量级的项目多花了多得多的 token ，这固然有第一次 vibe 不太有方法论和策略，整体规划做的不太好和 token 是免费的用起来不心疼的原因，但就算将上述原因全部纳入考虑，如此庞大的 token 消耗数依旧是不太正常的。所以，我猜测， BFE 中可能有部分需求触及到了 agent 能力的边界。目前我想到最有可能的就是，对十个主题的适配。由于我的项目定位更像是一个辅助平台，所以他是从现有的两个博客框架 hexo 和 hugo 中各挑了五个主题，辅助用户搭建这十个主题的博客。由于主题都是个人创作者发布并维护的，加上框架并没有规定官方的统一格式，所以每个主题的格式和配置基本都不一样。这就需要 agent 从网上下载十个主题的源码，浏览并学会如何使用，辨别出每个主题的不同，再用适配的脚本将用户的配置填入到特定的主题中。事实上，这是我理想中 agent 应该干的事，但是我的 agent 似乎在搜索和辨别这方面偷了懒，十个主题有些一次就能过，有些就不行。有些配置有的主题支持，有的不支持， agent 也未识别出来。</p>
-<p>但，将这个可能性列出来之后，我发现这似乎并不是 agent 能力的边界，而是由于前面提过的原因，导致 agent 在我的使用下，发挥不出全部的能力。“我”降低了 agent 的能力边界。这很正常，事实上大部分人使用 agent 都会这样，只是有些明显有些不明显。不过我在这里想讨论的并不是这个问题，相关的反思在前文中也已详细的叙述过。至于反思的到不到位，有没有效，都要经过下次 vibe 的检验。</p>
-<p>我想探讨的是，如何通过对需求的设计和转化，将其变为哪怕 agent 在被人降低能力边界的情况下，依旧能够很好的胜任。具体到这个项目，我想的是，能不能让 agent 重写这十个主题，使他们都符合某种设计好的格式，这样就不用后续对十个主题做格式之类的适配，相当于将“适配”提前。这里显然的缺点是， agent 重写的主题不一定和原本的主题相一致，看上去也增加了工作量和整个项目的风险与不稳定性。</p>
-<p>好处也是显而易见的，首先，使用同样多 token 的情况下，我觉得 agent 能在重写任务完成的不错的前提下，提升整个项目的可靠性（上文提到的风险是由于重写可能不成功导致项目失败，这里的可靠性是指， agent 一旦重写成功，后续功能的构建将有极大可能成功）。重写这十个主题对于 agent 完成这个项目来说，并不会比上面那样提到的去做更难，相当于将一个难完成的需求，通过增加工作量，变成一个易完成的需求，并提高成功的概率和整个项目的可靠性。还有第二个好处，是我们可以将重写主题的格式开源，从而来构建起一套新的主题生态，增加用户对项目的黏性。虽然这个在 BFE 上不太可能看到（毕竟只是一个不成熟的小玩具），但是思想非常值得学习。我们能在很多地方看到这种类似思想的使用，构建一套自己的标准，然后强兼别人的标准。</p>
-<p>至于工作量的增加，似乎也是一个伪命题。我就是一个很好的例子，毕竟我用看似更简单的方式去构建这个项目，但 token 数花的出奇的多。或许换成上面重写的思路，还不需要花这么多 token ，这种情况下，工作量的多少还真不好说。</p>
-<blockquote>
-<p>如果以后真的有人使用这个项目，或许我会考虑将项目迭代成重写主题的这种形式。如果没有就不折腾了。</p>
-</blockquote>
-<p>至于如何设计和转化需求，就是各位天才程序员目前的价值所在了。对此我也还在探索之中，并没有很多想法。但是可以将我对本文中思路的重思考分享一下。在正式开始项目之前，我其实未必想不到这个思路，但是，由于它可以预见的工作量，在还没开始之前，就被我不带任何其他思考的否决掉了。这么做放在 agent 出现以前，当然是合理的，可以让项目仅用很少的工作，就达到落地的效果。这对于项目后续的开发和开发者在这个项目上的收获都是很重要的。更别提重写主题是一个带有很大不确定性的活，比起这个，人类开发者肯定更擅长也更喜欢去一个一个主题的做适配。但是，大人，时代变了。在 agent 出来之后，二者在工作量上的差异在好的使用者手中被无限缩小， agent 的能力也让重写的成功性大大提高。我们以前可能更倾向于敏捷开发，让产品能很快有一个能给用户使用的版本，而放弃掉一些锦上添花的功能，甚至放弃一些明显有无可替代优势的方案。但在 agent 的时代，不妨给这些功能和方案一个机会。当我们迈一小步和一大步所需要的努力差不多的时候，我觉得后者会是更好的选择。</p>
-<p>agent 的冲击不止在技术的使用上，更在想法上。</p>
-]]></content>
-      <tags>
-        <tag>思考</tag>
-        <tag>短篇</tag>
-        <tag>项目</tag>
       </tags>
   </entry>
   <entry>
