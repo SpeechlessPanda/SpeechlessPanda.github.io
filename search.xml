@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>cpp 数组有趣之一</title>
-    <url>/2026/07/13/cpp%20%E6%95%B0%E7%BB%84%E6%9C%89%E8%B6%A3%E4%B9%8B%E4%B8%80/</url>
-    <content><![CDATA[<p>今天刷 leetcode 遇到一个很神奇的问题：给你一个整数数组 nums 和一个整数 k ，请你统计并返回该数组中和为 k 的子数组的个数 ，子数组是数组中元素的连续非空序列。</p>
-<p>单看问题本身并不神奇，但是它的题解非常有趣。我把两个题解放在下面，读者不妨猜猜看，哪个题解是官方的能通过的题解。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;<span class="comment">//题解1</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">subarraySum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="type">const</span> <span class="type">int</span> n = nums.<span class="built_in">size</span>();   </span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;               </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> start = <span class="number">0</span>; start &lt; n; ++start) &#123;</span><br><span class="line">            <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> end = start; end &gt;= <span class="number">0</span>; --end) &#123;</span><br><span class="line">                sum += nums[end];         </span><br><span class="line">                <span class="keyword">if</span> (sum == k) &#123;</span><br><span class="line">                    ++count;              </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;<span class="comment">//题解2</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">subarraySum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="type">const</span> <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> arr[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            arr[i] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> start = <span class="number">0</span>; start &lt; nums.<span class="built_in">size</span>(); ++start) &#123;</span><br><span class="line">            <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> end = start; end &gt;= <span class="number">0</span>; --end) &#123;</span><br><span class="line">                sum += arr[end];</span><br><span class="line">                <span class="keyword">if</span> (sum == k) &#123;</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>既然我都说了题解有趣，那想来大家不难猜到，看上去非常冗余繁琐的题解 2 才是最终的正确答案。而题解 1 则会在某个测试用例上超时。题解 2 不仅用了多余的空间，还有额外用来赋值的 O(n) 时间复杂度，但是它依然比题解 1 快。敏锐的读者已经发现了，题解 1 后续操作的是一个不标准变长数组 <code>int arr[n]</code> ，而题解 2 则是 <code>vector&lt;int&gt;&amp; nums</code> 。问题就出在这里，前者是栈上的数组，后者是堆上的一个容器。 vector 的访问是通过内部指针的间接访问，而 <code>int arr[n]</code> 则能做到直接寻址。再加上 cpp 的编译器对原生数组的优化更激进，最终造成了这个结果。真有趣， cpp 不愧是注重性能的语言。</p>
-<p>话说回来，我本人还是更推崇第一种写法。在代码的编写中，应减少冗余变量的出现，以及冗余的操作，这既为了可读性，也为了强迫症（或者代码品味）。再加上本来这两者带来的时间上的差距其实并不大，只有有特殊需求或在特定场景的情况下（比如数据爆炸多）才有必要追求题解 2 的写法。但是 leetcode 里超时的测试用例，数组里只有 4 个元素，这点差别就是超时和通过的天堑了，我认为这并不妥。</p>
-<p>这道题并不难，可能今天写在这里的内容对于大佬来说也不算什么新颖的东西。就当我新手就是爱记录好了（<s>还有水博客</s>）。最后给大家展示另一种时间复杂度仅为 O(n) 的更优雅的题解（思路详情详见<a href="https://leetcode.cn/problems/subarray-sum-equals-k/solutions/238572/he-wei-kde-zi-shu-zu-by-leetcode-solution/?envType=study-plan-v2&amp;envId=top-100-liked">官方题解</a>）。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">subarraySum</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; mp;</span><br><span class="line">        mp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>; </span><br><span class="line">        <span class="type">int</span> pre = <span class="number">0</span>;   </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;x : nums)</span><br><span class="line">        &#123;</span><br><span class="line">            pre += x;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (mp.<span class="built_in">find</span>(pre - k) != mp.<span class="built_in">end</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                count += mp[pre - k];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            mp[pre]++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>技术</tag>
-        <tag>短篇</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>AI 时代下回看以前的工作模式</title>
     <url>/2026/07/21/AI%20%E6%97%B6%E4%BB%A3%E4%B8%8B%E5%9B%9E%E7%9C%8B%E4%BB%A5%E5%89%8D%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<blockquote>
@@ -50,8 +34,24 @@
 <p>组织模式的转变这个过程要多久我不知道，但是变化肯定是一直在发生的，我没什么理想抱负，我只希望自己不要被变化落下就好。</p>
 ]]></content>
       <tags>
-        <tag>短篇</tag>
         <tag>思考</tag>
+        <tag>短篇</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cpp 数组有趣之一</title>
+    <url>/2026/07/13/cpp%20%E6%95%B0%E7%BB%84%E6%9C%89%E8%B6%A3%E4%B9%8B%E4%B8%80/</url>
+    <content><![CDATA[<p>今天刷 leetcode 遇到一个很神奇的问题：给你一个整数数组 nums 和一个整数 k ，请你统计并返回该数组中和为 k 的子数组的个数 ，子数组是数组中元素的连续非空序列。</p>
+<p>单看问题本身并不神奇，但是它的题解非常有趣。我把两个题解放在下面，读者不妨猜猜看，哪个题解是官方的能通过的题解。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;<span class="comment">//题解1</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">subarraySum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="type">const</span> <span class="type">int</span> n = nums.<span class="built_in">size</span>();   </span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;               </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> start = <span class="number">0</span>; start &lt; n; ++start) &#123;</span><br><span class="line">            <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> end = start; end &gt;= <span class="number">0</span>; --end) &#123;</span><br><span class="line">                sum += nums[end];         </span><br><span class="line">                <span class="keyword">if</span> (sum == k) &#123;</span><br><span class="line">                    ++count;              </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;<span class="comment">//题解2</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">subarraySum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="type">const</span> <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> arr[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            arr[i] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> start = <span class="number">0</span>; start &lt; nums.<span class="built_in">size</span>(); ++start) &#123;</span><br><span class="line">            <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> end = start; end &gt;= <span class="number">0</span>; --end) &#123;</span><br><span class="line">                sum += arr[end];</span><br><span class="line">                <span class="keyword">if</span> (sum == k) &#123;</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>既然我都说了题解有趣，那想来大家不难猜到，看上去非常冗余繁琐的题解 2 才是最终的正确答案。而题解 1 则会在某个测试用例上超时。题解 2 不仅用了多余的空间，还有额外用来赋值的 O(n) 时间复杂度，但是它依然比题解 1 快。敏锐的读者已经发现了，题解 1 后续操作的是一个不标准变长数组 <code>int arr[n]</code> ，而题解 2 则是 <code>vector&lt;int&gt;&amp; nums</code> 。问题就出在这里，前者是栈上的数组，后者是堆上的一个容器。 vector 的访问是通过内部指针的间接访问，而 <code>int arr[n]</code> 则能做到直接寻址。再加上 cpp 的编译器对原生数组的优化更激进，最终造成了这个结果。真有趣， cpp 不愧是注重性能的语言。</p>
+<p>话说回来，我本人还是更推崇第一种写法。在代码的编写中，应减少冗余变量的出现，以及冗余的操作，这既为了可读性，也为了强迫症（或者代码品味）。再加上本来这两者带来的时间上的差距其实并不大，只有有特殊需求或在特定场景的情况下（比如数据爆炸多）才有必要追求题解 2 的写法。但是 leetcode 里超时的测试用例，数组里只有 4 个元素，这点差别就是超时和通过的天堑了，我认为这并不妥。</p>
+<p>这道题并不难，可能今天写在这里的内容对于大佬来说也不算什么新颖的东西。就当我新手就是爱记录好了（<s>还有水博客</s>）。最后给大家展示另一种时间复杂度仅为 O(n) 的更优雅的题解（思路详情详见<a href="https://leetcode.cn/problems/subarray-sum-equals-k/solutions/238572/he-wei-kde-zi-shu-zu-by-leetcode-solution/?envType=study-plan-v2&amp;envId=top-100-liked">官方题解</a>）。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">subarraySum</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; mp;</span><br><span class="line">        mp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>; </span><br><span class="line">        <span class="type">int</span> pre = <span class="number">0</span>;   </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;x : nums)</span><br><span class="line">        &#123;</span><br><span class="line">            pre += x;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (mp.<span class="built_in">find</span>(pre - k) != mp.<span class="built_in">end</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                count += mp[pre - k];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            mp[pre]++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>短篇</tag>
+        <tag>技术</tag>
       </tags>
   </entry>
   <entry>
@@ -72,36 +72,8 @@
 <figure class="highlight rust"><table><tr><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
+        <tag>短篇</tag>
         <tag>技术</tag>
-        <tag>短篇</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vibe coding 前传，看想做后记</title>
-    <url>/2026/04/04/vibe%20coding%20%E5%89%8D%E4%BC%A0%EF%BC%8C%E7%9C%8B%E6%83%B3%E5%81%9A%E5%90%8E%E8%AE%B0/</url>
-    <content><![CDATA[<p>本来这篇文章的内容应该在我记录项目的那篇博客里的，但是后面发现想写在前面的东西太多，又有很多跟项目开发无关的内容，就单独拎了出来。</p>
-<h2 id="有关项目"><a class="markdownIt-Anchor" href="#有关项目"></a> 有关项目</h2>
-<p>这是我多看之后想做的第一个项目，从 idea 的分类上有点像之前博客里的第二点。简单来说，是想搭建一个一站式博客搭建平台，让想写博客搭自己博客网站的小白能够更容易开始。 idea 的来源离不开我个人搭建博客的经历和实践，同样印证了我之前博客里的观点，idea 的产生与实践分不开。其实在编写那一篇博客的时候，这个项目就已经开始了，所以有了当时的最后一段。因为我当时已经知道类似的项目已经有人做过了，且在老资历那里家喻户晓（前面提到的博客都是这一篇：<a href="https://speechlesspanda.github.io/2026/03/19/%E5%A4%9A%E7%9C%8B%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%9C%89%E5%85%B3idea/">多看之后，有关idea</a>）。</p>
-<h2 id="看想做后记"><a class="markdownIt-Anchor" href="#看想做后记"></a> 看想做后记</h2>
-<p>在我决定开始这个项目之后，我对之前的多想多看和实践有了更多新的感悟，所以在正式介绍项目之前，我先把这部分内容补充完整，就当是作为前面博客的后记。</p>
-<blockquote>
-<p>怎么搞得如果你看我的博客，好像还有点风险了呢（bushi）。因为我会把一个想法在不同的博客逐渐补充完善甚至推翻，如果只看一篇好像容易被误导说是。但我觉得记录这种变化和过程是有意义的。</p>
-</blockquote>
-<p>首先回顾一下前面提到过的两个看起来矛盾的观点：多看多想少做和有了一点想法之后马上去实践。我依旧是这么觉得的，前者偏向于确定一个大阶段内你要干什么，后者偏向于一些小的更要即时反馈的 idea 和一些你非常感兴趣的小项目。</p>
-<p>举个例子，假设你是一位研究生，前者适用于确立你整个研究生阶段要研究什么方向的时候，或者你的下一篇论文要写什么方向的时候；后者则适用于你已经确定好论文大概方向，在为内容做准备，读了各种论文之后，有了一些你不确定可不可行，需要立马验证的 idea 的时候，以及你突然心血来潮，想要做一点无关任务和论文的其他的小项目的时候。</p>
-<p>我个人并不推荐在使用完前者的情况下，即已经确定好“少做”什么内容的时候（为方便叙述，后文称这部分内容为主要目标），还突然心血来潮的更改整个大方向或者做一些与之无关的大项目。也并不推荐不加选择地去做所有心血来潮的小项目。兴趣是最好的老师，好奇让人们探索新知，这诚然不假，但人的精力是有限的，<strong>兴趣和一时的心血来潮不应该取代你之前多看多想之后的判断</strong>，而且我认为你多看多想的时候，也应该把自己的兴趣考虑进去。<strong>多想多看之后保持的兴趣使然，肯定比一时的心血来潮更有保证也更持久</strong>。所以从各种角度来看，你都应该将主要精力放在你的主要目标上。不过我依然推荐你在慎重考虑之后去完成一些你感兴趣的小项目，因为人不是机器，<strong>依然需要偶尔的脱轨和随心所欲，尽管这也建立在选择和思考之上</strong>。</p>
-<p>至于那些你为了主要目标而想要去获得即时反馈的小 idea ，我觉得你对他们应该和对那些即兴小项目一个态度。不能盲目不加选择的全部都去做一次，虽然在这些上面“浪费”一点精力是必然的事，但这不代表可以因此允许做一笔非常不划算的买卖。我认为<strong>那些值得去实现的 idea ，也应是经历过一轮简化版的多看多想所产生并保留下来的</strong>，这代表你对这个 idea 已经有了足够的把握，以及不会对它三分钟热度。<strong>“有了一点想法之后马上去实践”里的“马上”更多是强调执行力，而不是真的要越快越好，那样只会让你变成无头苍蝇</strong>。</p>
-<h2 id="有关学习"><a class="markdownIt-Anchor" href="#有关学习"></a> 有关学习</h2>
-<p>我感觉同样的道理对于学习也适用，不过<strong>学习能够包容更多的兴趣因素</strong>。在不影响主要目标，或者没有主要目标的情况下，如果是对某个东西很感兴趣，而想去学习，不是因为好像有用和潮流，我认为是完全可以的。甚至在没有主要目标时，这样的学习能够帮助到你后续的多看多想，毕竟刚开始看和想的基础质量和人已有的认知水平和眼界息息相关。不过，如果是为了追赶潮流和出于功利（这种情况可以排除已经有主要目标，故也不讨论会不会影响到主要目标），那我觉得不如还是先多看多想，因为不是出于兴趣的学习，对后续的多看多想帮助有限，况且多看多想也会提升认知水平和眼界，然后正循环提高多看多想的质量。所以在看和想完之后，再为了主要目标而去学习，更加功利高效。</p>
-<p>为什么我对二者的态度这么不同。我曾为了追赶潮流和功利学了很多内容，但是后来发现帮助并不大，因为此时的我既没有主要目标，也没有兴趣（我觉得对于大部分人来说，这样的学习收获都是有限的），且让自己疲于奔命。并且由于不是因为兴趣而学，在这个过程中，我感觉我丧失了对自己生活的掌控感和决定权。在我看来，<strong>有兴趣的学习，兴趣会成为一个锚点，它让你不会像无头苍蝇一样有什么学什么，也让你在学习过程中依旧拥有着自己的生活</strong>。哪怕你可能最终发现学习的内容帮助有限，也不会因此丧失很多的精力以及对生活的把握。</p>
-<blockquote>
-<p>顺带一提，我觉得赚钱作为你对学习兴趣的来源，以及赚钱作为主要目标，可能对你的学习并没有帮助。因为学习本身并不能让你直接赚到钱，在你还没有其他主要目标的情况下，它甚至不能很快的转化成钱。这种超长延时或者超长链路反馈，并不能避免上面提到的问题。</p>
-</blockquote>
-<p>这应该就是有关看想做的终章了，<s>大家放心阅读</s>，下一篇更新就是有关项目开发过程中的思考了。</p>
-]]></content>
-      <tags>
-        <tag>短篇</tag>
-        <tag>思考</tag>
       </tags>
   </entry>
   <entry>
@@ -215,8 +187,8 @@
 <p>最重要的是，不能放弃思考。这次某种意义上有点像 ai hype ，我能想明白不要 ai hype ，却被自己一直所渴求的代码品味给 hype 了一回，这下能理解 ai hype 了。但既然有了前车之鉴，后面更应该保持清醒，知道思考的可贵。</p>
 ]]></content>
       <tags>
-        <tag>技术</tag>
         <tag>短篇</tag>
+        <tag>技术</tag>
       </tags>
   </entry>
   <entry>
@@ -259,8 +231,8 @@
 <p>一个补充：个人创作 skills 不只可以积累遇到问题时的解决方式，还可以先彻底跑通一次某个流程，再让 agent 把这个工作流固化成 skills 。</p>
 ]]></content>
       <tags>
-        <tag>技术</tag>
         <tag>思考</tag>
+        <tag>技术</tag>
         <tag>随笔</tag>
       </tags>
   </entry>
@@ -300,9 +272,9 @@
 <p>最后的最后，由于本人 rust 并没有学完，所以本文并没有包含所有 rust 思维对写 cpp 有帮助的地方，比如竞争等。但我也不想等学完 rust 再来写这篇文章（不知道得到猴年马月了），<s>且分开两次写还能水一水博客</s>。后面如果有机会，估计会还有一篇博客谈论这个主题，所以或许有人可以注意到本篇博客的标题带了“初谈”二字，也算是我的一个美好期待，希望能有“再谈”的机会，<s>希望那个时候不要太晚</s>。</p>
 ]]></content>
       <tags>
-        <tag>技术</tag>
-        <tag>短篇</tag>
         <tag>思考</tag>
+        <tag>短篇</tag>
+        <tag>技术</tag>
       </tags>
   </entry>
   <entry>
@@ -315,8 +287,8 @@
 <p><code>“慢慢走，欣赏啊！”——朱光潜《谈美》</code></p>
 ]]></content>
       <tags>
-        <tag>短篇</tag>
         <tag>思考</tag>
+        <tag>短篇</tag>
       </tags>
   </entry>
   <entry>
@@ -342,8 +314,36 @@
 </blockquote>
 ]]></content>
       <tags>
-        <tag>短篇</tag>
         <tag>思考</tag>
+        <tag>短篇</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vibe coding 前传，看想做后记</title>
+    <url>/2026/04/04/vibe%20coding%20%E5%89%8D%E4%BC%A0%EF%BC%8C%E7%9C%8B%E6%83%B3%E5%81%9A%E5%90%8E%E8%AE%B0/</url>
+    <content><![CDATA[<p>本来这篇文章的内容应该在我记录项目的那篇博客里的，但是后面发现想写在前面的东西太多，又有很多跟项目开发无关的内容，就单独拎了出来。</p>
+<h2 id="有关项目"><a class="markdownIt-Anchor" href="#有关项目"></a> 有关项目</h2>
+<p>这是我多看之后想做的第一个项目，从 idea 的分类上有点像之前博客里的第二点。简单来说，是想搭建一个一站式博客搭建平台，让想写博客搭自己博客网站的小白能够更容易开始。 idea 的来源离不开我个人搭建博客的经历和实践，同样印证了我之前博客里的观点，idea 的产生与实践分不开。其实在编写那一篇博客的时候，这个项目就已经开始了，所以有了当时的最后一段。因为我当时已经知道类似的项目已经有人做过了，且在老资历那里家喻户晓（前面提到的博客都是这一篇：<a href="https://speechlesspanda.github.io/2026/03/19/%E5%A4%9A%E7%9C%8B%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%9C%89%E5%85%B3idea/">多看之后，有关idea</a>）。</p>
+<h2 id="看想做后记"><a class="markdownIt-Anchor" href="#看想做后记"></a> 看想做后记</h2>
+<p>在我决定开始这个项目之后，我对之前的多想多看和实践有了更多新的感悟，所以在正式介绍项目之前，我先把这部分内容补充完整，就当是作为前面博客的后记。</p>
+<blockquote>
+<p>怎么搞得如果你看我的博客，好像还有点风险了呢（bushi）。因为我会把一个想法在不同的博客逐渐补充完善甚至推翻，如果只看一篇好像容易被误导说是。但我觉得记录这种变化和过程是有意义的。</p>
+</blockquote>
+<p>首先回顾一下前面提到过的两个看起来矛盾的观点：多看多想少做和有了一点想法之后马上去实践。我依旧是这么觉得的，前者偏向于确定一个大阶段内你要干什么，后者偏向于一些小的更要即时反馈的 idea 和一些你非常感兴趣的小项目。</p>
+<p>举个例子，假设你是一位研究生，前者适用于确立你整个研究生阶段要研究什么方向的时候，或者你的下一篇论文要写什么方向的时候；后者则适用于你已经确定好论文大概方向，在为内容做准备，读了各种论文之后，有了一些你不确定可不可行，需要立马验证的 idea 的时候，以及你突然心血来潮，想要做一点无关任务和论文的其他的小项目的时候。</p>
+<p>我个人并不推荐在使用完前者的情况下，即已经确定好“少做”什么内容的时候（为方便叙述，后文称这部分内容为主要目标），还突然心血来潮的更改整个大方向或者做一些与之无关的大项目。也并不推荐不加选择地去做所有心血来潮的小项目。兴趣是最好的老师，好奇让人们探索新知，这诚然不假，但人的精力是有限的，<strong>兴趣和一时的心血来潮不应该取代你之前多看多想之后的判断</strong>，而且我认为你多看多想的时候，也应该把自己的兴趣考虑进去。<strong>多想多看之后保持的兴趣使然，肯定比一时的心血来潮更有保证也更持久</strong>。所以从各种角度来看，你都应该将主要精力放在你的主要目标上。不过我依然推荐你在慎重考虑之后去完成一些你感兴趣的小项目，因为人不是机器，<strong>依然需要偶尔的脱轨和随心所欲，尽管这也建立在选择和思考之上</strong>。</p>
+<p>至于那些你为了主要目标而想要去获得即时反馈的小 idea ，我觉得你对他们应该和对那些即兴小项目一个态度。不能盲目不加选择的全部都去做一次，虽然在这些上面“浪费”一点精力是必然的事，但这不代表可以因此允许做一笔非常不划算的买卖。我认为<strong>那些值得去实现的 idea ，也应是经历过一轮简化版的多看多想所产生并保留下来的</strong>，这代表你对这个 idea 已经有了足够的把握，以及不会对它三分钟热度。<strong>“有了一点想法之后马上去实践”里的“马上”更多是强调执行力，而不是真的要越快越好，那样只会让你变成无头苍蝇</strong>。</p>
+<h2 id="有关学习"><a class="markdownIt-Anchor" href="#有关学习"></a> 有关学习</h2>
+<p>我感觉同样的道理对于学习也适用，不过<strong>学习能够包容更多的兴趣因素</strong>。在不影响主要目标，或者没有主要目标的情况下，如果是对某个东西很感兴趣，而想去学习，不是因为好像有用和潮流，我认为是完全可以的。甚至在没有主要目标时，这样的学习能够帮助到你后续的多看多想，毕竟刚开始看和想的基础质量和人已有的认知水平和眼界息息相关。不过，如果是为了追赶潮流和出于功利（这种情况可以排除已经有主要目标，故也不讨论会不会影响到主要目标），那我觉得不如还是先多看多想，因为不是出于兴趣的学习，对后续的多看多想帮助有限，况且多看多想也会提升认知水平和眼界，然后正循环提高多看多想的质量。所以在看和想完之后，再为了主要目标而去学习，更加功利高效。</p>
+<p>为什么我对二者的态度这么不同。我曾为了追赶潮流和功利学了很多内容，但是后来发现帮助并不大，因为此时的我既没有主要目标，也没有兴趣（我觉得对于大部分人来说，这样的学习收获都是有限的），且让自己疲于奔命。并且由于不是因为兴趣而学，在这个过程中，我感觉我丧失了对自己生活的掌控感和决定权。在我看来，<strong>有兴趣的学习，兴趣会成为一个锚点，它让你不会像无头苍蝇一样有什么学什么，也让你在学习过程中依旧拥有着自己的生活</strong>。哪怕你可能最终发现学习的内容帮助有限，也不会因此丧失很多的精力以及对生活的把握。</p>
+<blockquote>
+<p>顺带一提，我觉得赚钱作为你对学习兴趣的来源，以及赚钱作为主要目标，可能对你的学习并没有帮助。因为学习本身并不能让你直接赚到钱，在你还没有其他主要目标的情况下，它甚至不能很快的转化成钱。这种超长延时或者超长链路反馈，并不能避免上面提到的问题。</p>
+</blockquote>
+<p>这应该就是有关看想做的终章了，<s>大家放心阅读</s>，下一篇更新就是有关项目开发过程中的思考了。</p>
+]]></content>
+      <tags>
+        <tag>思考</tag>
+        <tag>短篇</tag>
       </tags>
   </entry>
   <entry>
@@ -382,27 +382,9 @@
 <p>agent 的冲击不止在技术的使用上，更在想法上。</p>
 ]]></content>
       <tags>
+        <tag>思考</tag>
         <tag>短篇</tag>
-        <tag>思考</tag>
         <tag>项目</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>大学道路入门一</title>
-    <url>/2026/07/15/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8%E4%B8%80/</url>
-    <content><![CDATA[<p>保研<br />
-<a href="https://hoa.moe/blog/graduate-school-application-experience-sharing">https://hoa.moe/blog/graduate-school-application-experience-sharing</a></p>
-<p>港校</p>
-<p>就业<br />
-<a href="https://haseebq.com/my-ten-rules-for-negotiating-a-job-offer/">https://haseebq.com/my-ten-rules-for-negotiating-a-job-offer/</a><br />
-<a href="https://silviasapora.github.io/blog/ml-interviews.html">https://silviasapora.github.io/blog/ml-interviews.html</a><br />
-<a href="https://alisawuffles.github.io/blog/job-search/">https://alisawuffles.github.io/blog/job-search/</a><br />
-<a href="https://hoa.moe/blog/summer-intern">https://hoa.moe/blog/summer-intern</a><br />
-<a href="https://hoa.moe/blog/how-much-money-can-students-make-without-being-a-coder">https://hoa.moe/blog/how-much-money-can-students-make-without-being-a-coder</a></p>
-]]></content>
-      <tags>
-        <tag>思考</tag>
-        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -422,8 +404,8 @@
 </blockquote>
 ]]></content>
       <tags>
-        <tag>短篇</tag>
         <tag>思考</tag>
+        <tag>短篇</tag>
       </tags>
   </entry>
   <entry>
@@ -442,8 +424,8 @@
 <p>数学是最好的算法。</p>
 ]]></content>
       <tags>
-        <tag>技术</tag>
         <tag>短篇</tag>
+        <tag>技术</tag>
       </tags>
   </entry>
   <entry>
@@ -470,8 +452,8 @@
 <p>总而言之，梁文锋是非常独特的企业家，也是一个成熟的理想主义者。希望 deepseek 越做越强。</p>
 ]]></content>
       <tags>
-        <tag>短篇</tag>
         <tag>思考</tag>
+        <tag>短篇</tag>
       </tags>
   </entry>
   <entry>
@@ -1162,42 +1144,6 @@
       </tags>
   </entry>
   <entry>
-    <title>我的奋斗与痛苦</title>
-    <url>/2026/05/14/%E6%88%91%E7%9A%84%E5%A5%8B%E6%96%97%E4%B8%8E%E7%97%9B%E8%8B%A6/</url>
-    <content><![CDATA[<blockquote>
-<p>温馨提示:本文可能会比较有负面情绪，介意者现在可以退出。</p>
-</blockquote>
-<h2 id="前情提要"><a class="markdownIt-Anchor" href="#前情提要"></a> 前情提要</h2>
-<p>要了解我的奋斗和痛苦，首先得知道我大学选择的路。在我的<a href="https://speechlesspanda.github.io/2026/03/01/%E7%BB%83%E4%B9%A0%E6%97%B6%E9%95%BF%E4%B8%80%E5%B9%B4%E5%8D%8A%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%9C%89%E6%84%9F/">第一篇博客</a>中，我曾经颇为大胆的谈过如何做人生的选择，里面的内容 100% 来自我自己的选择经历，有我做好了的地方，也有我觉得我做的不好，所以写出来给大家避雷的地方。现在，我要将我做选择的思路，连同做的不好的地方，一并开源了。</p>
-<p>首先，开门见山，我选择的是保研这条路（其实我感觉这句话一出懂的人已经懂了）。其实我知道大学的路比我想的多，但对我当时的认知来说，无非就是本科就业、考研、保研、出国留学、考公和创业。创业，那真是顶尖天才的选择了，我还是有这个认知。考研，我已经厌倦了再去酣畅淋漓的卷一场应试教育了。出国留学，一是我对自己的英语一直不自信，二是家里可能也没那么多钱，不太想给太大的负担。考公，一是和应试教育差不多（尤其这两年比考研还有难度大了好像），二是我感觉我也不太会喜欢体制内的工作（虽然到现在，我其实又没有彻底排除考公的选项了，生活所迫）。本科就业，在我看来要么是另一批天才提前赚大钱的选择，要么是其他人的备选项，不是我这种零基础计算机专业本科生能做好的。所以最后就选择了保研。思路很简洁明了，认知可能会显得有点低下，甚至不对，但真实。当时是有点纸上谈兵的，这是我后来反思的一个地方，好在没出现大的偏差，没让我的目标产生严重动摇。但还是建议后来者了解的再细致一点，说不定就会选到更好的。</p>
-<h2 id="我过去的奋斗和痛苦"><a class="markdownIt-Anchor" href="#我过去的奋斗和痛苦"></a> 我过去的奋斗和痛苦</h2>
-<p>我曾经也是一个很能卷的人，坏消息是，起止时间为初二和初三，甚至初三都没完整的保持住。包括到后来的高三，我自认为也完全没有很卷很卷，但是在我能接受的范围内我尽力了。不知道是不是那一段很卷的时光抽干了我后续所有卷的精力和能力，还是抽干了我的心气和意志力，反正后来再也没有那么卷过。现在的我，能够接受持续的在舒适区或者渐渐出去一点点的努力，但已经做不到持续地在远离舒适区的地方跳舞的卷了，甚至连短暂去那个地方都有点力不从心了。我渐渐学会了通过持续的努力，来避免爆发性的透支。</p>
-<p>但是，我发现，这个时代似乎更宠幸那些能够短暂透支自己的人。我大一入学开始，就好好听课，每周努力学习，甚至因为学习而少参加了不少活动，处于一个基本一直呆在宿舍的状态。但是考出来的成绩并不是很理想，可也没到完全让我放弃保研的地步。舍友平时也有学习，但并没有我努力，还是比我考得好，处于一个平时玩的也开心，结局也皆大欢喜的地位。没有比较是不可能的，那时的我还能对自己说，说不定就是他天赋好呢。</p>
-<p>顺带一提，因为觉得自己什么都还不会，所以当时剩下多出来的一点时间，都用来学习其他一些课外或者以后要学的专业知识了（虽然现在看来对我的帮助甚小）。那时候 AI 也没有那么发达，所以，很多的比赛也没去参加（现在看来其实这点不太对，但我觉得对我来说这是一个自然的选择，也是大部分人正常的选择，所以我不怪自己），包括一个后来被人称为学分绩福利赛的赛事（后续这个赛事学校改了规则，没那么好加分了），也失之交臂，说不可惜是假的，但信息差就是一直存在，人也不能回到过去。</p>
-<p>后续学分绩方面是渐渐好起来了，已经能摸到保研的门槛了。尽管中途有几次，我的结果也还是没有很匹配我的努力。但还是不够，在我们学校，比赛加分不一定能保研，不加分一定不能保研。我也参加过一些比赛，最好的成绩也就是省一（可惜）。但大三已经快到了，又有什么办法呢，只能双线推进，谁叫我既缺学分绩，又缺比赛加分呢。</p>
-<blockquote>
-<p>不否认结果不匹配努力会有我的方法问题，但是我认为能够快速找到适合自己的方法本身也是天赋的一种。且大学这种考试少，但考了就很重要的机制，让改进方法和验证方法有效性是一件很奢侈的事。</p>
-</blockquote>
-<p>中途也不是没考虑过换方向吧，后续我了解到本科就业其实只要好好准备，不比研究生差。但后来学分绩慢慢好转，我就想着先观望一会，渐渐的，其实我已经没有把它作为主选的时间了，剩下的时间里将它作为主选和备选也差不多了。不过，有意思的事，由于了解到了这一点，加上学分绩失利，我其实也断断续续的做了很多就业的准备，虽然起到一个聊胜于无的效果说是。且就像一个老师对我说的，我把精力花的太分散了，如果我把那些时间用来准备比赛、科研甚至多学会课内知识，说不定我就不会像现在这样尴尬了。我把它归咎于，其实我一开始并没有好好了解过每一条道路，所以也不算彻底想清楚了，导致后续规划出了问题，我认。</p>
-<p>说点跟自己不沾边的奋斗，别人</p>
-<p>没有能快速将知识转换成做题的水平的能力，初中和高中的时候也是一个刚学内容的前几次测验必定不太理想，但是后面到正式大考时水平也能到和其他有相关能力的人的地步。</p>
-<h2 id="我最近的奋斗和痛苦"><a class="markdownIt-Anchor" href="#我最近的奋斗和痛苦"></a> 我最近的奋斗和痛苦</h2>
-<p>告诉自己不要缺乏从头开始的勇气和决心</p>
-<p>干活是为了干下一个活，忙碌是为了其他的忙碌</p>
-<p>放松对我来说就像是慢性毒药，会让后面更糟糕（</p>
-<p>分流之后，26%，差一点点会让人不甘心，差很多就会让人平静。</p>
-<p>很久没午睡睡着过了。</p>
-<p>没有中间态给我。既不开心，也没成果。</p>
-<h2 id="沾边的一点题外话"><a class="markdownIt-Anchor" href="#沾边的一点题外话"></a> 沾边的一点题外话</h2>
-<p>情绪这个 tag ，</p>
-]]></content>
-      <tags>
-        <tag>短篇</tag>
-        <tag>思考</tag>
-        <tag>情绪</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>我的苦难定理</title>
     <url>/2026/05/12/%E6%88%91%E7%9A%84%E8%8B%A6%E9%9A%BE%E5%AE%9A%E7%90%86/</url>
     <content><![CDATA[<p><em><strong>苦难定理 1 ：我总是会平凡的度过一段时间后，周期性的经历一个满是苦难的阶段。</strong></em></p>
@@ -1227,8 +1173,8 @@
 </blockquote>
 ]]></content>
       <tags>
-        <tag>短篇</tag>
         <tag>思考</tag>
+        <tag>短篇</tag>
         <tag>情绪</tag>
       </tags>
   </entry>
