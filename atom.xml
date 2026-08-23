@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, SpeechlessPanda</rights>
   <subtitle>A Blog</subtitle>
   <title>SpeechlessPanda</title>
-  <updated>2026-08-21T02:31:25.696Z</updated>
+  <updated>2026-08-23T23:30:00.000Z</updated>
   <entry>
     <author>
       <name>SpeechlessPanda</name>
@@ -29,7 +29,7 @@
 <p>叠甲：鉴于这是投资者大会上的发言，且本人的感悟也只是读了这篇发言（且懒得二次验证），所以其中不一定都是真相，甚至]]>
     </summary>
     <title>看梁文锋 4 小时发言有感</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -51,7 +51,7 @@
 <blockquot]]>
     </summary>
     <title>AI 时代下回看以前的工作模式</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.268Z</updated>
   </entry>
   <entry>
     <author>
@@ -70,7 +70,7 @@
 <p]]>
     </summary>
     <title>数学是最好的算法</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -89,7 +89,7 @@
 <p>单看问题本身并不神奇，但是它的题解非常有趣。我把两个题解放在下面，读者不妨猜猜看]]>
     </summary>
     <title>cpp 数组有趣之一</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -107,7 +107,7 @@
       <![CDATA[<p>刚刚阅读了 <a href="https://luminousmen.com/post/design-patterns-suck/">Design Patterns Suck</a> 这篇文章，对设计模式有了些新的思考，且发现在之前<a href="https://spee]]>
     </summary>
     <title>代码品味≈设计模式？</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -129,7 +129,7 @@
 <li>我在不久之前尝试 vibe 了一个 AI]]>
     </summary>
     <title>代码品味与架构设计</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -149,7 +149,7 @@
 <p>收集 GitHub 上值得关注的优质开源项目，按类别整理，持续更新。Star 数截至 2026-08-16（每月更新一次）。🆕 标记表示最近一次同步新增的项目，点击下方分类标题可展开查看详情。</p>]]>
     </summary>
     <title>项目收藏</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -167,7 +167,7 @@
       <![CDATA[<p>这几天，阴差阳错将一个保研来我们学校的学姐（不是我们专业的）带上了学习 claude code 怎么使用的路，看着她兴致勃勃的探索，并逐渐掌握我大部分日常用的内容，我不由得感叹原来 agent 的普及率没我想的那么高，以及会用 agent 真的不能算一个多么有优势的点。两个]]>
     </summary>
     <title>原来还可以不是 fomo</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -185,7 +185,7 @@
       <![CDATA[<p>昨晚由于一些原因，深入了解了一下之前就听过的 Warp ，看完之后非常心动，非常迫切想试一下。但是由于之前的 Powershell 已经有各种配置了，改用 Warp 同样的东西要再配一次，还要改各种软件的终端，虽然这可能是很快的事，但是我事太多了，多到哪怕时间不用花太多，我]]>
     </summary>
     <title>快与慢</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -206,7 +206,7 @@
 <p>今天过的真]]>
     </summary>
     <title>我的苦难定理</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -227,7 +227,7 @@
 <p]]>
     </summary>
     <title>初谈从 rust 到 cpp</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -246,7 +246,7 @@
       <![CDATA[<p>在<a href="https://speechlesspanda.github.io/2026/04/06/vibe%20coding%20%E5%BC%80%E5%8F%91%20BFE%20%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D%E4]]>
     </summary>
     <title>对 BFE 构建思路的重思考</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -266,7 +266,7 @@
 <p>BFE 全称 BlogForEveryone ，是一个专为小白设计的面向 GitHub 部署的一站式博客搭建创作发布软件]]>
     </summary>
     <title>vibe coding 开发 BFE 后的反思与总结</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -285,7 +285,7 @@
 <h2 id="有关项目"><a class="markdownIt-Anchor" href="#有关项目"></a> 有关项目</]]>
     </summary>
     <title>vibe coding 前传，看想做后记</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -303,7 +303,7 @@
       <![CDATA[<p>今天又要写博客了，真是痛苦又享受的过程。每次写的内容都是我想写的，而且在写的过程中，我能把一些脑子里零散的不知道什么时候就会消失的想法串联记录下来，这个过程是美妙的。但是每次做这种文字创作工作就会高度集中注意力，而且持续相当一段时间，写的时候是爽了，写完之后不亚于肾透支，导]]>
     </summary>
     <title>一点碎碎念</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -323,7 +323,7 @@
 <p>基]]>
     </summary>
     <title>多看之后，有关idea</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -341,7 +341,7 @@
       <![CDATA[<p>本文写于开学一周后的周日。这是一个浑浑噩噩的一周，在合理的上课策略之下，我拥有了许多课外时间，但当我想把这些课外时间利用起来的时候，发现自己不知道要做什么。一开始想着学完一套 Java 课程，但是跟课上内容重合了，我想着课件加 AI 应该就能勉强达到要用的时候能马上上手的程]]>
     </summary>
     <title>多看，多想，少做</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -359,7 +359,7 @@
       <![CDATA[<p>我高考专业是在知道自己不想选什么，然后在剩下的里面挑一个的情况下，选择了计算机。一开始并没有什么兴趣可言，直到我接触了很多种语言之后，反复在每种语言学习的一开始，输出一个“ hello world ”。我开始觉得技术是一件很有意思的事，甚至有一瞬间觉得是神圣的。这算是我对计]]>
     </summary>
     <title>hello world</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
   <entry>
     <author>
@@ -378,9 +378,10 @@
 <p>这篇文章写于我大二寒假的末尾，动笔的契机是寒假末尾不知道能干点什么，然后在一个交流群里有人做了个能把群友发过的博客转发到群里的机器人，看着群友写]]>
     </summary>
     <title>练习时长一年半大学生有感</title>
-    <updated>2026-08-21T02:31:25.696Z</updated>
+    <updated>2026-08-23T15:59:57.269Z</updated>
   </entry>
-<entry><author><name>SpeechlessPanda</name></author><category term="感慨"/><category term="有趣"/><content type="html"><![CDATA[<p>脚痛了一个星期，昨天去检查，原因是尿酸高导致的痛风。哭笑不得，看来每日锻炼也不能挽回一些不良的生活习惯。这次是上周二走太多诱发的，本来不应该痛这么久的，但是本人之前有过类似的脚痛经历，是因为某些炎症或者红肿，喷点云南白药泡个脚就能解决，谁曾想痛风严禁泡脚这种热敷类的行为，要冰敷，并且要涂的是扶他林（这个药也非常不错，建议和云南白药都作为家中常备）。昨天看完狠狠冰敷了一会，今天大抵好的差不多了，至于尿酸还得吃药加调整饮食什么的慢慢降。现在各种病都越来越年轻化了，只能说身体是革命的本钱，也是享受的本钱，希望看博客的各位大佬还是要注意身体才是，以及有什么问题多去医院查一查，像我这次不去医院估计永远治不了尿酸高这个本。</p>
+<entry><author><name>SpeechlessPanda</name></author><category term="感慨"/><content type="html"><![CDATA[<p>书接着往后翻，之前认为 cpp 暂时还能高枕无忧的还是浅薄了。前面看到的现代化语言之所以还没取代 cpp ，没有和 cpp 一流的互操作性也是一个很大影响因素，这使团队无法丝滑地从 cpp 迁移到其他语言。但谷歌最近开发的 Carbon 解决了这个痛点，甚至重点就是和 cpp 一流的互操作性，以取代 cpp 。如果这门语言最终做的够好，说不定几年之后 cpp 也会日薄西山。但也不好说，其他语言没有与 cpp 一流的互操作可能也是因为这玩意东西太多了，压根做不出来吧。</p>
+]]></content><id>https://speechlesspanda.github.io/memos/#2026-08-23T23:30:00.000Z</id><link href="https://speechlesspanda.github.io/memos/"/><published>2026-08-23T23:30:00.000Z</published><title>碎碎念 · 2026-08-23</title><updated>2026-08-23T23:30:00.000Z</updated></entry><entry><author><name>SpeechlessPanda</name></author><category term="感慨"/><category term="有趣"/><content type="html"><![CDATA[<p>脚痛了一个星期，昨天去检查，原因是尿酸高导致的痛风。哭笑不得，看来每日锻炼也不能挽回一些不良的生活习惯。这次是上周二走太多诱发的，本来不应该痛这么久的，但是本人之前有过类似的脚痛经历，是因为某些炎症或者红肿，喷点云南白药泡个脚就能解决，谁曾想痛风严禁泡脚这种热敷类的行为，要冰敷，并且要涂的是扶他林（这个药也非常不错，建议和云南白药都作为家中常备）。昨天看完狠狠冰敷了一会，今天大抵好的差不多了，至于尿酸还得吃药加调整饮食什么的慢慢降。现在各种病都越来越年轻化了，只能说身体是革命的本钱，也是享受的本钱，希望看博客的各位大佬还是要注意身体才是，以及有什么问题多去医院查一查，像我这次不去医院估计永远治不了尿酸高这个本。</p>
 <p>特此将这段有趣又令人感慨的经历分享出来，以鉴后人和前人。<s>记住，哪里痛要先弄清楚病因，云南白药不是万能的</s>。</p>
 ]]></content><id>https://speechlesspanda.github.io/memos/#2026-08-20T13:30:00.000Z</id><link href="https://speechlesspanda.github.io/memos/"/><published>2026-08-20T13:30:00.000Z</published><title>碎碎念 · 2026-08-20</title><updated>2026-08-20T13:30:00.000Z</updated></entry><entry><author><name>SpeechlessPanda</name></author><category term="思考"/><category term="有趣"/><content type="html"><![CDATA[<p>cpp 像什么语言界的最终 boss 一样， cpp 之后的语言，要么是为了弥补 cpp 在某些方面的欠缺，要么是要创造更安全 balabala 的 cpp ，比如 rust 、c# 、 D语言等。“天下苦 cpp 久矣。”尽管这样，这些语言都没能取代 cpp ，这绝不是语言本身的问题，事实上，这些语言在大部分方面都比 cpp 优秀，剩下极少数方面的差距也不足以让 cpp 不被取代，以至于让我一直在怀疑我学 cpp 是不是正确的。这固然和这些语言分别有的特殊原因有关，比如没有及时开源、错过了什么什么时代等，但也有 cpp 方面的原因。我引用一下《代码的文明》的原文来说明，我觉得我自己说也不会比这个表述更好了：</p>
 <p>“正如《史记》扁鹊所言，三兄弟中医术最下的扁鹊救人于‘已病’而闻于诸侯，长兄治‘未病’却名不出于家，类似的现象在软件圈屡见不鲜： cpp 常把简单问题复杂化，于是总有‘已病’可救，开发者得以快速立下可见功劳、筑高个人壁垒；这也许是 cpp 长期保持热度的深层次原因。作为从业者，我们更需要多角度审视技术和现实的互动。</p>
