@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://speechlesspanda.github.io/about/index.html</loc>
+    <loc>https://speechlesspanda.github.io/link/index.html</loc>
     
     <lastmod>2026-08-24</lastmod>
     
@@ -11,9 +11,9 @@
   </url>
   
   <url>
-    <loc>https://speechlesspanda.github.io/link/index.html</loc>
+    <loc>https://speechlesspanda.github.io/about/index.html</loc>
     
-    <lastmod>2026-08-21</lastmod>
+    <lastmod>2026-08-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
