@@ -15,7 +15,7 @@
 - **博客文章**：Markdown 撰写，支持分类、标签、封面、摘要、目录（TOC）、相关文章推荐、上下篇导航、版权声明
 - **碎碎念（Memos）**：独立 `/memos/` 页面，记录短动态；支持分页（每页 8 条）、每条独立评论、标签、相对时间、图片灯箱；数据写在 `source/_data/shuoshuo.yml`，复用主题内置 shuoshuo 系统，无 key 时自动用日期生成评论标识
 - **OG 分享图自动生成**：构建时为每篇文章生成 1200×630 PNG（SVG 模板 + `@resvg/resvg-js` + 内嵌 LXGW WenKai 字体），蓝→橙主题渐变；自动注入 `og:image` / `twitter:image` / `twitter:card=summary_large_image`，分享到微信 / Twitter / Discord 等平台带预览图
-- **独立页面**：关于、友链、分类、标签、归档
+- **站点导航**：首页（`/`）即「关于」页，复用 `source/about/index.md` 的内容（单一来源），右侧栏保留（作者卡片 / 公告 / 网站信息）；文章列表（含最新碎碎念）位于 `/blog/`（不显示右侧栏）；另有**友链、标签、归档、碎碎念**等页面；「分类」功能已停用并移除
 
 ### 💬 评论与互动
 
@@ -61,7 +61,7 @@
 - **字数统计 / 阅读时长**：hexo-wordcount
 - **打字机副标题**：typed.js（首页一言式轮播）
 - **进入动画 / 圆角 UI / 分割线图标**
-- **侧边栏组件**：作者卡片、公告、最近文章、分类、标签、归档、网站信息
+- **侧边栏组件**：作者卡片、公告、最近文章、标签、归档、网站信息（分类卡片已随分类功能停用；首页侧栏精简为作者卡片、公告、网站信息，文章内容页保留最近文章等）
 
 ### 🔤 字体
 
@@ -88,7 +88,7 @@
 
 ```text
 blog/
-├── _config.yml                       # Hexo 全局配置（含 og_image 配置块）
+├── _config.yml                       # Hexo 全局配置（含 og_image 配置块；index_generator 文章流指向 /blog）
 ├── package.json                      # 依赖与脚本
 ├── pnpm-lock.yaml
 ├── README.md
@@ -96,14 +96,15 @@ blog/
 │   ├── _posts/                       # 博客文章（Markdown）
 │   ├── _data/
 │   │   └── shuoshuo.yml              # 碎碎念数据
+│   ├── index.md                      # 首页：渲染「关于」内容（layout: home，见 themes/butterfly/layout/home.pug）
 │   ├── memos/                        # 碎碎念页面（type: shuoshuo）
-│   ├── about/ categories/ tags/ link/   # 独立页面
+│   ├── about/ tags/ link/            # 独立页面（分类页已停用并删除）
 │   └── img/                          # 静态图片（头像、打赏码等）
 ├── scripts/
 │   ├── og-image.js                   # OG 图生成（hexo generator + helper）
 │   ├── atom-feed.js                  # 自写 Atom 生成器：文章+碎碎念混排进 atom.xml，旧文更新改 guid 推送
 │   ├── memo-comment-count.js         # 构建时查 Giscus 评论数，控制碎碎念评论区自动展开
-│   ├── memo-helpers.js               # 碎碎念模板 helper（首页"最新碎碎念"等）
+│   ├── memo-helpers.js               # 碎碎念模板 helper（/blog/ 页"最新碎碎念"等）
 │   ├── search-memos.js               # 把碎碎念注入 search.xml（本地搜索可命中）
 │   └── events/
 │       ├── sync_comment_notify_workflow.js   # 把发布仓 workflow 同步到 public
@@ -121,7 +122,7 @@ blog/
 └── public/                           # 生成产物（gitignore）
 ```
 
-> 注：主题主体配置在 `themes/butterfly/_config.yml`；站点根的 `_config.butterfly.yml` 是覆盖文件，目前只放 inject（RSS autodiscovery 链接、fix-link-target.js）。
+> 注：主题主体配置在 `themes/butterfly/_config.yml`；站点根的 `_config.butterfly.yml` 是覆盖文件，目前放 inject（fix-link-target.js）与 aside 侧栏显示配置（首页 / 归档 / 标签等页面隐藏侧栏、停用分类卡片）。
 
 ---
 
