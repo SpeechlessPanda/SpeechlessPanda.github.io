@@ -35,7 +35,7 @@
 ### 🌐 SEO 与分发
 
 - **Open Graph meta** + 自动生成的 OG 图
-- **RSS 订阅**：`atom.xml`（`hexo-generator-feed`），由 `scripts/feed-memos.js` 额外把碎碎念注入，订阅者可同时收到博客文章与碎碎念
+- **RSS 订阅**：`atom.xml` 由自写生成器 `scripts/atom-feed.js` 生成（官方 `hexo-generator-feed` 已停用）：**博客文章 + 碎碎念按日期倒序混排**，碎碎念日期按 +08:00 解析、guid 稳定；**文章更新距发布超过 1 天时改变条目 guid**，订阅者能收到旧文更新通知（依赖 CI 按 git 历史恢复文件 mtime）
 - **站点地图**：`sitemap.xml` + `baidusitemap.xml`（百度）+ `robots.txt`（`hexo-generator-robotstxt`）
 - **搜索引擎 ping**：CI 部署后自动通知搜索引擎（`search-engine-ping.yml`）
 - **分享按钮**：sharejs（微信 / X / 微博 / QQ / Facebook）
@@ -101,7 +101,7 @@ blog/
 │   └── img/                          # 静态图片（头像、打赏码等）
 ├── scripts/
 │   ├── og-image.js                   # OG 图生成（hexo generator + helper）
-│   ├── feed-memos.js                 # 把碎碎念注入 atom.xml（RSS）
+│   ├── atom-feed.js                  # 自写 Atom 生成器：文章+碎碎念混排进 atom.xml，旧文更新改 guid 推送
 │   ├── memo-comment-count.js         # 构建时查 Giscus 评论数，控制碎碎念评论区自动展开
 │   ├── memo-helpers.js               # 碎碎念模板 helper（首页"最新碎碎念"等）
 │   ├── search-memos.js               # 把碎碎念注入 search.xml（本地搜索可命中）
@@ -121,7 +121,7 @@ blog/
 └── public/                           # 生成产物（gitignore）
 ```
 
-> 注：本站主题配置直接写在 `themes/butterfly/_config.yml`（站点根没有 `_config.butterfly.yml` 覆盖文件）。
+> 注：主题主体配置在 `themes/butterfly/_config.yml`；站点根的 `_config.butterfly.yml` 是覆盖文件，目前只放 inject（RSS autodiscovery 链接、fix-link-target.js）。
 
 ---
 
@@ -130,7 +130,7 @@ blog/
 push 到 `blog-s-code` 的 `main` 分支 → GitHub Actions 自动构建 → 部署到 `SpeechlessPanda.github.io`。
 
 **流程**（`.github/workflows/deploy-from-source.yml`）：
-1. checkout 源码
+1. checkout 源码（`fetch-depth: 0`）并**按 git 提交时间恢复文件 mtime**——否则所有文章的 `updated` 都等于 checkout 时间，RSS 旧文更新推送会误判刷屏
 2. setup Node 20 + pnpm 10
 3. `pnpm install --frozen-lockfile`
 4. **缓存 OG 字体**（`fonts/`，key 基于 `_config.yml`）
