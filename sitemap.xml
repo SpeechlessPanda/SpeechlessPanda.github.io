@@ -257,6 +257,13 @@
   </url>
   
   <url>
+    <loc>https://speechlesspanda.github.io/tags/%E6%83%B3%E6%B3%95/</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://speechlesspanda.github.io/tags/%E9%A1%B9%E7%9B%AE/</loc>
     <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -272,13 +279,6 @@
   
   <url>
     <loc>https://speechlesspanda.github.io/tags/%E9%9A%8F%E7%AC%94/</loc>
-    <lastmod>2026-08-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://speechlesspanda.github.io/tags/%E6%83%B3%E6%B3%95/</loc>
     <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
