@@ -35,7 +35,7 @@
 ### 🌐 SEO 与分发
 
 - **Open Graph meta** + 自动生成的 OG 图
-- **RSS 订阅**：`atom.xml` 由自写生成器 `scripts/atom-feed.js` 生成（官方 `hexo-generator-feed` 已停用）：**博客文章 + 碎碎念按日期倒序混排**，碎碎念日期按 +08:00 解析、每条 id/link 唯一（`/memos/#时间戳`），按 link 识别条目的阅读器也能正确收到；**文章更新距发布超过 1 天时改变条目 id/link**，订阅者能收到旧文更新通知（依赖 CI 按 git 历史恢复文件 mtime）
+- **RSS 订阅**：`atom.xml` 由自写生成器 `scripts/atom-feed.js` 生成（官方 `hexo-generator-feed` 已停用）：**博客文章 + 碎碎念按日期倒序混排**，碎碎念日期按 +08:00 解析、每条 id/link 唯一（`/memos/?m=时间戳`，用 query 而非 #fragment——RSSFlow 等阅读器归一化 guid 时会丢弃 fragment）；**文章更新距发布超过 1 天时条目 id/link 加 `?u=` 参数**，订阅者能收到旧文更新通知（依赖 CI 按 git 历史恢复文件 mtime）
 - **站点地图**：`sitemap.xml` + `baidusitemap.xml`（百度）+ `robots.txt`（`hexo-generator-robotstxt`）
 - **搜索引擎 ping**：CI 部署后自动通知搜索引擎（`search-engine-ping.yml`）
 - **分享按钮**：sharejs（微信 / X / 微博 / QQ / Facebook）
