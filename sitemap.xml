@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://speechlesspanda.github.io/2026/08/29/AI-is-coming/</loc>
+    
+    <lastmod>2026-08-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://speechlesspanda.github.io/2026/03/08/hello%20world/</loc>
     
     <lastmod>2026-08-29</lastmod>
@@ -257,13 +266,6 @@
   </url>
   
   <url>
-    <loc>https://speechlesspanda.github.io/tags/%E6%83%B3%E6%B3%95/</loc>
-    <lastmod>2026-08-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://speechlesspanda.github.io/tags/%E9%A1%B9%E7%9B%AE/</loc>
     <lastmod>2026-08-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -272,6 +274,13 @@
   
   <url>
     <loc>https://speechlesspanda.github.io/tags/%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://speechlesspanda.github.io/tags/%E6%83%B3%E6%B3%95/</loc>
     <lastmod>2026-08-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
