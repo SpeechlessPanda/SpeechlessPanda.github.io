@@ -757,13 +757,22 @@
     }
   }
 
-  const renderPage = (page) => {
+  const scrollToFirstMemo = () => {
+    const first = document.querySelector('#article-container .shuoshuo-item')
+    if (!first) return
+    // 固定导航栏约 70px，与 btf.scrollToDest 偏移一致；翻页等同换页，瞬时回到第一条
+    const dest = Math.max(0, btf.getEleTop(first) - 70)
+    window.scrollTo(0, dest)
+  }
+
+  const renderPage = (page, scrollToTop = false) => {
     const start = (page - 1) * itemsPerPage
     const end = start + itemsPerPage
     const pageData = data.slice(start, end)
     renderData(pageData)
     renderNavigation()
     autoExpandComments()
+    if (scrollToTop) scrollToFirstMemo()
   }
 
   // 有评论的碎碎念自动展开评论区(build 时已查 commentCount 注入 shuoshuo-data)
@@ -821,14 +830,14 @@
   window.shuoshuoPrevPage = () => {
     if (currentPage > 1) {
       currentPage--
-      renderPage(currentPage)
+      renderPage(currentPage, true)
     }
   }
 
   window.shuoshuoNextPage = () => {
     if (currentPage < totalPages) {
       currentPage++
-      renderPage(currentPage)
+      renderPage(currentPage, true)
     }
   }
 
@@ -837,7 +846,7 @@
       // Directly jump to the specified page
       if (page >= 1 && page <= totalPages && page !== currentPage) {
         currentPage = page
-        renderPage(currentPage)
+        renderPage(currentPage, true)
       }
     } else {
       // Get page from input box
@@ -846,7 +855,7 @@
       const inputPage = inputValue === '' ? currentPage : parseInt(inputValue)
       if (inputPage >= 1 && inputPage <= totalPages && inputPage !== currentPage) {
         currentPage = inputPage
-        renderPage(currentPage)
+        renderPage(currentPage, true)
       } else if (inputValue === '') {
         // If input box is empty, re-render current page (update placeholder)
         renderPage(currentPage)
