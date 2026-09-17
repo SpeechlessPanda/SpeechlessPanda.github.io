@@ -100,6 +100,7 @@ blog/
 │   ├── memos/                        # 碎碎念页面（type: shuoshuo）
 │   ├── about/ tags/ link/            # 独立页面（分类页已停用并删除）
 │   ├── js/fix-link-target.js         # 正文/碎碎念链接新标签页打开（经 _config.butterfly.yml inject 注入）
+│   ├── img/                          # 个人头像、favicon、微信/支付宝打赏码（保留 /img/ URL）
 │   └── _drafts/                      # 草稿（render_drafts: false，不发布）
 ├── scripts/
 │   ├── og-image.js                   # OG 图生成（hexo generator + helper）
@@ -115,7 +116,7 @@ blog/
 ├── tools/
 │   └── verify-feed.js                # atom.xml 条目身份标识校验（pnpm run verify，CI 构建后自动执行）
 ├── themes/
-│   └── butterfly/                    # Butterfly 主题（本地源码 5.7.0，配置在其 _config.yml；头像/打赏码等图片在其 source/img/）
+│   └── butterfly/                    # Butterfly 5.7.0 本地分叉：默认配置与个人配置分离，仍保留本站源码补丁
 ├── scaffolds/                        # 文章 / 页面模板（post / page / draft）
 ├── .github/workflows/
 │   ├── deploy-from-source.yml        # push → 自动构建并部署到发布仓(设 exclude_assets="" 把 .github/workflows 一起带过去)
@@ -127,7 +128,7 @@ blog/
 └── public/                           # 生成产物（gitignore）
 ```
 
-> 注：主题主体配置在 `themes/butterfly/_config.yml`；站点根的 `_config.butterfly.yml` 是覆盖文件，目前放 inject（fix-link-target.js）与 aside 侧栏显示配置（首页 / 归档 / 标签等页面隐藏侧栏、停用分类卡片）。
+> 注：个人配置集中在站点根 `_config.butterfly.yml`，包括菜单、Giscus、头像、字体、渐变注入与侧栏选项；`themes/butterfly/_config.yml` 保留 5.7.0 默认配置。个人图片位于 `source/img/`，公开 URL 不变。主题仍含本站源码补丁，升级时必须合并这些补丁，不能直接用官方目录覆盖。
 
 ---
 
