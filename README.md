@@ -73,8 +73,8 @@
 
 | 类别 | 技术 | 说明 |
 |------|------|------|
-| 框架 | [Hexo](https://hexo.io/) 8.1.1 | 静态博客框架 |
-| 主题 | [Butterfly](https://butterfly.js.org/) | 功能丰富，本地源码（`themes/butterfly/`） |
+| 框架 | [Hexo](https://hexo.io/) 8.1.2 | 静态博客框架 |
+| 主题 | [Butterfly](https://butterfly.js.org/) 5.7.0 | 功能丰富，本地源码（`themes/butterfly/`），保留本站补丁 |
 | 包管理 | [pnpm](https://pnpm.io/) 10 | 高效磁盘 |
 | 运行时 | Node.js 20 | CI 运行环境 |
 | OG 渲染 | [@resvg/resvg-js](https://github.com/thx/resvg-js) | SVG → PNG，跨平台中文字体 |
@@ -212,4 +212,4 @@ pnpm run new "文章标题"   # 在 source/_posts/ 生成草稿
 
 本博客文章内容版权归作者所有，转载请注明出处。
 
-主题 Butterfly 遵循 [GPL-3.0 License](https://github.com/jerryc127/hexo-theme-butterfly/blob/dev/LICENSE)。
+主题 Butterfly 遵循 [Apache-2.0 License](https://github.com/jerryc127/hexo-theme-butterfly/blob/master/LICENSE)。

@@ -10,51 +10,92 @@
 <meta property="article:modified_time" content="2026-09-05T13:09:48.000Z">
 <meta property="article:author" content="SpeechlessPanda">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://speechlesspanda.github.io/img/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://speechlesspanda.github.io/link/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.9/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+<meta name="twitter:image" content="https://speechlesspanda.github.io/img/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://speechlesspanda.github.io/link/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
     (() => {
       
     const saveToLocal = {
       set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
       },
       get: key => {
         const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
           localStorage.removeItem(key)
-          return undefined
         }
-        return value
       }
     }
 
+    const scriptCache = new Map()
+    const cssCache = new Map()
     window.btf = {
       saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
         }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
         }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
       addGlobalFn: (key, fn, name = false, parent = window) => {
         if (!true && key.startsWith('pjax')) return
         const globalFn = parent.globalFn || {}
@@ -65,16 +106,17 @@
     }
   
       
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
       const activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
         }
       }
       const activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
         }
       }
 
@@ -91,10 +133,15 @@
             else if (mediaQueryDark.matches) activateDarkMode()
             else {
               const hour = new Date().getHours()
-              const isNight = hour <= 6 || hour >= 18
+              const start = 6
+              const end = 18
+              const isNight =
+                start < end
+                    ? hour < start || hour >= end
+                    : hour >= start || hour < end
               isNight ? activateDarkMode() : activateLightMode()
             }
-            mediaQueryDark.addEventListener('change', () => {
+            mediaQueryDark.addEventListener('change', e => {
               if (saveToLocal.get('theme') === undefined) {
                 e.matches ? activateDarkMode() : activateLightMode()
               }
@@ -400,7 +447,7 @@
     color: #000000 !important;
   }
 </style>
-<link rel="alternate" type="application/atom+xml" title="SpeechlessPanda" href="/atom.xml"><meta name="generator" content="Hexo 8.1.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+<link rel="alternate" type="application/atom+xml" title="SpeechlessPanda" href="/atom.xml"><meta name="generator" content="Hexo 8.1.2"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
   const $loadingBox = document.getElementById('loading-box')
   const $body = document.body
   const preloader = {
@@ -434,126 +481,126 @@
 <h2 id="个人博客"><a class="markdownIt-Anchor" href="#个人博客"></a> 个人博客</h2>
 <div class="flink"><div class="flink-list">
       <div class="flink-list-item">
-        <a href="https://www.coderlock.site" title="寒夜雨" target="_blank">
+        <a href="https:&#x2F;&#x2F;www.coderlock.site" title="寒夜雨" target="_blank">
           <div class="flink-item-icon">
-            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.coderlock.site/doomee.png" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="寒夜雨" />
+            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https:&#x2F;&#x2F;www.coderlock.site&#x2F;doomee.png" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="寒夜雨" />
           </div>
           <div class="flink-item-name">寒夜雨</div>
           <div class="flink-item-desc" title="汀苇乱摇寒夜雨，沙鸥闲弄夕阳天。">汀苇乱摇寒夜雨，沙鸥闲弄夕阳天。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://blog.wh1isper.top/" title="Wh1isper" target="_blank">
+        <a href="https:&#x2F;&#x2F;blog.wh1isper.top&#x2F;" title="Wh1isper" target="_blank">
           <div class="flink-item-icon">
-            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://blog.wh1isper.top/img/avatar-cyberpunk.png" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Wh1isper" />
+            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https:&#x2F;&#x2F;blog.wh1isper.top&#x2F;img&#x2F;avatar-cyberpunk.png" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Wh1isper" />
           </div>
           <div class="flink-item-name">Wh1isper</div>
           <div class="flink-item-desc" title="ya-mono harness 的开发者，AI agent 领域大佬。">ya-mono harness 的开发者，AI agent 领域大佬。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://vaala.cat/" title="Vaala Cat" target="_blank">
+        <a href="https:&#x2F;&#x2F;vaala.cat&#x2F;" title="Vaala Cat" target="_blank">
           <div class="flink-item-icon">
-            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://vaala.cat/favicon.ico" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Vaala Cat" />
+            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https:&#x2F;&#x2F;vaala.cat&#x2F;favicon.ico" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Vaala Cat" />
           </div>
           <div class="flink-item-name">Vaala Cat</div>
           <div class="flink-item-desc" title="frp-panel 与 vaala ai 的开发者，字节飞书优秀员工。">frp-panel 与 vaala ai 的开发者，字节飞书优秀员工。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://jyi2ya.github.io/" title="jyi" target="_blank">
+        <a href="https:&#x2F;&#x2F;jyi2ya.github.io&#x2F;" title="jyi" target="_blank">
           <div class="flink-item-icon">
-            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/86813521?v=4" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="jyi" />
+            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https:&#x2F;&#x2F;avatars.githubusercontent.com&#x2F;u&#x2F;86813521?v&#x3D;4" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="jyi" />
           </div>
           <div class="flink-item-name">jyi</div>
           <div class="flink-item-desc" title="rvs 机器人的主人，博客里有可爱能互动的 rvs 3D 模型。">rvs 机器人的主人，博客里有可爱能互动的 rvs 3D 模型。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://saurlax.com/" title="Saurlax" target="_blank">
+        <a href="https:&#x2F;&#x2F;saurlax.com&#x2F;" title="Saurlax" target="_blank">
           <div class="flink-item-icon">
-            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/49343742?v=4" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Saurlax" />
+            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https:&#x2F;&#x2F;avatars.githubusercontent.com&#x2F;u&#x2F;49343742?v&#x3D;4" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Saurlax" />
           </div>
           <div class="flink-item-name">Saurlax</div>
           <div class="flink-item-desc" title="一位更新博客非常多的大佬，博客里 pinned 了很多好用的工具和框架。">一位更新博客非常多的大佬，博客里 pinned 了很多好用的工具和框架。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://vaaandark.top/" title="Vaaandark" target="_blank">
+        <a href="https:&#x2F;&#x2F;vaaandark.top&#x2F;" title="Vaaandark" target="_blank">
           <div class="flink-item-icon">
-            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://vaaandark.top/image/vaaandark.png" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Vaaandark" />
+            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https:&#x2F;&#x2F;vaaandark.top&#x2F;image&#x2F;vaaandark.png" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Vaaandark" />
           </div>
           <div class="flink-item-name">Vaaandark</div>
           <div class="flink-item-desc" title="技术博客更新极多，涉猎广泛，干货满满。">技术博客更新极多，涉猎广泛，干货满满。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://wdgaster703.github.io" title="Gaster" target="_blank">
+        <a href="https:&#x2F;&#x2F;wdgaster703.github.io" title="Gaster" target="_blank">
           <div class="flink-item-icon">
-            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://wdgaster703.github.io/img/about/WDGaster.jpg" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Gaster" />
+            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https:&#x2F;&#x2F;wdgaster703.github.io&#x2F;img&#x2F;about&#x2F;WDGaster.jpg" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Gaster" />
           </div>
           <div class="flink-item-name">Gaster</div>
           <div class="flink-item-desc" title="喜欢收集知识涉猎广泛的电气学长。">喜欢收集知识涉猎广泛的电气学长。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://kowyo.com/" title="Kowyo" target="_blank">
+        <a href="https:&#x2F;&#x2F;kowyo.com&#x2F;" title="Kowyo" target="_blank">
           <div class="flink-item-icon">
-            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/110339237?v=4" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Kowyo" />
+            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https:&#x2F;&#x2F;avatars.githubusercontent.com&#x2F;u&#x2F;110339237?v&#x3D;4" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Kowyo" />
           </div>
           <div class="flink-item-name">Kowyo</div>
           <div class="flink-item-desc" title="HOA 主要维护者和创始人之一， mini-agent 开发者。">HOA 主要维护者和创始人之一， mini-agent 开发者。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://blog.yinmo19.top/" title="YinMo19" target="_blank">
+        <a href="https:&#x2F;&#x2F;blog.yinmo19.top&#x2F;" title="YinMo19" target="_blank">
           <div class="flink-item-icon">
-            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://avatars.githubusercontent.com/u/144041694?v=4" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="YinMo19" />
+            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https:&#x2F;&#x2F;avatars.githubusercontent.com&#x2F;u&#x2F;144041694?v&#x3D;4" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="YinMo19" />
           </div>
           <div class="flink-item-name">YinMo19</div>
           <div class="flink-item-desc" title="OSA 前会长，逆向领域大佬， zeroreader 开发者。">OSA 前会长，逆向领域大佬， zeroreader 开发者。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://www.ruanyifeng.com/blog/index.html" title="科技爱好者周刊" target="_blank">
+        <a href="https:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;index.html" title="科技爱好者周刊" target="_blank">
           <div class="flink-item-icon">
-            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.ruanyifeng.com/blog/images/person2_s.jpg" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="科技爱好者周刊" />
+            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;images&#x2F;person2_s.jpg" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="科技爱好者周刊" />
           </div>
           <div class="flink-item-name">科技爱好者周刊</div>
           <div class="flink-item-desc" title="记录每周值得分享的科技内容，周五发布。">记录每周值得分享的科技内容，周五发布。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://chami537.github.io" title="Chami" target="_blank">
+        <a href="https:&#x2F;&#x2F;chami537.github.io" title="Chami" target="_blank">
           <div class="flink-item-icon">
-            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://chami537.github.io/images/avatar.jpg" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Chami" />
+            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https:&#x2F;&#x2F;chami537.github.io&#x2F;images&#x2F;avatar.jpg" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Chami" />
           </div>
           <div class="flink-item-name">Chami</div>
           <div class="flink-item-desc" title="喜欢拍天空，写随笔，做小工具（ hita ）的 CS 学生。">喜欢拍天空，写随笔，做小工具（ hita ）的 CS 学生。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://fun10165.github.io/" title="Fun10165" target="_blank">
+        <a href="https:&#x2F;&#x2F;fun10165.github.io&#x2F;" title="Fun10165" target="_blank">
           <div class="flink-item-icon">
-            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://fun10165.github.io/avatar.webp" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Fun10165" />
+            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https:&#x2F;&#x2F;fun10165.github.io&#x2F;avatar.webp" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="Fun10165" />
           </div>
           <div class="flink-item-name">Fun10165</div>
           <div class="flink-item-desc" title="hpc 国一，能同时准备期末考、毕设和多个比赛。">hpc 国一，能同时准备期末考、毕设和多个比赛。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://pppppst.github.io" title="pppppst" target="_blank">
+        <a href="https:&#x2F;&#x2F;pppppst.github.io" title="pppppst" target="_blank">
           <div class="flink-item-icon">
-            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pppppst.github.io/img/avatar2.png" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="pppppst" />
+            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https:&#x2F;&#x2F;pppppst.github.io&#x2F;img&#x2F;avatar2.png" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="pppppst" />
           </div>
           <div class="flink-item-name">pppppst</div>
           <div class="flink-item-desc" title="在中大读计科的朋友，目前专注于具身智能领域。">在中大读计科的朋友，目前专注于具身智能领域。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://collinke05.github.io/" title="CollinKe05" target="_blank">
+        <a href="https:&#x2F;&#x2F;collinke05.github.io&#x2F;" title="CollinKe05" target="_blank">
           <div class="flink-item-icon">
-            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://collinke05.github.io/img/avatar.jpg" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="CollinKe05" />
+            <img class="no-lightbox" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https:&#x2F;&#x2F;collinke05.github.io&#x2F;img&#x2F;avatar.jpg" onerror='this.onerror=null;this.src="/img/friend_404.gif"' alt="CollinKe05" />
           </div>
           <div class="flink-item-name">CollinKe05</div>
           <div class="flink-item-desc" title="在华南理工读人工智能的朋友，有较多的比赛和项目经历。">在华南理工读人工智能的朋友，有较多的比赛和项目经历。</div>
@@ -562,79 +609,79 @@
 <h2 id="有用资源"><a class="markdownIt-Anchor" href="#有用资源"></a> 有用资源</h2>
 <div class="flink"><div class="flink-list no-avatar">
       <div class="flink-list-item">
-        <a href="https://hoa.moe" title="HITSZ 课程攻略共享计划" target="_blank">
+        <a href="https:&#x2F;&#x2F;hoa.moe" title="HITSZ 课程攻略共享计划" target="_blank">
           <div class="flink-item-name">HITSZ 课程攻略共享计划</div>
           <div class="flink-item-desc" title="HITSZ 学生必须知道的攻略网站。">HITSZ 学生必须知道的攻略网站。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://osa.moe/" title="HITSZ 开源技术协会" target="_blank">
+        <a href="https:&#x2F;&#x2F;osa.moe&#x2F;" title="HITSZ 开源技术协会" target="_blank">
           <div class="flink-item-name">HITSZ 开源技术协会</div>
           <div class="flink-item-desc" title="打造 HITSZ 学生自己的镜像站和各种有用的项目。">打造 HITSZ 学生自己的镜像站和各种有用的项目。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://mirrors.cernet.edu.cn/" title="校园网联合镜像站" target="_blank">
+        <a href="https:&#x2F;&#x2F;mirrors.cernet.edu.cn&#x2F;" title="校园网联合镜像站" target="_blank">
           <div class="flink-item-name">校园网联合镜像站</div>
           <div class="flink-item-desc" title="提供对部分高校的校园网镜像站的索引和跳转服务。">提供对部分高校的校园网镜像站的索引和跳转服务。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://howtoask-revise-1.ustclug.pages.dev/wiki/doc/howtoask/" title="提问指南" target="_blank">
+        <a href="https:&#x2F;&#x2F;howtoask-revise-1.ustclug.pages.dev&#x2F;wiki&#x2F;doc&#x2F;howtoask&#x2F;" title="提问指南" target="_blank">
           <div class="flink-item-name">提问指南</div>
           <div class="flink-item-desc" title="有关如何提问题和回答问题的指南（新人强推）。">有关如何提问题和回答问题的指南（新人强推）。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://kaisery.github.io/trpl-zh-cn/title-page.html" title="Rust 程序设计语言" target="_blank">
+        <a href="https:&#x2F;&#x2F;kaisery.github.io&#x2F;trpl-zh-cn&#x2F;title-page.html" title="Rust 程序设计语言" target="_blank">
           <div class="flink-item-name">Rust 程序设计语言</div>
           <div class="flink-item-desc" title="Rust 官方教程的社区中文版。">Rust 官方教程的社区中文版。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://learncpp.cn/" title="学习 C++" target="_blank">
+        <a href="https:&#x2F;&#x2F;learncpp.cn&#x2F;" title="学习 C++" target="_blank">
           <div class="flink-item-name">学习 C++</div>
           <div class="flink-item-desc" title="LearnCpp.com 中文版，从入门到精通的现代 C++ 免费教程。">LearnCpp.com 中文版，从入门到精通的现代 C++ 免费教程。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://totoro-jam.github.io/battle-tested-patterns/zh/patterns/" title="Battle-Tested Patterns" target="_blank">
+        <a href="https:&#x2F;&#x2F;totoro-jam.github.io&#x2F;battle-tested-patterns&#x2F;zh&#x2F;patterns&#x2F;" title="Battle-Tested Patterns" target="_blank">
           <div class="flink-item-name">Battle-Tested Patterns</div>
           <div class="flink-item-desc" title="46 个生产验证的编程模式，含交互可视化与多语言实现。">46 个生产验证的编程模式，含交互可视化与多语言实现。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://typst-doc-cn.github.io/tutorial/introduction.html" title="Typst 中文教程" target="_blank">
+        <a href="https:&#x2F;&#x2F;typst-doc-cn.github.io&#x2F;tutorial&#x2F;introduction.html" title="Typst 中文教程" target="_blank">
           <div class="flink-item-name">Typst 中文教程</div>
           <div class="flink-item-desc" title="面向所有 Typst 用户的中文教程，与官方文档互补。">面向所有 Typst 用户的中文教程，与官方文档互补。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://caomaolufei.github.io/AIInfraGuide/" title="AIInfraGuide" target="_blank">
+        <a href="https:&#x2F;&#x2F;caomaolufei.github.io&#x2F;AIInfraGuide&#x2F;" title="AIInfraGuide" target="_blank">
           <div class="flink-item-name">AIInfraGuide</div>
           <div class="flink-item-desc" title="从 CUDA 编程到分布式训练与推理优化的 AI Infra 全栈知识库。">从 CUDA 编程到分布式训练与推理优化的 AI Infra 全栈知识库。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://www.criwits.top/missing/" title="你缺失的那门计算机课" target="_blank">
+        <a href="https:&#x2F;&#x2F;www.criwits.top&#x2F;missing&#x2F;" title="你缺失的那门计算机课" target="_blank">
           <div class="flink-item-name">你缺失的那门计算机课</div>
           <div class="flink-item-desc" title="适合电脑小白入门的电脑使用课程，面向信息时代的指南。">适合电脑小白入门的电脑使用课程，面向信息时代的指南。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://csdiy.wiki/" title="CS 自学指南" target="_blank">
+        <a href="https:&#x2F;&#x2F;csdiy.wiki&#x2F;" title="CS 自学指南" target="_blank">
           <div class="flink-item-name">CS 自学指南</div>
           <div class="flink-item-desc" title="计算机自学指南，汇总国内外高质量 CS 课程。">计算机自学指南，汇总国内外高质量 CS 课程。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://moe.lkyu.cf/" title="MOE 频道购机指南" target="_blank">
+        <a href="https:&#x2F;&#x2F;moe.lkyu.cf&#x2F;" title="MOE 频道购机指南" target="_blank">
           <div class="flink-item-name">MOE 频道购机指南</div>
-          <div class="flink-item-desc" title="写给大学生的电脑科普&购买一体方案。">写给大学生的电脑科普&购买一体方案。</div>
+          <div class="flink-item-desc" title="写给大学生的电脑科普&amp;购买一体方案。">写给大学生的电脑科普&amp;购买一体方案。</div>
         </a>
       </div>
       <div class="flink-list-item">
-        <a href="https://znew.pages.dev/" title="Z-Library 图书馆" target="_blank">
+        <a href="https:&#x2F;&#x2F;znew.pages.dev&#x2F;" title="Z-Library 图书馆" target="_blank">
           <div class="flink-item-name">Z-Library 图书馆</div>
           <div class="flink-item-desc" title="世界上最大的电子图书馆。">世界上最大的电子图书馆。</div>
         </a>
@@ -644,16 +691,16 @@
 地址：<a href="https://speechlesspanda.github.io">https://speechlesspanda.github.io</a><br />
 头像：<a href="https://speechlesspanda.github.io/img/avatar.png">https://speechlesspanda.github.io/img/avatar.png</a><br />
 介绍：分享一只无语熊猫的观点、经验和生活思考，偶尔也会讲一些技术相关内容。</p>
-</div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By SpeechlessPanda</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.9/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(async () => {
+</div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By SpeechlessPanda</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.7.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(async () => {
   const showKatex = () => {
     document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
   }
 
   if (!window.katex_js_css) {
     window.katex_js_css = true
-    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.18.1/dist/katex.min.css')
     if (false) {
-      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.18.1/dist/contrib/copy-tex.min.js')
     }
   }
 
@@ -745,7 +792,7 @@
   const pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:description\"]","link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
 
   window.pjax = new Pjax({
-    elements: 'a:not([target="_blank"]):not([href="/memos/"]):not([href="/memos/index.html"])',
+    elements: 'a:not([target="_blank"]):not([data-fancybox]):not([href="/memos/"]):not([href="/memos/index.html"])',
     selectors: pjaxSelectors,
     cacheBust: false,
     analytics: false,
@@ -778,8 +825,9 @@
   document.addEventListener('pjax:complete', () => {
     btf.removeGlobalFnEvent('pjaxCompleteOnce')
     document.querySelectorAll('script[data-pjax]').forEach(item => {
+      if (!item.parentNode) return
       const newScript = document.createElement('script')
-      const content = item.text || item.textContent || item.innerHTML || ""
+      const content = item.text || item.textContent || ''
       Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
       newScript.appendChild(document.createTextNode(content))
       item.parentNode.replaceChild(newScript, item)
@@ -789,10 +837,13 @@
   })
 
   document.addEventListener('pjax:error', e => {
-    if (e.request.status === 404) {
+    const responseURL = e.request && e.request.responseURL
+    if (e.request && e.request.status === 404) {
       false
         ? pjax.loadUrl('/404.html')
-        : window.location.href = e.request.responseURL
+        : responseURL && (window.location.href = responseURL)
+    } else if (responseURL) {
+      window.location.href = responseURL
     }
   })
-})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.7.0"></script></div></div></body></html>
