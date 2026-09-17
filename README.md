@@ -20,7 +20,7 @@
 ### 💬 评论与互动
 
 - **Giscus 评论**：基于 GitHub Discussions，支持 Reactions、多语言、暗色模式联动
-- **碎碎念每条可独立评论**：同页多条评论区用独立 iframe 直嵌 giscus `/widget`（绕过 client.js 单例），每条对应一个 Giscus discussion；登录态只在 OAuth 回调当次传递（不写 localStorage，避免过期 session 触发 `oauth/token` 400 导致整条评论区空白）；giscus.app 被广告拦截/跟踪防护屏蔽时，每条评论区常驻"在新标签页打开评论 ↗"一键出口
+- **碎碎念每条可独立评论**：同页多条评论区用独立 iframe 直嵌 giscus `/widget`（绕过 client.js 单例），每条对应一个 Giscus discussion；登录态写入 localStorage（`giscus-session`，与官方 client.js 格式一致），iframe 回传 session 失效错误时自动清除并按未登录态重载，避免过期 session 触发 `oauth/token` 400 导致整条评论区空白；giscus.app 被广告拦截/跟踪防护屏蔽时，每条评论区常驻"在新标签页打开评论 ↗"一键出口
 - **评论邮件通知**：`comment-email-notify.yml` 监听 `discussion`（首评/新建讨论）与 `discussion_comment`（后续回复），有评论即通过 QQ SMTP 自动发邮件通知作者（在发布仓运行）
 - **评论触发重建**：新评论到达时，`comment-email-notify.yml` 还会向源仓派发 `repository_dispatch`（`rebuild-on-comment`），`deploy-from-source.yml` 监听该事件自动重建，刷新碎碎念/文章的 `commentCount`，让有评论的碎碎念评论区自动展开（否则要等下次推送）。需在发布仓配置 `SOURCE_DEPLOY_PAT`（对源仓有 Actions:write 权限的 PAT）；未配置则跳过，不影响邮件通知
 
@@ -99,24 +99,27 @@ blog/
 │   ├── index.md                      # 首页：渲染「关于」内容（layout: home，见 themes/butterfly/layout/home.pug）
 │   ├── memos/                        # 碎碎念页面（type: shuoshuo）
 │   ├── about/ tags/ link/            # 独立页面（分类页已停用并删除）
-│   └── img/                          # 静态图片（头像、打赏码等）
+│   ├── js/fix-link-target.js         # 正文/碎碎念链接新标签页打开（经 _config.butterfly.yml inject 注入）
+│   └── _drafts/                      # 草稿（render_drafts: false，不发布）
 ├── scripts/
 │   ├── og-image.js                   # OG 图生成（hexo generator + helper）
 │   ├── atom-feed.js                  # 自写 Atom 生成器：文章+碎碎念混排进 atom.xml，旧文更新改 guid 推送
 │   ├── memo-comment-count.js         # 构建时查 Giscus 评论数，控制碎碎念评论区自动展开
 │   ├── memo-helpers.js               # 碎碎念模板 helper（/blog/ 页"最新碎碎念"等）
-│   ├── search-memos.js               # 把碎碎念注入 search.xml（本地搜索可命中）
+│   ├── search-memos.js               # 把碎碎念注入 search.xml（本地搜索可命中，指向 /memos/<时间戳>/ 独立页）
+│   ├── lib/
+│   │   └── memo-utils.js             # 碎碎念日期解析 / slug / XML 转义共享工具
 │   └── events/
 │       ├── sync_comment_notify_workflow.js   # 把发布仓 workflow 同步到 public
 │       └── sync_readme_to_public.js          # 把 README 同步到 public
 ├── tools/
-│   └── verify-feed.js                # atom.xml 条目身份标识校验（link/id 唯一性，node tools/verify-feed.js）
+│   └── verify-feed.js                # atom.xml 条目身份标识校验（pnpm run verify，CI 构建后自动执行）
 ├── themes/
-│   └── butterfly/                    # Butterfly 主题（本地源码，配置在其 _config.yml）
+│   └── butterfly/                    # Butterfly 主题（本地源码 5.7.0，配置在其 _config.yml；头像/打赏码等图片在其 source/img/）
 ├── scaffolds/                        # 文章 / 页面模板（post / page / draft）
 ├── .github/workflows/
 │   ├── deploy-from-source.yml        # push → 自动构建并部署到发布仓(设 exclude_assets="" 把 .github/workflows 一起带过去)
-│   ├── retry-pages-deploy.yml        # 每 10 分钟巡检,发布仓 pages 部署偶发失败则自动重跑(在源仓跨仓运行)
+│   ├── retry-pages-deploy.yml        # 发布仓 pages 部署失败时自动重跑（同步到发布仓运行，源仓里被守卫跳过）
 │   ├── comment-email-notify.yml      # Giscus 评论(首评+回复)→ 邮件通知(在发布仓运行)
 │   └── search-engine-ping.yml        # 发布仓部署后 ping 搜索引擎(在发布仓运行)
 ├── docs/superpowers/                 # 设计文档与实现计划
@@ -138,13 +141,14 @@ push 到 `blog-s-code` 的 `main` 分支 → GitHub Actions 自动构建 → 部
 3. `pnpm install --frozen-lockfile`
 4. **缓存 OG 字体**（`fonts/`，key 基于 `_config.yml`）
 5. `pnpm run build`（hexo generate，自动生成碎碎念页面、OG 图、RSS、sitemap 等）
-6. sync README + 发布仓 workflow（comment-email-notify / search-engine-ping）到 public
-7. push `public/`（含 `.github/workflows`，通过 `exclude_assets: ""` 不再排除）到发布仓库（peaceiris/actions-gh-pages）
+6. `node tools/verify-feed.js` 校验 atom.xml 条目身份标识，失败即中断部署
+7. sync README + 发布仓 workflow（comment-email-notify / search-engine-ping / retry-pages-deploy）到 public
+8. push `public/`（含 `.github/workflows`，通过 `exclude_assets: ""` 不再排除）到发布仓库（peaceiris/actions-gh-pages）
 
 触发条件：`main` 分支 push / 手动 `workflow_dispatch` / 发布仓收到新评论时派发的 `repository_dispatch`（`rebuild-on-comment`，用于刷新 `commentCount`，详见「评论触发重建」）。
 
-> 发布仓的 `pages-build-deployment` 偶发平台错误 "Deployment failed, try again later." 时，源仓的 `retry-pages-deploy.yml` 会每 10 分钟自动重跑（最多 3 次，防死循环），无需人工介入。
-> 注：`comment-email-notify` / `search-engine-ping` 同步到发布仓后在那里激活（均带 `if: github.repository=='SpeechlessPanda/SpeechlessPanda.github.io'` 守卫）；`retry-pages-deploy` 留在源仓跨仓操作（peaceiris 默认会排除 `.github`，故用 `exclude_assets: ""` 放行前两个，retry 不进同步集）。
+> 发布仓的 `pages-build-deployment` 偶发平台错误 "Deployment failed, try again later." 时，`retry-pages-deploy.yml`（同步到发布仓，由 workflow_run 立即触发 + 每 15 分钟定时兜底）会自动重跑（最多 3 次，防死循环），无需人工介入。
+> 注：`comment-email-notify` / `search-engine-ping` / `retry-pages-deploy` 由 scripts/events/sync_comment_notify_workflow.js 同步到发布仓后在那里激活（均带 `if: github.repository=='SpeechlessPanda/SpeechlessPanda.github.io'` 守卫，源仓里自动跳过）。
 
 ---
 
@@ -154,6 +158,7 @@ push 到 `blog-s-code` 的 `main` 分支 → GitHub Actions 自动构建 → 部
 pnpm install        # 安装依赖
 pnpm run server     # 本地预览 http://localhost:4000
 pnpm run build      # 构建到 public/
+pnpm run verify     # 校验 atom.xml 条目身份标识（需在 build 之后）
 pnpm run clean      # 清理缓存与 public
 pnpm run publish    # 清理 + 构建 + 部署（本地直接发布）
 ```
@@ -202,7 +207,7 @@ pnpm run new "文章标题"   # 在 source/_posts/ 生成草稿
 
 ## 📬 联系方式
 
-- **Email**：[859635282@qq.com](mailto:859635282@qq.com)
+- **Email**：[zhoushimingyu@qq.com](mailto:zhoushimingyu@qq.com)
 - **GitHub**：[SpeechlessPanda](https://github.com/SpeechlessPanda)
 - **RSS**：[https://speechlesspanda.github.io/atom.xml](https://speechlesspanda.github.io/atom.xml)
 
