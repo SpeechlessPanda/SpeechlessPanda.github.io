@@ -1,9 +1,4 @@
-/**
- * Refer to hexo-generator-searchdb
- * https://github.com/next-theme/hexo-generator-searchdb/blob/main/dist/search.js
- * Modified by hexo-theme-butterfly
- */
-
+// Modified from hexo-theme-butterfly 5.7.0 (Apache-2.0) by SpeechlessPanda, 2026: ranks tag hits in local search results
 class LocalSearch {
   constructor ({
     path = '',

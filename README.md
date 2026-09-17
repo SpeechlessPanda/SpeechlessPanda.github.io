@@ -30,12 +30,12 @@
 
 ### 🔍 搜索
 
-- **本地搜索**：`hexo-generator-searchdb`，全文即时搜索，无外部服务依赖（碎碎念也纳入搜索索引，由 `scripts/search-memos.js` 注入 `search.xml`）
+- **本地搜索**:`hexo-generator-searchdb`,全文即时搜索,无外部服务依赖(碎碎念由主题注入 `search.xml`,搜索结果直达 `/memos/<时间戳>/` 独立页)
 
 ### 🌐 SEO 与分发
 
 - **Open Graph meta** + 自动生成的 OG 图
-- **RSS 订阅**：`atom.xml` 由自写生成器 `scripts/atom-feed.js` 生成（官方 `hexo-generator-feed` 已停用）：**博客文章 + 碎碎念按日期倒序混排**，碎碎念日期按 +08:00 解析；每条碎碎念生成独立页 `/memos/<时间戳>/`（noindex），旧文更新（距发布超 1 天，依赖 CI 恢复文件 mtime）生成 stub 页 `文章路径/u/<更新时间>/`——条目 id/link 的区分信息全部放在 URL **路径**里（有阅读器丢 fragment、有的丢 query，路径是唯一全阅读器普适的成分），任何 RSS 阅读器都能正确识别新碎碎念与旧文更新
+- **RSS 订阅**:`atom.xml` 由 Panda 主题内置生成器生成(`feed.enable`,官方 `hexo-generator-feed` 已停用):**博客文章 + 碎碎念按日期倒序混排**,碎碎念日期按站点时区解析;每条碎碎念生成独立页 `/memos/<时间戳>/`(noindex),旧文更新(距发布超 1 天,依赖 CI 恢复文件 mtime)生成 stub 页 `文章路径/u/<更新时间>/`——条目 id/link 的区分信息全部放在 URL **路径**里(有阅读器丢 fragment、有的丢 query,路径是唯一全阅读器普适的成分),任何 RSS 阅读器都能正确识别新碎碎念与旧文更新
 - **站点地图**：`sitemap.xml` + `baidusitemap.xml`（百度）+ `robots.txt`（`hexo-generator-robotstxt`）
 - **搜索引擎 ping**：CI 部署后自动通知搜索引擎（`search-engine-ping.yml`）
 - **分享按钮**：sharejs（微信 / X / 微博 / QQ / Facebook）
@@ -74,7 +74,7 @@
 | 类别 | 技术 | 说明 |
 |------|------|------|
 | 框架 | [Hexo](https://hexo.io/) 8.1.2 | 静态博客框架 |
-| 主题 | [Butterfly](https://butterfly.js.org/) 5.7.0 | 功能丰富，本地源码（`themes/butterfly/`），保留本站补丁 |
+| 主题 | [Panda](https://github.com/SpeechlessPanda/hexo-theme-panda) 1.0.0 | 本站自建主题（`themes/panda/`),基于 Butterfly 5.7.0 二次开发(Apache-2.0) |
 | 包管理 | [pnpm](https://pnpm.io/) 10 | 高效磁盘 |
 | 运行时 | Node.js 20 | CI 运行环境 |
 | OG 渲染 | [@resvg/resvg-js](https://github.com/thx/resvg-js) | SVG → PNG，跨平台中文字体 |
@@ -88,7 +88,8 @@
 
 ```text
 blog/
-├── _config.yml                       # Hexo 全局配置（含 og_image 配置块；index_generator 文章流指向 /blog）
+├── _config.yml                       # Hexo 全局配置(index_generator 文章流指向 /blog)
+├── _config.panda.yml                 # 个人主题配置(覆盖 themes/panda/_config.yml 默认值)
 ├── package.json                      # 依赖与脚本
 ├── pnpm-lock.yaml
 ├── README.md
@@ -96,27 +97,19 @@ blog/
 │   ├── _posts/                       # 博客文章（Markdown）
 │   ├── _data/
 │   │   └── shuoshuo.yml              # 碎碎念数据
-│   ├── index.md                      # 首页：渲染「关于」内容（layout: home，见 themes/butterfly/layout/home.pug）
+│   ├── index.md                      # 首页:渲染「关于」内容(layout: home,主题特性 home_about)
 │   ├── memos/                        # 碎碎念页面（type: shuoshuo）
 │   ├── about/ tags/ link/            # 独立页面（分类页已停用并删除）
-│   ├── js/fix-link-target.js         # 正文/碎碎念链接新标签页打开（经 _config.butterfly.yml inject 注入）
 │   ├── img/                          # 个人头像、favicon、微信/支付宝打赏码（保留 /img/ URL）
 │   └── _drafts/                      # 草稿（render_drafts: false，不发布）
 ├── scripts/
-│   ├── og-image.js                   # OG 图生成（hexo generator + helper）
-│   ├── atom-feed.js                  # 自写 Atom 生成器：文章+碎碎念混排进 atom.xml，旧文更新改 guid 推送
-│   ├── memo-comment-count.js         # 构建时查 Giscus 评论数，控制碎碎念评论区自动展开
-│   ├── memo-helpers.js               # 碎碎念模板 helper（/blog/ 页"最新碎碎念"等）
-│   ├── search-memos.js               # 把碎碎念注入 search.xml（本地搜索可命中，指向 /memos/<时间戳>/ 独立页）
-│   ├── lib/
-│   │   └── memo-utils.js             # 碎碎念日期解析 / slug / XML 转义共享工具
-│   └── events/
+│   └── events/                       # 站点级构建事件（CI 相关，不属于主题）
 │       ├── sync_comment_notify_workflow.js   # 把发布仓 workflow 同步到 public
 │       └── sync_readme_to_public.js          # 把 README 同步到 public
 ├── tools/
 │   └── verify-feed.js                # atom.xml 条目身份标识校验（pnpm run verify，CI 构建后自动执行）
 ├── themes/
-│   └── butterfly/                    # Butterfly 5.7.0 本地分叉：默认配置与个人配置分离，仍保留本站源码补丁
+│   └── panda/                        # Panda 主题（碎碎念增强/feed/OG 图/渐变等已内建为主题特性）
 ├── scaffolds/                        # 文章 / 页面模板（post / page / draft）
 ├── .github/workflows/
 │   ├── deploy-from-source.yml        # push → 自动构建并部署到发布仓(设 exclude_assets="" 把 .github/workflows 一起带过去)
@@ -128,7 +121,7 @@ blog/
 └── public/                           # 生成产物（gitignore）
 ```
 
-> 注：个人配置集中在站点根 `_config.butterfly.yml`，包括菜单、Giscus、头像、字体、渐变注入与侧栏选项；`themes/butterfly/_config.yml` 保留 5.7.0 默认配置。个人图片位于 `source/img/`，公开 URL 不变。主题仍含本站源码补丁，升级时必须合并这些补丁，不能直接用官方目录覆盖。
+> 注:个人配置集中在站点根 `_config.panda.yml`(菜单、Giscus、头像、字体、侧栏、feed/OG 开关等);`themes/panda/_config.yml` 是主题默认配置,含每个键的注释。碎碎念增强、Atom feed、OG 图、渐变外观、链接新标签页、fish/typst 高亮均由主题脚本提供,不在本站 scripts/ 里。
 
 ---
 
@@ -218,4 +211,4 @@ pnpm run new "文章标题"   # 在 source/_posts/ 生成草稿
 
 本博客文章内容版权归作者所有，转载请注明出处。
 
-主题 Butterfly 遵循 [Apache-2.0 License](https://github.com/jerryc127/hexo-theme-butterfly/blob/master/LICENSE)。
+主题 Panda 遵循 [Apache-2.0 License](https://github.com/SpeechlessPanda/hexo-theme-panda/blob/main/LICENSE),其上游 Butterfly 同样为 [Apache-2.0](https://github.com/jerryc127/hexo-theme-butterfly/blob/master/LICENSE)。

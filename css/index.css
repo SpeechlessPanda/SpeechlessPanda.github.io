@@ -8748,3 +8748,19 @@ blockquote.pullquote.right {
     transform: rotate(360deg);
   }
 }
+.social-share .icon-x {
+  color: #fff !important;
+  border-color: rgba(255,255,255,0.85) !important;
+}
+.social-share .icon-x:hover {
+  background: #000 !important;
+  color: #fff !important;
+}
+[data-theme='dark'] .social-share .icon-x {
+  color: #fff !important;
+  border-color: rgba(255,255,255,0.7) !important;
+}
+[data-theme='dark'] .social-share .icon-x:hover {
+  background: rgba(255,255,255,0.9) !important;
+  color: #000 !important;
+}

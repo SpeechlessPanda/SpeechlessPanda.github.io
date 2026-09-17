@@ -1,3 +1,4 @@
+// New file in hexo-theme-panda (Apache-2.0), forked from hexo-theme-butterfly 5.7.0: open article/memo links in a new tab
 /*!
  * 在新标签页打开文章正文与碎碎念里的链接
  *
