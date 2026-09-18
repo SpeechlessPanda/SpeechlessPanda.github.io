@@ -170,7 +170,7 @@ pnpm exec hexo new series "大学道路入门"               # source/_posts/大
 pnpm exec hexo new --series "大学道路入门" "第一章"    # source/_posts/大学道路入门/第一章.md
 ```
 
-`index.md` 必须有 `title`、`description` 两个键（描述可空），不要写 `date`。把已有文章拖进该文件夹即可并入系列，下次构建后它们会从 `/blog/` 消失、出现在系列页。
+`index.md` 必须有 `title`、`description` 两个键（描述可空），不要写 `date`。`cover` 是系列封面（和文章 `cover` 一样）：填 `/img/foo.jpg` 或图片 URL 当封面图，填渐变/`#色值` 当 CSS 背景，留空或 `false` 则卡片无图、系列页页头用主题默认顶图。把已有文章拖进该文件夹即可并入系列，下次构建后它们会从 `/blog/` 消失、出现在系列页。
 
 ### 写新碎碎念
 
