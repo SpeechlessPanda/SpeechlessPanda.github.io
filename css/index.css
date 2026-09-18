@@ -219,6 +219,7 @@ template {
 #post .post-copyright:before,
 #post #post-outdate-notice:before,
 .toggle > .toggle-button::before,
+.toggle > .toggle-collapse::before,
 .note:not(.no-icon)::before,
 .search-dialog hr:before {
   display: inline-block;
@@ -7245,17 +7246,15 @@ blockquote.pullquote.right {
 .toggle > .toggle-content {
   margin: 30px 24px;
 }
-.toggle > .toggle-button {
+.toggle > .toggle-button,
+.toggle > .toggle-collapse {
   padding: 6px 15px;
   background: #f0f0f0;
   color: #1f2d3d;
-  list-style: none;
   cursor: pointer;
 }
-.toggle > .toggle-button::-webkit-details-marker {
-  display: none;
-}
-.toggle > .toggle-button::before {
+.toggle > .toggle-button::before,
+.toggle > .toggle-collapse::before {
   margin-right: 8px;
   content: '\f0d7';
   -webkit-transition: -webkit-transform 0.3s ease;
@@ -7273,6 +7272,33 @@ blockquote.pullquote.right {
   -o-transform-origin: center center;
   -ms-transform-origin: center center;
   transform-origin: center center;
+}
+.toggle > .toggle-button {
+  list-style: none;
+}
+.toggle > .toggle-button::-webkit-details-marker {
+  display: none;
+}
+.toggle > .toggle-collapse {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-top: 1px solid #ddd;
+  font: inherit;
+  text-align: left;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.toggle > .toggle-collapse::before {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.toggle > .toggle-collapse:hover {
+  background: #e6e6e6;
 }
 .toggle[open] summary::before {
   -webkit-transform: rotate(0);
@@ -8017,6 +8043,7 @@ blockquote.pullquote.right {
 }
 [data-theme='dark'] .hide-button,
 [data-theme='dark'] .toggle-button,
+[data-theme='dark'] .toggle-collapse,
 [data-theme='dark'] #post-outdate-notice,
 [data-theme='dark'] .error-img,
 [data-theme='dark'] .container iframe,
@@ -8275,6 +8302,8 @@ blockquote.pullquote.right {
   border: 1px solid var(--gray) !important;
 }
 .read-mode .container .hide-button,
+.read-mode .container .toggle-button,
+.read-mode .container .toggle-collapse,
 .read-mode .container .btn-beautify,
 .read-mode .container .hl-label {
   border: 1px solid var(--gray) !important;
