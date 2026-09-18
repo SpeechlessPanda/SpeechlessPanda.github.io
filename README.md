@@ -13,9 +13,10 @@
 ### 📝 内容
 
 - **博客文章**：Markdown 撰写，支持分类、标签、封面、摘要、目录（TOC）、相关文章推荐、上下篇导航、版权声明
+- **博客系列**：`source/_posts/<系列名>/index.md` 只存系列标题和描述（无创建时间）；同文件夹其它 md 是章节，出现在 `/series/<系列名>/`，**不**出现在 `/blog/` 文章流。文章流按独立文章和系列卡片混排，卡片时间取该系列最新一章。把已发表文章拖进文件夹即可重组，不用改 front-matter
 - **碎碎念（Memos）**：独立 `/memos/` 页面，记录短动态；支持分页（每页 8 条）、每条独立评论、标签、相对时间、图片灯箱；数据写在 `source/_data/shuoshuo.yml`，复用主题内置 shuoshuo 系统，无 key 时自动用日期生成评论标识
 - **OG 分享图自动生成**：构建时为每篇文章生成 1200×630 PNG（SVG 模板 + `@resvg/resvg-js` + 内嵌 LXGW WenKai 字体），蓝→橙主题渐变；自动注入 `og:image` / `twitter:image` / `twitter:card=summary_large_image`，分享到微信 / Twitter / Discord 等平台带预览图
-- **站点导航**：首页（`/`）即「关于」页，复用 `source/about/index.md` 的内容（单一来源），右侧栏保留（作者卡片 / 公告 / 网站信息）；文章列表（含最新碎碎念）位于 `/blog/`（不显示右侧栏）；另有**友链、标签、归档、碎碎念**等页面；「分类」功能已停用并移除
+- **站点导航**：首页（`/`）即「关于」页，复用 `source/about/index.md` 的内容（单一来源），右侧栏保留（作者卡片 / 公告 / 网站信息）；文章列表（含最新碎碎念、系列卡片）位于 `/blog/`（不显示右侧栏）；另有**友链、标签、归档、碎碎念**等页面；「分类」功能已停用并移除
 
 ### 💬 评论与互动
 
@@ -35,7 +36,7 @@
 ### 🌐 SEO 与分发
 
 - **Open Graph meta** + 自动生成的 OG 图
-- **RSS 订阅**:`atom.xml` 由 Panda 主题内置生成器生成(`feed.enable`,官方 `hexo-generator-feed` 已停用):**博客文章 + 碎碎念按日期倒序混排**,碎碎念日期按站点时区解析;每条碎碎念生成独立页 `/memos/<时间戳>/`(noindex),旧文更新(距发布超 1 天,依赖 CI 恢复文件 mtime)生成 stub 页 `文章路径/u/<更新时间>/`——条目 id/link 的区分信息全部放在 URL **路径**里(有阅读器丢 fragment、有的丢 query,路径是唯一全阅读器普适的成分),任何 RSS 阅读器都能正确识别新碎碎念与旧文更新
+- **RSS 订阅**:`atom.xml` 由 Panda 主题内置生成器生成(`feed.enable`,官方 `hexo-generator-feed` 已停用):**独立文章 + 系列章节 + 碎碎念按日期倒序混排**（系列 `index.md` 不是文章、不进 feed）；碎碎念日期按站点时区解析;每条碎碎念生成独立页 `/memos/<时间戳>/`(noindex),旧文更新(距发布超 1 天,依赖 CI 恢复文件 mtime)生成 stub 页 `文章路径/u/<更新时间>/`——条目 id/link 的区分信息全部放在 URL **路径**里(有阅读器丢 fragment、有的丢 query,路径是唯一全阅读器普适的成分),任何 RSS 阅读器都能正确识别新碎碎念、新章节与旧文更新
 - **站点地图**：`sitemap.xml` + `baidusitemap.xml`（百度）+ `robots.txt`（`hexo-generator-robotstxt`）
 - **搜索引擎 ping**：CI 部署后自动通知搜索引擎（`search-engine-ping.yml`）
 - **分享按钮**：sharejs（微信 / X / 微博 / QQ / Facebook）
@@ -94,7 +95,7 @@ blog/
 ├── pnpm-lock.yaml
 ├── README.md
 ├── source/
-│   ├── _posts/                       # 博客文章（Markdown）
+│   ├── _posts/                       # 独立文章；系列为 _posts/<系列名>/index.md + 同级章节 md
 │   ├── _data/
 │   │   └── shuoshuo.yml              # 碎碎念数据
 │   ├── index.md                      # 首页:渲染「关于」内容(layout: home,主题特性 home_about)
@@ -109,7 +110,7 @@ blog/
 ├── tools/
 │   └── verify-feed.js                # atom.xml 条目身份标识校验（pnpm run verify，CI 构建后自动执行）
 ├── themes/
-│   └── panda/                        # Panda 主题（碎碎念增强/feed/OG 图/渐变等已内建为主题特性）
+│   └── panda/                        # Panda 主题（碎碎念增强/博客系列/feed/OG 图/渐变等已内建为主题特性）
 ├── scaffolds/                        # 文章 / 页面模板（post / page / draft）
 ├── .github/workflows/
 │   ├── deploy-from-source.yml        # push → 自动构建并部署到发布仓(设 exclude_assets="" 把 .github/workflows 一起带过去)
@@ -121,7 +122,7 @@ blog/
 └── public/                           # 生成产物（gitignore）
 ```
 
-> 注:个人配置集中在站点根 `_config.panda.yml`(菜单、Giscus、头像、字体、侧栏、feed/OG 开关等);`themes/panda/_config.yml` 是主题默认配置,含每个键的注释。碎碎念增强、Atom feed、OG 图、渐变外观、链接新标签页、fish/typst 高亮均由主题脚本提供,不在本站 scripts/ 里。
+> 注:个人配置集中在站点根 `_config.panda.yml`(菜单、Giscus、头像、字体、侧栏、feed/OG 开关等);`themes/panda/_config.yml` 是主题默认配置,含每个键的注释。碎碎念增强、博客系列、Atom feed、OG 图、渐变外观、链接新标签页、fish/typst 高亮均由主题脚本提供,不在本站 scripts/ 里。系列作者指南见 [themes/panda/README_CN.md](themes/panda/README_CN.md)。
 
 ---
 
@@ -159,11 +160,17 @@ pnpm run publish    # 清理 + 构建 + 部署（本地直接发布）
 
 > 首次 build 会自动从 GitHub 下载 LXGW WenKai 字体到 `fonts/`（约 20MB，已 gitignore，后续构建复用）。
 
-### 写新文章
+### 写新文章 / 系列
+
+站点没有 `pnpm run new` 脚本，用 Hexo 原生命令（主题提供 `series` layout 和 `--series`）：
 
 ```bash
-pnpm run new "文章标题"   # 在 source/_posts/ 生成草稿
+pnpm exec hexo new "文章标题"                          # source/_posts/文章标题.md
+pnpm exec hexo new series "大学道路入门"               # source/_posts/大学道路入门/index.md
+pnpm exec hexo new --series "大学道路入门" "第一章"    # source/_posts/大学道路入门/第一章.md
 ```
+
+`index.md` 必须有 `title`、`description` 两个键（描述可空），不要写 `date`。把已有文章拖进该文件夹即可并入系列，下次构建后它们会从 `/blog/` 消失、出现在系列页。
 
 ### 写新碎碎念
 
