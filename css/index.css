@@ -8764,3 +8764,33 @@ blockquote.pullquote.right {
   background: rgba(255,255,255,0.9) !important;
   color: #000 !important;
 }
+.post-series-link {
+  display: -webkit-inline-box;
+  display: -moz-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-box;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.35em;
+  margin: 0.4em 0 0;
+  font-size: 0.85em;
+  opacity: 0.92;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=92)";
+  filter: alpha(opacity=92);
+}
+.post-series-link i {
+  margin-right: 0.15em;
+}
+.recent-post-item.series-card .article-title .series-badge {
+  margin-right: 0.4em;
+  font-size: 0.85em;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}

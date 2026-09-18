@@ -74,7 +74,7 @@
 | 类别 | 技术 | 说明 |
 |------|------|------|
 | 框架 | [Hexo](https://hexo.io/) 8.1.2 | 静态博客框架 |
-| 主题 | [Panda](https://github.com/SpeechlessPanda/hexo-theme-panda) 1.0.0 | 本站自建主题（`themes/panda/`),基于 Butterfly 5.7.0 二次开发(Apache-2.0) |
+| 主题 | [Panda](https://github.com/SpeechlessPanda/hexo-theme-panda) 1.1.0 | 本站自建主题（`themes/panda/`），基于 Butterfly 5.7.0 二次开发(Apache-2.0) |
 | 包管理 | [pnpm](https://pnpm.io/) 10 | 高效磁盘 |
 | 运行时 | Node.js 20 | CI 运行环境 |
 | OG 渲染 | [@resvg/resvg-js](https://github.com/thx/resvg-js) | SVG → PNG，跨平台中文字体 |
