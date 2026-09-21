@@ -75,7 +75,7 @@
 | 类别 | 技术 | 说明 |
 |------|------|------|
 | 框架 | [Hexo](https://hexo.io/) 8.1.2 | 静态博客框架 |
-| 主题 | [Panda](https://github.com/SpeechlessPanda/hexo-theme-panda) 1.1.0 | 本站自建主题（`themes/panda/`），基于 Butterfly 5.7.0 二次开发(Apache-2.0) |
+| 主题 | [Panda](https://github.com/SpeechlessPanda/hexo-theme-panda) 1.1.2 | 本站自建主题（npm 依赖 `hexo-theme-panda`），基于 Butterfly 5.7.0 二次开发(Apache-2.0) |
 | 包管理 | [pnpm](https://pnpm.io/) 10 | 高效磁盘 |
 | 运行时 | Node.js 20 | CI 运行环境 |
 | OG 渲染 | [@resvg/resvg-js](https://github.com/thx/resvg-js) | SVG → PNG，跨平台中文字体 |
@@ -90,7 +90,7 @@
 ```text
 blog/
 ├── _config.yml                       # Hexo 全局配置(index_generator 文章流指向 /blog)
-├── _config.panda.yml                 # 个人主题配置(覆盖 themes/panda/_config.yml 默认值)
+├── _config.panda.yml                 # 个人主题配置(覆盖 node_modules/hexo-theme-panda/_config.yml 默认值)
 ├── package.json                      # 依赖与脚本
 ├── pnpm-lock.yaml
 ├── README.md
@@ -122,7 +122,15 @@ blog/
 └── public/                           # 生成产物（gitignore）
 ```
 
-> 注:个人配置集中在站点根 `_config.panda.yml`(菜单、Giscus、头像、字体、侧栏、feed/OG 开关等);`themes/panda/_config.yml` 是主题默认配置,含每个键的注释。碎碎念增强、博客系列、Atom feed、OG 图、渐变外观、链接新标签页、fish/typst 高亮均由主题脚本提供,不在本站 scripts/ 里。系列作者指南见 [themes/panda/README_CN.md](themes/panda/README_CN.md)。
+> 注:个人配置集中在站点根 `_config.panda.yml`(菜单、Giscus、头像、字体、侧栏、feed/OG 开关等);主题自带 `_config.yml` 是默认配置,含每个键的注释,不要改——升级主题会被覆盖。碎碎念增强、博客系列、Atom feed、OG 图、渐变外观、链接新标签页、fish/typst 高亮均由主题脚本提供,不在本站 scripts/ 里。系列作者指南见主题包的 `README_CN.md`。
+>
+> 主题是 npm 依赖(`package.json` 的 `hexo-theme-panda`),不在 `themes/` 目录里。升级只需改版本号:
+>
+> ```bash
+> pnpm update hexo-theme-panda
+> ```
+>
+> ⚠️ Hexo **优先**加载 `themes/<主题名>`,其次才是 `node_modules/hexo-theme-<主题名>`。所以 `themes/` 下不要留 Panda 的副本,否则 npm 更新会悄悄失效(1.1.3 起构建时会打印警告)。
 
 ---
 
