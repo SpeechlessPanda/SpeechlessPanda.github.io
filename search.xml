@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AI is coming!</title>
+    <url>/2026/08/29/AI-is-coming/</url>
+    <content><![CDATA[<p>本篇文章是最近看的部分博客、文章和视频之后有意识的整理以及产生的思考。在此也推荐一篇比尔·盖茨的博客 <a href="https://www.gatesnotes.com/home/home-page-topic/reader/a-turbulent-ai-era-and-critical-choices-to-make">The turbulent AI era is here. The choices we make now are critical.</a></p>
+<p>AI is coming! 这是一个客观事实，但还有很多很多隐藏在这个冰山之下。老生常谈的话题是， AI 会取代大家的工作。我之前的观点得到了很多渠道的印证，就是 AI 平等的踹死一切岗位。不止计算机，其他专业也是如此。在计算机专业里，有人觉得硬件和 infra 是个出路。不可否认，暂时来看，比其他方向要好。但是硬件一贯待遇不好，且最近 Anthropic 宣布推出硬件用 MCP：Model Hardware Standard（MHS），加上具身智能的迅猛发展，硬件岗位的中层也将死一大片。至于 infra ，更多是因为暂时这方面岗位会比较多，但是 AI 也已经能做到比大部分人 infra 做得好了。</p>
+<p>之前的信心，来源于以前的技术革命中，新出现的岗位会替代旧的岗位吸收人口。但现在这个迷之自信要被我亲手打破。之前的变革大多会持续几代人，并在这个过程中渐渐出现新岗位。这次的 AI 则不然，变革来的非常快，可能在变革结束之后，依然不会看到大量新岗位的出现，毕竟 AI 和机器人在体力和脑力两个方面都在挤压人类的生存空间。变革快还意味着新东西产生的很快，意味着当你面向一个新岗位做好准备的时候，可能就需要面向下一个新岗位开始准备，甚至已经落后了（真成红皇后时代了）。</p>
+<p>同时 AI 的到来会让“入门级阶梯被抽走”，因为入门的内容 AI 完全能干好，这意味着你不仅要和 AI 竞争，还要面对没有公司愿意付费让你学习的残酷现实。自学的成本更高，同时难度更大，内容更多，时间更长。这在我看来很矛盾怪诞，不进企业就无法收获企业级理解，但没有企业级理解就进不了企业，颇有点像现在简历上的项目。以前总说码农 35 岁是个危机，现在也逐渐向硬件一样越老越吃香了，天道好轮回了，十几年前只要会写代码就能入职，十几年后变成有工作经验才能有工作，<s>这很公平</s>。</p>
+<p>佩雷斯时滞指的是，一项技术从发明到彻底改变你的生活之间数十年的间隔。工业革命用了五六十年，信息技术用了二三十年，而 AI ，预测只需要 15 年（根据这个理论，我在 <a href="https://speechlesspanda.github.io/2026/07/21/AI%20%E6%97%B6%E4%BB%A3%E4%B8%8B%E5%9B%9E%E7%9C%8B%E4%BB%A5%E5%89%8D%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/">AI 时代下回看以前的工作模式</a>中提到的组织架构彻底调整到来的时间应该也会被大大提前）。我不知道这意味着什么，变化来的太快了，新岗位也会这么快的出现吗，还是我目光狭隘了，那时候的人们不需要考虑有什么岗位能接纳自己，而是考虑自己想做什么？还是人人都去创新？</p>
+<p>这期没有怎么做，虽然我面临着新情况，但是我能想到的解法依旧和以前一样，归纳下来就是保持努力，保持思考。具体来说，详看我之前博客的内容（笑，我认为过时的不多，且确实没啥更好的办法了貌似）。<code>AI will either be the greatest equalizer ever invented, or the worst source of injustice.   -- Bill Gates</code> 我希望最后到来的是前者， 15 年貌似刚好在 2035 年左右，居民收入达到中等发达国家水平不会以一种大家都意想不到的方式实现吧。</p>
+]]></content>
+      <tags>
+        <tag>思考</tag>
+        <tag>短篇</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AI 时代下回看以前的工作模式</title>
     <url>/2026/07/21/AI%20%E6%97%B6%E4%BB%A3%E4%B8%8B%E5%9B%9E%E7%9C%8B%E4%BB%A5%E5%89%8D%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<blockquote>
@@ -36,50 +51,6 @@
       <tags>
         <tag>思考</tag>
         <tag>短篇</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>AI is coming!</title>
-    <url>/2026/08/29/AI-is-coming/</url>
-    <content><![CDATA[<p>本篇文章是最近看的部分博客、文章和视频之后有意识的整理以及产生的思考。在此也推荐一篇比尔·盖茨的博客 <a href="https://www.gatesnotes.com/home/home-page-topic/reader/a-turbulent-ai-era-and-critical-choices-to-make">The turbulent AI era is here. The choices we make now are critical.</a></p>
-<p>AI is coming! 这是一个客观事实，但还有很多很多隐藏在这个冰山之下。老生常谈的话题是， AI 会取代大家的工作。我之前的观点得到了很多渠道的印证，就是 AI 平等的踹死一切岗位。不止计算机，其他专业也是如此。在计算机专业里，有人觉得硬件和 infra 是个出路。不可否认，暂时来看，比其他方向要好。但是硬件一贯待遇不好，且最近 Anthropic 宣布推出硬件用 MCP：Model Hardware Standard（MHS），加上具身智能的迅猛发展，硬件岗位的中层也将死一大片。至于 infra ，更多是因为暂时这方面岗位会比较多，但是 AI 也已经能做到比大部分人 infra 做得好了。</p>
-<p>之前的信心，来源于以前的技术革命中，新出现的岗位会替代旧的岗位吸收人口。但现在这个迷之自信要被我亲手打破。之前的变革大多会持续几代人，并在这个过程中渐渐出现新岗位。这次的 AI 则不然，变革来的非常快，可能在变革结束之后，依然不会看到大量新岗位的出现，毕竟 AI 和机器人在体力和脑力两个方面都在挤压人类的生存空间。变革快还意味着新东西产生的很快，意味着当你面向一个新岗位做好准备的时候，可能就需要面向下一个新岗位开始准备，甚至已经落后了（真成红皇后时代了）。</p>
-<p>同时 AI 的到来会让“入门级阶梯被抽走”，因为入门的内容 AI 完全能干好，这意味着你不仅要和 AI 竞争，还要面对没有公司愿意付费让你学习的残酷现实。自学的成本更高，同时难度更大，内容更多，时间更长。这在我看来很矛盾怪诞，不进企业就无法收获企业级理解，但没有企业级理解就进不了企业，颇有点像现在简历上的项目。以前总说码农 35 岁是个危机，现在也逐渐向硬件一样越老越吃香了，天道好轮回了，十几年前只要会写代码就能入职，十几年后变成有工作经验才能有工作，<s>这很公平</s>。</p>
-<p>佩雷斯时滞指的是，一项技术从发明到彻底改变你的生活之间数十年的间隔。工业革命用了五六十年，信息技术用了二三十年，而 AI ，预测只需要 15 年（根据这个理论，我在 <a href="https://speechlesspanda.github.io/2026/07/21/AI%20%E6%97%B6%E4%BB%A3%E4%B8%8B%E5%9B%9E%E7%9C%8B%E4%BB%A5%E5%89%8D%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/">AI 时代下回看以前的工作模式</a>中提到的组织架构彻底调整到来的时间应该也会被大大提前）。我不知道这意味着什么，变化来的太快了，新岗位也会这么快的出现吗，还是我目光狭隘了，那时候的人们不需要考虑有什么岗位能接纳自己，而是考虑自己想做什么？还是人人都去创新？</p>
-<p>这期没有怎么做，虽然我面临着新情况，但是我能想到的解法依旧和以前一样，归纳下来就是保持努力，保持思考。具体来说，详看我之前博客的内容（笑，我认为过时的不多，且确实没啥更好的办法了貌似）。<code>AI will either be the greatest equalizer ever invented, or the worst source of injustice.   -- Bill Gates</code> 我希望最后到来的是前者， 15 年貌似刚好在 2035 年左右，居民收入达到中等发达国家水平不会以一种大家都意想不到的方式实现吧。</p>
-]]></content>
-      <tags>
-        <tag>思考</tag>
-        <tag>短篇</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hello world!</title>
-    <url>/2026/03/08/hello%20world/</url>
-    <content><![CDATA[<p>我高考专业是在知道自己不想选什么，然后在剩下的里面挑一个的情况下，选择了计算机。一开始并没有什么兴趣可言，直到我接触了很多种语言之后，反复在每种语言学习的一开始，输出一个“ hello world ”。我开始觉得技术是一件很有意思的事，甚至有一瞬间觉得是神圣的。这算是我对计算机的热情和兴趣被点燃的时刻，为了纪念这一时刻，有了这一短篇。我将在这里，用各种我学过的语言输出一遍“ hello world !”。</p>
-<p>本文并非是专业技术性博客。只要我学过，且我想，就会出现。为了读起来方便一点，下面按编程语言、标记语言和 Shell 语言分了组。由于标记语言的展示形式多样，本文统一采用正文格式，或随机一种格式。</p>
-<p>然后因为我学的语言会越来越多，所以这个短篇理论上永不完结（也有可能变成一个小长篇）。</p>
-<h2 id="编程语言"><a class="markdownIt-Anchor" href="#编程语言"></a> 编程语言</h2>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello world!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;hello world!&quot;</span> &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world!&quot;</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight rust"><table><tr><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="标记语言"><a class="markdownIt-Anchor" href="#标记语言"></a> 标记语言</h2>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>hello world!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>hello world!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>&#123;article&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">hello world!</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">hello world!</span><br></pre></td></tr></table></figure>
-<figure class="highlight typst"><table><tr><td class="code"><pre><span class="line">hello world!</span><br></pre></td></tr></table></figure>
-<h2 id="shell-语言"><a class="markdownIt-Anchor" href="#shell-语言"></a> Shell 语言</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello world!&quot;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> hello world!</span><br></pre></td></tr></table></figure>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Write-Host</span> <span class="string">&quot;hello world!&quot;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight fish"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello world!&quot;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>短篇</tag>
-        <tag>技术</tag>
       </tags>
   </entry>
   <entry>
@@ -486,6 +457,35 @@
       </tags>
   </entry>
   <entry>
+    <title>hello world!</title>
+    <url>/2026/03/08/hello%20world/</url>
+    <content><![CDATA[<p>我高考专业是在知道自己不想选什么，然后在剩下的里面挑一个的情况下，选择了计算机。一开始并没有什么兴趣可言，直到我接触了很多种语言之后，反复在每种语言学习的一开始，输出一个“ hello world ”。我开始觉得技术是一件很有意思的事，甚至有一瞬间觉得是神圣的。这算是我对计算机的热情和兴趣被点燃的时刻，为了纪念这一时刻，有了这一短篇。我将在这里，用各种我学过的语言输出一遍“ hello world !”。</p>
+<p>本文并非是专业技术性博客。只要我学过，且我想，就会出现。为了读起来方便一点，下面按编程语言、标记语言和 Shell 语言分了组。由于标记语言的展示形式多样，本文统一采用正文格式，或随机一种格式。</p>
+<p>然后因为我学的语言会越来越多，所以这个短篇理论上永不完结（也有可能变成一个小长篇）。</p>
+<h2 id="编程语言"><a class="markdownIt-Anchor" href="#编程语言"></a> 编程语言</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello world!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;hello world!&quot;</span> &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world!&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="标记语言"><a class="markdownIt-Anchor" href="#标记语言"></a> 标记语言</h2>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>hello world!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>hello world!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>&#123;article&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">hello world!</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">hello world!</span><br></pre></td></tr></table></figure>
+<figure class="highlight typst"><table><tr><td class="code"><pre><span class="line">hello world!</span><br></pre></td></tr></table></figure>
+<h2 id="shell-语言"><a class="markdownIt-Anchor" href="#shell-语言"></a> Shell 语言</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello world!&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> hello world!</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Write-Host</span> <span class="string">&quot;hello world!&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight fish"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello world!&quot;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>短篇</tag>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vibe coding 开发 BFE 后的反思与总结</title>
     <url>/2026/04/06/vibe%20coding%20%E5%BC%80%E5%8F%91%20BFE%20%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D%E4%B8%8E%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h2 id="项目简单介绍"><a class="markdownIt-Anchor" href="#项目简单介绍"></a> 项目简单介绍</h2>
@@ -566,20 +566,6 @@
         <tag>思考</tag>
         <tag>项目</tag>
         <tag>记录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一出好戏——国奖幻梦，梦碎？梦醒时分</title>
-    <url>/2026/09/20/%E4%B8%80%E5%87%BA%E5%A5%BD%E6%88%8F%E2%80%94%E2%80%94%E5%9B%BD%E5%A5%96%E5%B9%BB%E6%A2%A6%EF%BC%8C%E6%A2%A6%E7%A2%8E%EF%BC%9F%E6%A2%A6%E9%86%92%E6%97%B6%E5%88%86/</url>
-    <content><![CDATA[<h2 id="开场"><a class="markdownIt-Anchor" href="#开场"></a> 开场</h2>
-<h2 id="发展"><a class="markdownIt-Anchor" href="#发展"></a> 发展</h2>
-<h2 id="高潮"><a class="markdownIt-Anchor" href="#高潮"></a> 高潮</h2>
-<h2 id="尾声"><a class="markdownIt-Anchor" href="#尾声"></a> 尾声</h2>
-<p>End scene!</p>
-]]></content>
-      <tags>
-        <tag>短篇</tag>
-        <tag>情绪</tag>
       </tags>
   </entry>
   <entry>
@@ -701,6 +687,26 @@
       </tags>
   </entry>
   <entry>
+    <title>对 BFE 构建思路的重思考</title>
+    <url>/2026/04/12/%E5%AF%B9%20BFE%20%E6%9E%84%E5%BB%BA%E6%80%9D%E8%B7%AF%E7%9A%84%E9%87%8D%E6%80%9D%E8%80%83/</url>
+    <content><![CDATA[<p>在<a href="https://speechlesspanda.github.io/2026/04/06/vibe%20coding%20%E5%BC%80%E5%8F%91%20BFE%20%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D%E4%B8%8E%E6%80%BB%E7%BB%93/">前文</a>中，我们曾提到过， BFE 比同量级的项目多花了多得多的 token ，这固然有第一次 vibe 不太有方法论和策略，整体规划做的不太好和 token 是免费的用起来不心疼的原因，但就算将上述原因全部纳入考虑，如此庞大的 token 消耗数依旧是不太正常的。所以，我猜测， BFE 中可能有部分需求触及到了 agent 能力的边界。目前我想到最有可能的就是，对十个主题的适配。由于我的项目定位更像是一个辅助平台，所以他是从现有的两个博客框架 hexo 和 hugo 中各挑了五个主题，辅助用户搭建这十个主题的博客。由于主题都是个人创作者发布并维护的，加上框架并没有规定官方的统一格式，所以每个主题的格式和配置基本都不一样。这就需要 agent 从网上下载十个主题的源码，浏览并学会如何使用，辨别出每个主题的不同，再用适配的脚本将用户的配置填入到特定的主题中。事实上，这是我理想中 agent 应该干的事，但是我的 agent 似乎在搜索和辨别这方面偷了懒，十个主题有些一次就能过，有些就不行。有些配置有的主题支持，有的不支持， agent 也未识别出来。</p>
+<p>但，将这个可能性列出来之后，我发现这似乎并不是 agent 能力的边界，而是由于前面提过的原因，导致 agent 在我的使用下，发挥不出全部的能力。“我”降低了 agent 的能力边界。这很正常，事实上大部分人使用 agent 都会这样，只是有些明显有些不明显。不过我在这里想讨论的并不是这个问题，相关的反思在前文中也已详细的叙述过。至于反思的到不到位，有没有效，都要经过下次 vibe 的检验。</p>
+<p>我想探讨的是，如何通过对需求的设计和转化，将其变为哪怕 agent 在被人降低能力边界的情况下，依旧能够很好的胜任。具体到这个项目，我想的是，能不能让 agent 重写这十个主题，使他们都符合某种设计好的格式，这样就不用后续对十个主题做格式之类的适配，相当于将“适配”提前。这里显然的缺点是， agent 重写的主题不一定和原本的主题相一致，看上去也增加了工作量和整个项目的风险与不稳定性。</p>
+<p>好处也是显而易见的，首先，使用同样多 token 的情况下，我觉得 agent 能在重写任务完成的不错的前提下，提升整个项目的可靠性（上文提到的风险是由于重写可能不成功导致项目失败，这里的可靠性是指， agent 一旦重写成功，后续功能的构建将有极大可能成功）。重写这十个主题对于 agent 完成这个项目来说，并不会比上面那样提到的去做更难，相当于将一个难完成的需求，通过增加工作量，变成一个易完成的需求，并提高成功的概率和整个项目的可靠性。还有第二个好处，是我们可以将重写主题的格式开源，从而来构建起一套新的主题生态，增加用户对项目的黏性。虽然这个在 BFE 上不太可能看到（毕竟只是一个不成熟的小玩具），但是思想非常值得学习。我们能在很多地方看到这种类似思想的使用，构建一套自己的标准，然后强兼别人的标准。</p>
+<p>至于工作量的增加，似乎也是一个伪命题。我就是一个很好的例子，毕竟我用看似更简单的方式去构建这个项目，但 token 数花的出奇的多。或许换成上面重写的思路，还不需要花这么多 token ，这种情况下，工作量的多少还真不好说。</p>
+<blockquote>
+<p>如果以后真的有人使用这个项目，或许我会考虑将项目迭代成重写主题的这种形式。如果没有就不折腾了。</p>
+</blockquote>
+<p>至于如何设计和转化需求，就是各位天才程序员目前的价值所在了。对此我也还在探索之中，并没有很多想法。但是可以将我对本文中思路的重思考分享一下。在正式开始项目之前，我其实未必想不到这个思路，但是，由于它可以预见的工作量，在还没开始之前，就被我不带任何其他思考的否决掉了。这么做放在 agent 出现以前，当然是合理的，可以让项目仅用很少的工作，就达到落地的效果。这对于项目后续的开发和开发者在这个项目上的收获都是很重要的。更别提重写主题是一个带有很大不确定性的活，比起这个，人类开发者肯定更擅长也更喜欢去一个一个主题的做适配。但是，大人，时代变了。在 agent 出来之后，二者在工作量上的差异在好的使用者手中被无限缩小， agent 的能力也让重写的成功性大大提高。我们以前可能更倾向于敏捷开发，让产品能很快有一个能给用户使用的版本，而放弃掉一些锦上添花的功能，甚至放弃一些明显有无可替代优势的方案。但在 agent 的时代，不妨给这些功能和方案一个机会。当我们迈一小步和一大步所需要的努力差不多的时候，我觉得后者会是更好的选择。</p>
+<p>agent 的冲击不止在技术的使用上，更在想法上。</p>
+]]></content>
+      <tags>
+        <tag>思考</tag>
+        <tag>短篇</tag>
+        <tag>项目</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>我的苦难定理</title>
     <url>/2026/05/12/%E6%88%91%E7%9A%84%E8%8B%A6%E9%9A%BE%E5%AE%9A%E7%90%86/</url>
     <content><![CDATA[<p><em><strong>苦难定理 1 ：我总是会平凡的度过一段时间后，周期性的经历一个满是苦难的阶段。</strong></em></p>
@@ -733,6 +739,34 @@
         <tag>思考</tag>
         <tag>短篇</tag>
         <tag>情绪</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>看梁文锋 4 小时发言有感</title>
+    <url>/2026/08/03/%E7%9C%8B%E6%A2%81%E6%96%87%E9%94%8B-4-%E5%B0%8F%E6%97%B6%E5%8F%91%E8%A8%80%E6%9C%89%E6%84%9F/</url>
+    <content><![CDATA[<p>今天看完了梁文锋在投资者交流会上的发言，全文三万多字，看下来觉得时间花的值（虽然也是在等 agent 干活的时候看的）。</p>
+<blockquote>
+<p>叠甲：鉴于这是投资者大会上的发言，且本人的感悟也只是读了这篇发言（且懒得二次验证），所以其中不一定都是真相，甚至极大概率梁文锋在里面讲了不少故事。但其中蕴含的一点精华就足以对你我有益，故此有此文。</p>
+</blockquote>
+<h2 id="克制"><a class="markdownIt-Anchor" href="#克制"></a> 克制</h2>
+<p>首先是他非常强调克制。本身幻方和大企业比规模不能算大，所以他们能这么成功，离不开他们始终坚持走在实现自己愿景的路上，以及坚定地执行路线图。他们专注于智能的提升，他们认为多模态并不是智能提高的表现，所以没有当成主线去做，更多是为了回应 C 端的期待。同样，他们认为世界模型也没有提高模型智能，所以也没有做这个。在他们的路线中，智能是第一重要的，等模型能够自主学习和进化之后，他们的任务才算阶段性完成，届时才会开始具身智能这些其他方向的研究。关于具身智能，他认为是一定要做的，因为只有这样 AI 才能更好落地，普惠更多人，做更多事。但是他们是一条线的在去做，而不是像其他公司多线并行。</p>
+<p>关于克制另一个很好的体现是商业化。众所周知的是，国内御三家都在积极谋求上市。不难理解，毕竟大模型是一个需要砸钱的产业。但在梁文锋这次的发言中，我们听到了商业化凡尔赛的版本。他说并没有刻意的去追求商业化，就和没有想去维护 C 端用户一样（<s>经典发言： C 端用户赶都赶不走</s>），只是就像求其上者得其中一样，当你锚定的是一个更高的目标——智能时，商业化就是一个水到渠成的事情。当然不是说商业化不重要，否则也就没有这次谈话了，只是并不以商业化为目的，这也是克制的一种表现。</p>
+<p>体现克制的另外一点是，对于金钱的清醒。先别急着说和上一段重复了，只是开头这一句形似而已。众所又周知， deepseek 是开源的，甚至他们很乐意帮有能力的公司部署 deepseek 。其中一个原因是，有更多公司一起研究，能加速智能这一目标的实现，另一个原因是，梁文锋觉得这里面的利润很大，他们一家公司不可能吃下，他们已获得的已经够了（这也体现在他们的 api 定价上）。横向上，他们不参与到具身智能和世界模型的竞争，是对这部分利润保持了克制，甚至局限点的横向上， glm 和 kimi ，梁文锋对其的态度也是友好的，可以合作的。纵向上，他们只做模型这一层，不参与服务器和算力的竞争，但会帮助华为做算子适配（这点真是伟大，虽然不排除有国外的卡受限很大的原因）。高度专注，非常清醒和克制。很多初创会一上来就想吃掉整个市场，尤其如果那家初创如果还出现过 deepseek 时刻这样的奇迹的时候，更是会想要垄断。但梁文锋的克制让 deepseek 没有走向这条道路，这很难得，也让 deepseek 得以有今天这样健康的状态。</p>
+<blockquote>
+<p>但我们也需要看到， deepseek 创造了一个斩杀线，尤其是最近 dsv4f 出来后，没它强又比它贵的公司无异于被宣判的了死刑。所以就算他肯让利，也得有能力上桌才行。</p>
+</blockquote>
+<h2 id="数据-人工-智能"><a class="markdownIt-Anchor" href="#数据-人工-智能"></a> 数据 人工 智能</h2>
+<p>这一章严格来讲，并不算发言的重点，是我将发言的一部分和之前看过的一系列内容有关关联到了一起。首先，梁文锋强调数据很重要。他们团队，有一半的人在负责算法，另一半的人就是在洗数据。没错，就是以前科研民工干的事（真是感慨，以前科研入门生怕被拉去洗数据，现在洗数据的机会都不一定有）。大模型领域有一句名言，和一句谚语。名言是：<code>rubbish in, rubbish out</code>。谚语是：<code>有多少人工就有多少智能</code>。今年年初，我看到一个团队用高质量数据，以极小的参数，做出了一个媲美当时 GPT 前一个小版本的模型。这无疑是震撼的，但大家都应该因此去洗数据吗，答案是否定的。一个是，如何洗出高质量数据，是有挑战的，要多少时间，是不确定的。那个团队拼尽全力，也没干过当时的 GPT ，后面更是杳无音信。梁文锋也说，当前别说国内，就连国外都还远远没到 scaling law 的边界，也即堆参数的效果依然会十分明显。一边充满了不确定，另一边收益明显，大家都知道应该怎么选。现阶段，洗数据还是只能作为一个辅助或者支线，还没到能成为主线的程度。可能后续到大家触及到 scaling law 边界之后，我们会看到一个洗数据的黄金时代吧。</p>
+<blockquote>
+<p>谈及这个，我脑子里总会出现一个画面，人类用尽全力（所有数据）托举起另一个物种，嘴里还说着，收下吧，这是人类最后的荣光 doge 。</p>
+</blockquote>
+<h2 id="正事只占一半的时间"><a class="markdownIt-Anchor" href="#正事只占一半的时间"></a> 正事只占一半的时间</h2>
+<p>这既是他们克制带来的好处，也是他们能够不断有创新的关键。梁文锋说他们员工公司上的事只占工作的一半时间（还是在六点准时下班的情况下），剩下一半时间允许员工去研究自己的东西，他认为这是有意义的，因为研究需要保持一个好的状态。我觉得这还是挺有启发的一件事。你可以说大厂员工经常加班是因为大部分员工并不从事这种研究型的工作，但是哪怕开发也是脑力劳动，且大厂研究基模的部门比开发部门还要辛苦。虽然这部分只占梁文锋发言的极小一部分内容，但我很想要其他公司学习，也很羡慕。而且对于大部分疲于内卷的哈工深学子来说，我相信也是有一定启发意义。</p>
+<p>总而言之，梁文锋是非常独特的企业家，也是一个成熟的理想主义者。希望 deepseek 越做越强。</p>
+]]></content>
+      <tags>
+        <tag>思考</tag>
+        <tag>短篇</tag>
       </tags>
   </entry>
   <entry>
@@ -797,68 +831,6 @@
       <tags>
         <tag>思考</tag>
         <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>原来还可以不是 fomo</title>
-    <url>/2026/05/30/%E4%B8%80%E7%82%B9%E5%AF%B9%E6%8A%80%E6%9C%AF%E7%84%A6%E8%99%91%E7%9A%84%E6%80%9D%E8%80%83/%E5%8E%9F%E6%9D%A5%E8%BF%98%E5%8F%AF%E4%BB%A5%E4%B8%8D%E6%98%AF%20fomo/</url>
-    <content><![CDATA[<p>这几天，阴差阳错将一个保研来我们学校的学姐（不是我们专业的）带上了学习 claude code 怎么使用的路，看着她兴致勃勃的探索，并逐渐掌握我大部分日常用的内容，我不由得感叹原来 agent 的普及率没我想的那么高，以及会用 agent 真的不能算一个多么有优势的点。两个舍友也恰巧开始摸索如何使用 claude code 了，无时无刻不震惊于 claude code 的强大，就像我一年前一样（有一说一，看着挺好玩）。水群确实害人不浅啊，我以为我身边早已经被 agent 包围了。</p>
-<p>但是最感慨的两点是，原来还可以不是 fomo ，原来真的没必要 fomo 。我能感觉到他们学习使用 agent 的时候是快乐的，那是一种发现 agent 真的帮助自己提升效率，和省去一些琐事的时间的快乐。他们没有担忧自己会被 agent 替代，也没有想过自己和 agent 比竞争优势在哪里。讲真我很羡慕。虽然我猜一方面有可能是还不知道 agent 到底有多强（用的还只是 dsv4 和 mimo ），但另一方面，也因为我舍友和这位学姐，已经是短暂不用担心“前途”的阶段了。学姐不用说，舍友也是大概率能保研或留学。</p>
-<p>我从一开始接触 agent ，就没有这么轻松过，没有体会过这种比较纯粹的快乐。哪怕到现在，看着周围的越来越多人会用 agent ，我依然还会焦虑。原来学习新技术完全可以不是因为担心自己被落下，可以单纯只是因为自己需要。原来就算提前学了很多新技术，也不抵一个确定的前途，或是真正的护城河。我想这两个事例确实部分证明了我前面博客里的观点是对的（不用担心误人子弟了）。如果你还没有 fomo ，那希望你看到这篇博客后能坚定的保持下去。如果你已经在 fomo 了，希望你看到这篇博客能够宽慰一些（如果还不行，可以去看看我前面的博客 doge ）。</p>
-<p>我希望有一天，我也能纯粹的为技术的进步感到开心一次，不用担心被取代，不用害怕学不会会怎样，不用疲于奔命地去追赶。</p>
-<p><code>“慢慢走，欣赏啊！”——朱光潜《谈美》</code></p>
-]]></content>
-      <tags>
-        <tag>思考</tag>
-        <tag>短篇</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>对 BFE 构建思路的重思考</title>
-    <url>/2026/04/12/%E5%AF%B9%20BFE%20%E6%9E%84%E5%BB%BA%E6%80%9D%E8%B7%AF%E7%9A%84%E9%87%8D%E6%80%9D%E8%80%83/</url>
-    <content><![CDATA[<p>在<a href="https://speechlesspanda.github.io/2026/04/06/vibe%20coding%20%E5%BC%80%E5%8F%91%20BFE%20%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D%E4%B8%8E%E6%80%BB%E7%BB%93/">前文</a>中，我们曾提到过， BFE 比同量级的项目多花了多得多的 token ，这固然有第一次 vibe 不太有方法论和策略，整体规划做的不太好和 token 是免费的用起来不心疼的原因，但就算将上述原因全部纳入考虑，如此庞大的 token 消耗数依旧是不太正常的。所以，我猜测， BFE 中可能有部分需求触及到了 agent 能力的边界。目前我想到最有可能的就是，对十个主题的适配。由于我的项目定位更像是一个辅助平台，所以他是从现有的两个博客框架 hexo 和 hugo 中各挑了五个主题，辅助用户搭建这十个主题的博客。由于主题都是个人创作者发布并维护的，加上框架并没有规定官方的统一格式，所以每个主题的格式和配置基本都不一样。这就需要 agent 从网上下载十个主题的源码，浏览并学会如何使用，辨别出每个主题的不同，再用适配的脚本将用户的配置填入到特定的主题中。事实上，这是我理想中 agent 应该干的事，但是我的 agent 似乎在搜索和辨别这方面偷了懒，十个主题有些一次就能过，有些就不行。有些配置有的主题支持，有的不支持， agent 也未识别出来。</p>
-<p>但，将这个可能性列出来之后，我发现这似乎并不是 agent 能力的边界，而是由于前面提过的原因，导致 agent 在我的使用下，发挥不出全部的能力。“我”降低了 agent 的能力边界。这很正常，事实上大部分人使用 agent 都会这样，只是有些明显有些不明显。不过我在这里想讨论的并不是这个问题，相关的反思在前文中也已详细的叙述过。至于反思的到不到位，有没有效，都要经过下次 vibe 的检验。</p>
-<p>我想探讨的是，如何通过对需求的设计和转化，将其变为哪怕 agent 在被人降低能力边界的情况下，依旧能够很好的胜任。具体到这个项目，我想的是，能不能让 agent 重写这十个主题，使他们都符合某种设计好的格式，这样就不用后续对十个主题做格式之类的适配，相当于将“适配”提前。这里显然的缺点是， agent 重写的主题不一定和原本的主题相一致，看上去也增加了工作量和整个项目的风险与不稳定性。</p>
-<p>好处也是显而易见的，首先，使用同样多 token 的情况下，我觉得 agent 能在重写任务完成的不错的前提下，提升整个项目的可靠性（上文提到的风险是由于重写可能不成功导致项目失败，这里的可靠性是指， agent 一旦重写成功，后续功能的构建将有极大可能成功）。重写这十个主题对于 agent 完成这个项目来说，并不会比上面那样提到的去做更难，相当于将一个难完成的需求，通过增加工作量，变成一个易完成的需求，并提高成功的概率和整个项目的可靠性。还有第二个好处，是我们可以将重写主题的格式开源，从而来构建起一套新的主题生态，增加用户对项目的黏性。虽然这个在 BFE 上不太可能看到（毕竟只是一个不成熟的小玩具），但是思想非常值得学习。我们能在很多地方看到这种类似思想的使用，构建一套自己的标准，然后强兼别人的标准。</p>
-<p>至于工作量的增加，似乎也是一个伪命题。我就是一个很好的例子，毕竟我用看似更简单的方式去构建这个项目，但 token 数花的出奇的多。或许换成上面重写的思路，还不需要花这么多 token ，这种情况下，工作量的多少还真不好说。</p>
-<blockquote>
-<p>如果以后真的有人使用这个项目，或许我会考虑将项目迭代成重写主题的这种形式。如果没有就不折腾了。</p>
-</blockquote>
-<p>至于如何设计和转化需求，就是各位天才程序员目前的价值所在了。对此我也还在探索之中，并没有很多想法。但是可以将我对本文中思路的重思考分享一下。在正式开始项目之前，我其实未必想不到这个思路，但是，由于它可以预见的工作量，在还没开始之前，就被我不带任何其他思考的否决掉了。这么做放在 agent 出现以前，当然是合理的，可以让项目仅用很少的工作，就达到落地的效果。这对于项目后续的开发和开发者在这个项目上的收获都是很重要的。更别提重写主题是一个带有很大不确定性的活，比起这个，人类开发者肯定更擅长也更喜欢去一个一个主题的做适配。但是，大人，时代变了。在 agent 出来之后，二者在工作量上的差异在好的使用者手中被无限缩小， agent 的能力也让重写的成功性大大提高。我们以前可能更倾向于敏捷开发，让产品能很快有一个能给用户使用的版本，而放弃掉一些锦上添花的功能，甚至放弃一些明显有无可替代优势的方案。但在 agent 的时代，不妨给这些功能和方案一个机会。当我们迈一小步和一大步所需要的努力差不多的时候，我觉得后者会是更好的选择。</p>
-<p>agent 的冲击不止在技术的使用上，更在想法上。</p>
-]]></content>
-      <tags>
-        <tag>思考</tag>
-        <tag>短篇</tag>
-        <tag>项目</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>看梁文锋 4 小时发言有感</title>
-    <url>/2026/08/03/%E7%9C%8B%E6%A2%81%E6%96%87%E9%94%8B-4-%E5%B0%8F%E6%97%B6%E5%8F%91%E8%A8%80%E6%9C%89%E6%84%9F/</url>
-    <content><![CDATA[<p>今天看完了梁文锋在投资者交流会上的发言，全文三万多字，看下来觉得时间花的值（虽然也是在等 agent 干活的时候看的）。</p>
-<blockquote>
-<p>叠甲：鉴于这是投资者大会上的发言，且本人的感悟也只是读了这篇发言（且懒得二次验证），所以其中不一定都是真相，甚至极大概率梁文锋在里面讲了不少故事。但其中蕴含的一点精华就足以对你我有益，故此有此文。</p>
-</blockquote>
-<h2 id="克制"><a class="markdownIt-Anchor" href="#克制"></a> 克制</h2>
-<p>首先是他非常强调克制。本身幻方和大企业比规模不能算大，所以他们能这么成功，离不开他们始终坚持走在实现自己愿景的路上，以及坚定地执行路线图。他们专注于智能的提升，他们认为多模态并不是智能提高的表现，所以没有当成主线去做，更多是为了回应 C 端的期待。同样，他们认为世界模型也没有提高模型智能，所以也没有做这个。在他们的路线中，智能是第一重要的，等模型能够自主学习和进化之后，他们的任务才算阶段性完成，届时才会开始具身智能这些其他方向的研究。关于具身智能，他认为是一定要做的，因为只有这样 AI 才能更好落地，普惠更多人，做更多事。但是他们是一条线的在去做，而不是像其他公司多线并行。</p>
-<p>关于克制另一个很好的体现是商业化。众所周知的是，国内御三家都在积极谋求上市。不难理解，毕竟大模型是一个需要砸钱的产业。但在梁文锋这次的发言中，我们听到了商业化凡尔赛的版本。他说并没有刻意的去追求商业化，就和没有想去维护 C 端用户一样（<s>经典发言： C 端用户赶都赶不走</s>），只是就像求其上者得其中一样，当你锚定的是一个更高的目标——智能时，商业化就是一个水到渠成的事情。当然不是说商业化不重要，否则也就没有这次谈话了，只是并不以商业化为目的，这也是克制的一种表现。</p>
-<p>体现克制的另外一点是，对于金钱的清醒。先别急着说和上一段重复了，只是开头这一句形似而已。众所又周知， deepseek 是开源的，甚至他们很乐意帮有能力的公司部署 deepseek 。其中一个原因是，有更多公司一起研究，能加速智能这一目标的实现，另一个原因是，梁文锋觉得这里面的利润很大，他们一家公司不可能吃下，他们已获得的已经够了（这也体现在他们的 api 定价上）。横向上，他们不参与到具身智能和世界模型的竞争，是对这部分利润保持了克制，甚至局限点的横向上， glm 和 kimi ，梁文锋对其的态度也是友好的，可以合作的。纵向上，他们只做模型这一层，不参与服务器和算力的竞争，但会帮助华为做算子适配（这点真是伟大，虽然不排除有国外的卡受限很大的原因）。高度专注，非常清醒和克制。很多初创会一上来就想吃掉整个市场，尤其如果那家初创如果还出现过 deepseek 时刻这样的奇迹的时候，更是会想要垄断。但梁文锋的克制让 deepseek 没有走向这条道路，这很难得，也让 deepseek 得以有今天这样健康的状态。</p>
-<blockquote>
-<p>但我们也需要看到， deepseek 创造了一个斩杀线，尤其是最近 dsv4f 出来后，没它强又比它贵的公司无异于被宣判的了死刑。所以就算他肯让利，也得有能力上桌才行。</p>
-</blockquote>
-<h2 id="数据-人工-智能"><a class="markdownIt-Anchor" href="#数据-人工-智能"></a> 数据 人工 智能</h2>
-<p>这一章严格来讲，并不算发言的重点，是我将发言的一部分和之前看过的一系列内容有关关联到了一起。首先，梁文锋强调数据很重要。他们团队，有一半的人在负责算法，另一半的人就是在洗数据。没错，就是以前科研民工干的事（真是感慨，以前科研入门生怕被拉去洗数据，现在洗数据的机会都不一定有）。大模型领域有一句名言，和一句谚语。名言是：<code>rubbish in, rubbish out</code>。谚语是：<code>有多少人工就有多少智能</code>。今年年初，我看到一个团队用高质量数据，以极小的参数，做出了一个媲美当时 GPT 前一个小版本的模型。这无疑是震撼的，但大家都应该因此去洗数据吗，答案是否定的。一个是，如何洗出高质量数据，是有挑战的，要多少时间，是不确定的。那个团队拼尽全力，也没干过当时的 GPT ，后面更是杳无音信。梁文锋也说，当前别说国内，就连国外都还远远没到 scaling law 的边界，也即堆参数的效果依然会十分明显。一边充满了不确定，另一边收益明显，大家都知道应该怎么选。现阶段，洗数据还是只能作为一个辅助或者支线，还没到能成为主线的程度。可能后续到大家触及到 scaling law 边界之后，我们会看到一个洗数据的黄金时代吧。</p>
-<blockquote>
-<p>谈及这个，我脑子里总会出现一个画面，人类用尽全力（所有数据）托举起另一个物种，嘴里还说着，收下吧，这是人类最后的荣光 doge 。</p>
-</blockquote>
-<h2 id="正事只占一半的时间"><a class="markdownIt-Anchor" href="#正事只占一半的时间"></a> 正事只占一半的时间</h2>
-<p>这既是他们克制带来的好处，也是他们能够不断有创新的关键。梁文锋说他们员工公司上的事只占工作的一半时间（还是在六点准时下班的情况下），剩下一半时间允许员工去研究自己的东西，他认为这是有意义的，因为研究需要保持一个好的状态。我觉得这还是挺有启发的一件事。你可以说大厂员工经常加班是因为大部分员工并不从事这种研究型的工作，但是哪怕开发也是脑力劳动，且大厂研究基模的部门比开发部门还要辛苦。虽然这部分只占梁文锋发言的极小一部分内容，但我很想要其他公司学习，也很羡慕。而且对于大部分疲于内卷的哈工深学子来说，我相信也是有一定启发意义。</p>
-<p>总而言之，梁文锋是非常独特的企业家，也是一个成熟的理想主义者。希望 deepseek 越做越强。</p>
-]]></content>
-      <tags>
-        <tag>思考</tag>
-        <tag>短篇</tag>
       </tags>
   </entry>
   <entry>
@@ -1678,6 +1650,20 @@
 ]]></content>
       <tags>
         <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>原来还可以不是 fomo</title>
+    <url>/2026/05/30/%E4%B8%80%E7%82%B9%E5%AF%B9%E6%8A%80%E6%9C%AF%E7%84%A6%E8%99%91%E7%9A%84%E6%80%9D%E8%80%83/%E5%8E%9F%E6%9D%A5%E8%BF%98%E5%8F%AF%E4%BB%A5%E4%B8%8D%E6%98%AF%20fomo/</url>
+    <content><![CDATA[<p>这几天，阴差阳错将一个保研来我们学校的学姐（不是我们专业的）带上了学习 claude code 怎么使用的路，看着她兴致勃勃的探索，并逐渐掌握我大部分日常用的内容，我不由得感叹原来 agent 的普及率没我想的那么高，以及会用 agent 真的不能算一个多么有优势的点。两个舍友也恰巧开始摸索如何使用 claude code 了，无时无刻不震惊于 claude code 的强大，就像我一年前一样（有一说一，看着挺好玩）。水群确实害人不浅啊，我以为我身边早已经被 agent 包围了。</p>
+<p>但是最感慨的两点是，原来还可以不是 fomo ，原来真的没必要 fomo 。我能感觉到他们学习使用 agent 的时候是快乐的，那是一种发现 agent 真的帮助自己提升效率，和省去一些琐事的时间的快乐。他们没有担忧自己会被 agent 替代，也没有想过自己和 agent 比竞争优势在哪里。讲真我很羡慕。虽然我猜一方面有可能是还不知道 agent 到底有多强（用的还只是 dsv4 和 mimo ），但另一方面，也因为我舍友和这位学姐，已经是短暂不用担心“前途”的阶段了。学姐不用说，舍友也是大概率能保研或留学。</p>
+<p>我从一开始接触 agent ，就没有这么轻松过，没有体会过这种比较纯粹的快乐。哪怕到现在，看着周围的越来越多人会用 agent ，我依然还会焦虑。原来学习新技术完全可以不是因为担心自己被落下，可以单纯只是因为自己需要。原来就算提前学了很多新技术，也不抵一个确定的前途，或是真正的护城河。我想这两个事例确实部分证明了我前面博客里的观点是对的（不用担心误人子弟了）。如果你还没有 fomo ，那希望你看到这篇博客后能坚定的保持下去。如果你已经在 fomo 了，希望你看到这篇博客能够宽慰一些（如果还不行，可以去看看我前面的博客 doge ）。</p>
+<p>我希望有一天，我也能纯粹的为技术的进步感到开心一次，不用担心被取代，不用害怕学不会会怎样，不用疲于奔命地去追赶。</p>
+<p><code>“慢慢走，欣赏啊！”——朱光潜《谈美》</code></p>
+]]></content>
+      <tags>
+        <tag>思考</tag>
+        <tag>短篇</tag>
       </tags>
   </entry>
   <entry>
