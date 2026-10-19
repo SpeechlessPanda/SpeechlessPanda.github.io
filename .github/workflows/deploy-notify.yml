@@ -16,24 +16,29 @@ name: Deploy Notify
 # 「Deploy Blog From Source」跑在源仓 blog-s-code，而本文件在发布仓
 # SpeechlessPanda.github.io，跨仓监听不会产生任何事件（实测：静默不触发，
 # Actions 页面无运行记录）。因此这里监听发布仓自己的
-# 「pages build and deployment」—— 它由发布仓内容变更触发，与部署成功落地
-# 严格同时发生，是同仓可监听的正确信号。retry-pages-deploy.yml 同理。
+# 触发器选择（三次踩坑后的结论）：
+#   1. workflow_run 监听「Deploy Blog From Source」→ 跨仓，GitHub 不产生该事件，静默失败。
+#      约束：workflow_run 只能监听**同一仓库**内的 workflow 运行。
+#   2. 改监听发布仓的「pages build and deployment」（dynamic workflow，同仓合法）
+#      → 配置正确、事件也确实发生，但仍未触发。原因是 GitHub 对 workflow_run
+#      的监听有"仅追踪事件前已存在于默认分支的 workflow"约束，与本文件
+#      自身被部署同步进来的时机存在竞态，新文件在首次落地时抓不到事件。
+#   3. 最终改用 push 事件：与 search-engine-ping.yml 完全同构，同样由源仓部署
+#      推送到发布仓 main 时触发，实测可靠。部署落地 = 一次 push，语义等价。
 #
 # 同步：由 scripts/events/sync_comment_notify_workflow.js 同步到发布仓
 # SpeechlessPanda.github.io 并在那里激活（SMTP secrets 也在发布仓）。
 
 on:
-  workflow_run:
-    workflows:
-      - pages build and deployment
-    types:
-      - completed
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   notify:
     runs-on: ubuntu-latest
-    # 仅发布仓运行：SMTP secrets 在此仓。手动触发时跳过 workflow_run 分支判断。
+    # 仅发布仓运行：SMTP secrets 在此仓。源仓同步进来的这份会被此守卫跳过。
     if: github.repository == 'SpeechlessPanda/SpeechlessPanda.github.io'
     permissions:
       contents: read
@@ -45,7 +50,17 @@ jobs:
           CONCLUSION: ${{ github.event_name == 'workflow_dispatch' && 'success' || github.event.workflow_run.conclusion }}
           SOURCE_SHA: ${{ github.event.workflow_run.head_sha }}
           RUN_ID: ${{ github.event.workflow_run.id }}
+          # push 场景：部署落地即推送，取推送 commit 作为发布 sha
+          PUSH_SHA: ${{ github.event_name == 'workflow_dispatch' && '' || github.sha }}
         run: |
+          # push 事件即代表部署已成功落地（内容已推到发布仓 main），无需等 workflow_run
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "conclusion=success" >> "$GITHUB_OUTPUT"
+            echo "status=success" >> "$GITHUB_OUTPUT"
+            echo "publish_sha=${PUSH_SHA:0:7}" >> "$GITHUB_OUTPUT"
+            echo "display_sha=${PUSH_SHA:0:7}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           if [ -z "$CONCLUSION" ]; then
             echo "conclusion=" >> "$GITHUB_OUTPUT"
             echo "status=skipped" >> "$GITHUB_OUTPUT"
@@ -95,17 +110,17 @@ jobs:
           subject: >-
             ${{ steps.result.outputs.status == 'success'
                 && format('[博客部署成功] {0}', steps.result.outputs.display_sha)
-                || format('[博客部署失败] {0}', github.event.workflow_run.head_branch || 'main') }}
+                || format('[博客部署失败] {0}', github.ref_name) }}
           html_body: |
             <h2>${{ steps.result.outputs.status == 'success' && '博客部署成功' || '博客部署失败' }}</h2>
             <table cellpadding="6" style="border-collapse:collapse;font-family:monospace">
               <tr><td><strong>结果</strong></td><td>${{ steps.result.outputs.status }}</td></tr>
               <tr><td><strong>发布仓</strong></td><td>SpeechlessPanda/SpeechlessPanda.github.io</td></tr>
               <tr><td><strong>源仓</strong></td><td>SpeechlessPanda/blog-s-code</td></tr>
-              <tr><td><strong>发布 commit</strong></td><td>${{ steps.result.outputs.publish_sha || steps.result.outputs.display_sha }}</td></tr>
-              <tr><td><strong>源仓 commit</strong></td><td>${{ github.event.workflow_run.head_sha || github.sha }}</td></tr>
-              <tr><td><strong>触发分支</strong></td><td>${{ github.event.workflow_run.head_branch || 'main' }}</td></tr>
-              <tr><td><strong>部署运行</strong></td><td><a href="https://github.com/SpeechlessPanda/blog-s-code/actions/runs/${{ github.event.workflow_run.id }}">#${{ github.event.workflow_run.id }}</a></td></tr>
+              <tr><td><strong>发布 commit</strong></td><td>${{ steps.result.outputs.display_sha }}</td></tr>
+              <tr><td><strong>触发分支</strong></td><td>${{ github.ref_name }}</td></tr>
+              <tr><td><strong>提交</strong></td><td>${{ github.event.head_commit.message || github.sha }}</td></tr>
+              <tr><td><strong>本次运行</strong></td><td><a href="https://github.com/SpeechlessPanda/SpeechlessPanda.github.io/actions/runs/${{ github.run_id }}">#${{ github.run_id }}</a></td></tr>
             </table>
             <p>站点：<a href="https://speechlesspanda.github.io">https://speechlesspanda.github.io</a></p>
             <hr/>
