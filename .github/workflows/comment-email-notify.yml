@@ -34,7 +34,10 @@ jobs:
           test -n "${{ secrets.MAIL_TO }}" || (echo "Missing MAIL_TO" && exit 1)
 
       - name: Send comment notification email
-        uses: dawidd6/action-send-mail@v4
+        # v22 起 action 基于 node24（v4 是 node20，已触发 GitHub 弃用警告，
+        # 未来移除强制兼容后会直接失败）。注意 v20 起有 BREAKING CHANGE：
+        # HTTP_PROXY 不再被读取，改用 SMTP_PROXY 环境变量；本 workflow 不走代理，无影响。
+        uses: dawidd6/action-send-mail@v22
         with:
           server_address: ${{ secrets.SMTP_SERVER }}
           server_port: ${{ secrets.SMTP_PORT }}

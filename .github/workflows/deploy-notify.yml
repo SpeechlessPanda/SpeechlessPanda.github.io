@@ -1,0 +1,106 @@
+name: Deploy Notify
+
+# 部署结果邮件通知。
+#
+# 背景：2026-10-15 GitHub 官方下线了「仓库 push 邮件通知」功能（理由是反垃圾/防滥用，
+# 收件人从未获得同意）。此前 blog 每次部署成功后收到的那封
+#   "[SpeechlessPanda/SpeechlessPanda.github.io] 69b284: deploy: ..." 邮件
+# 来自 github-actions[bot]<noreply@github.com>，属于该原生功能，不是自建 SMTP。
+# 该功能下线后不再有邮件，故此处用 Actions + 自有 SMTP 复刻该通知能力。
+# 官方替代建议：https://github.blog/changelog/2026-10-15-email-notifications-for-repository-push-events-have-been-retired
+#
+# 职责边界：只发部署结果通知，不参与部署本身。
+# 部署本体由 deploy-from-source.yml 完成；失败通知需要在部署失败时也能发出，
+# 因此这里用 workflow_run 监听而非在部署内部加步骤——后者失败后邮件也会一起丢掉。
+#
+# 同步：由 scripts/events/sync_comment_notify_workflow.js 同步到发布仓
+# SpeechlessPanda.github.io 并在那里激活（SMTP secrets 也在发布仓）。
+
+on:
+  workflow_run:
+    workflows:
+      - Deploy Blog From Source
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    # 仅发布仓运行：SMTP secrets 在此仓。手动触发时跳过 workflow_run 分支判断。
+    if: github.repository == 'SpeechlessPanda/SpeechlessPanda.github.io'
+    permissions:
+      contents: read
+    steps:
+      - name: Resolve deployment result
+        id: result
+        env:
+          # workflow_dispatch 时 github.event.workflow_run 不存在，表达式退化为空
+          CONCLUSION: ${{ github.event_name == 'workflow_dispatch' && 'success' || github.event.workflow_run.conclusion }}
+          SOURCE_SHA: ${{ github.event.workflow_run.head_sha }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          if [ -z "$CONCLUSION" ]; then
+            echo "conclusion=" >> "$GITHUB_OUTPUT"
+            echo "status=skipped" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "conclusion=$CONCLUSION" >> "$GITHUB_OUTPUT"
+          if [ "$CONCLUSION" = "success" ]; then
+            echo "status=success" >> "$GITHUB_OUTPUT"
+          else
+            echo "status=failure" >> "$GITHUB_OUTPUT"
+          fi
+          # 部署成功后到发布仓取真实 commit 短 sha，比源仓 head_sha 更有意义
+          short=""
+          if [ "$CONCLUSION" = "success" ] && [ -n "$SOURCE_SHA" ]; then
+            short=$(gh api "repos/SpeechlessPanda/SpeechlessPanda.github.io/commits/main" --jq '.sha[0:7]' 2>/dev/null || echo "")
+          fi
+          echo "publish_sha=${short}" >> "$GITHUB_OUTPUT"
+
+      - name: Skip when no deployment result
+        if: steps.result.outputs.status == 'skipped'
+        run: echo "::notice::未获取到部署运行结果,跳过通知"
+
+      - name: Validate required secrets
+        if: steps.result.outputs.status != 'skipped'
+        run: |
+          test -n "${{ secrets.SMTP_SERVER }}"  || (echo "Missing SMTP_SERVER"  && exit 1)
+          test -n "${{ secrets.SMTP_PORT }}"    || (echo "Missing SMTP_PORT"    && exit 1)
+          test -n "${{ secrets.SMTP_USERNAME }}" || (echo "Missing SMTP_USERNAME" && exit 1)
+          test -n "${{ secrets.SMTP_PASSWORD }}" || (echo "Missing SMTP_PASSWORD" && exit 1)
+          test -n "${{ secrets.MAIL_FROM }}"     || (echo "Missing MAIL_FROM"     && exit 1)
+          test -n "${{ secrets.MAIL_TO }}"       || (echo "Missing MAIL_TO"       && exit 1)
+
+      - name: Send deployment notification email
+        if: steps.result.outputs.status != 'skipped'
+        uses: dawidd6/action-send-mail@v22
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          secure: true
+          from: ${{ secrets.MAIL_FROM }}
+          to: ${{ secrets.MAIL_TO }}
+          subject: >-
+            ${{ steps.result.outputs.status == 'success'
+                && format('[博客部署成功] {0}', steps.result.outputs.publish_sha || github.sha)
+                || format('[博客部署失败] {0}', github.event.workflow_run.head_branch || 'main') }}
+          html_body: |
+            <h2>${{ steps.result.outputs.status == 'success' && '博客部署成功' || '博客部署失败' }}</h2>
+            <table cellpadding="6" style="border-collapse:collapse;font-family:monospace">
+              <tr><td><strong>结果</strong></td><td>${{ steps.result.outputs.status }}</td></tr>
+              <tr><td><strong>发布仓</strong></td><td>SpeechlessPanda/SpeechlessPanda.github.io</td></tr>
+              <tr><td><strong>源仓</strong></td><td>SpeechlessPanda/blog-s-code</td></tr>
+              <tr><td><strong>发布 commit</strong></td><td>${{ steps.result.outputs.publish_sha || 'N/A' }}</td></tr>
+              <tr><td><strong>源仓 commit</strong></td><td>${{ github.event.workflow_run.head_sha || github.sha }}</td></tr>
+              <tr><td><strong>触发分支</strong></td><td>${{ github.event.workflow_run.head_branch || 'main' }}</td></tr>
+              <tr><td><strong>部署运行</strong></td><td><a href="https://github.com/SpeechlessPanda/blog-s-code/actions/runs/${{ github.event.workflow_run.id }}">#${{ github.event.workflow_run.id }}</a></td></tr>
+            </table>
+            <p>站点：<a href="https://speechlesspanda.github.io">https://speechlesspanda.github.io</a></p>
+            <hr/>
+            <p style="color:#888;font-size:12px">
+              这封邮件替代了 GitHub 于 2026-10-15 下线的仓库 push 原生通知邮件。<br/>
+              Repository: ${{ github.repository }}
+            </p>
