@@ -23,6 +23,7 @@
 - **Giscus 评论**：基于 GitHub Discussions，支持 Reactions、多语言、暗色模式联动
 - **碎碎念每条可独立评论**：同页多条评论区用独立 iframe 直嵌 giscus `/widget`（绕过 client.js 单例），每条对应一个 Giscus discussion；登录态写入 localStorage（`giscus-session`，与官方 client.js 格式一致），iframe 回传 session 失效错误时自动清除并按未登录态重载，避免过期 session 触发 `oauth/token` 400 导致整条评论区空白；giscus.app 被广告拦截/跟踪防护屏蔽时，每条评论区常驻"在新标签页打开评论 ↗"一键出口
 - **评论邮件通知**：`comment-email-notify.yml` 监听 `discussion`（首评/新建讨论）与 `discussion_comment`（后续回复），有评论即通过 QQ SMTP 自动发邮件通知作者（在发布仓运行）
+- **部署邮件通知**：`deploy-notify.yml` 在发布仓由 `push` 事件触发，每次部署落地后经 QQ SMTP 发一封结果邮件（主题 `[博客部署成功] <短sha>`）。这是 GitHub 于 2026-10-15 下线「仓库 push 原生邮件通知」后的替代方案——此前收到的 `[SpeechlessPanda.github.io] xxx: deploy: ...` 邮件来自 `github-actions[bot]<noreply@github.com>`，属该原生功能，现已不再由GitHub 发送
 - **评论触发重建**：新评论到达时，`comment-email-notify.yml` 还会向源仓派发 `repository_dispatch`（`rebuild-on-comment`），`deploy-from-source.yml` 监听该事件自动重建，刷新碎碎念/文章的 `commentCount`，让有评论的碎碎念评论区自动展开（否则要等下次推送）。需在发布仓配置 `SOURCE_DEPLOY_PAT`（对源仓有 Actions:write 权限的 PAT）；未配置则跳过，不影响邮件通知
 
 ### 📊 统计与分析
@@ -116,6 +117,7 @@ blog/
 │   ├── deploy-from-source.yml        # push → 自动构建并部署到发布仓(设 exclude_assets="" 把 .github/workflows 一起带过去)
 │   ├── retry-pages-deploy.yml        # 发布仓 pages 部署失败时自动重跑（同步到发布仓运行，源仓里被守卫跳过）
 │   ├── comment-email-notify.yml      # Giscus 评论(首评+回复)→ 邮件通知(在发布仓运行)
+│   ├── deploy-notify.yml             # 发布仓 push → 部署结果邮件通知(替代已下线的 GitHub 原生 push 邮件)
 │   └── search-engine-ping.yml        # 发布仓部署后 ping 搜索引擎(在发布仓运行)
 ├── docs/superpowers/                 # 设计文档与实现计划
 ├── fonts/                            # OG 字体（构建时下载，gitignore）
