@@ -57,6 +57,9 @@ jobs:
             short=$(gh api "repos/SpeechlessPanda/SpeechlessPanda.github.io/commits/main" --jq '.sha[0:7]' 2>/dev/null || echo "")
           fi
           echo "publish_sha=${short}" >> "$GITHUB_OUTPUT"
+          # 展示用短 sha：优先发布仓 commit，取不到时退回本次运行的源仓 commit
+          display="${short:-${GITHUB_SHA:0:7}}"
+          echo "display_sha=${display}" >> "$GITHUB_OUTPUT"
 
       - name: Skip when no deployment result
         if: steps.result.outputs.status == 'skipped'
@@ -85,7 +88,7 @@ jobs:
           to: ${{ secrets.MAIL_TO }}
           subject: >-
             ${{ steps.result.outputs.status == 'success'
-                && format('[博客部署成功] {0}', steps.result.outputs.publish_sha || github.sha)
+                && format('[博客部署成功] {0}', steps.result.outputs.display_sha)
                 || format('[博客部署失败] {0}', github.event.workflow_run.head_branch || 'main') }}
           html_body: |
             <h2>${{ steps.result.outputs.status == 'success' && '博客部署成功' || '博客部署失败' }}</h2>
@@ -93,7 +96,7 @@ jobs:
               <tr><td><strong>结果</strong></td><td>${{ steps.result.outputs.status }}</td></tr>
               <tr><td><strong>发布仓</strong></td><td>SpeechlessPanda/SpeechlessPanda.github.io</td></tr>
               <tr><td><strong>源仓</strong></td><td>SpeechlessPanda/blog-s-code</td></tr>
-              <tr><td><strong>发布 commit</strong></td><td>${{ steps.result.outputs.publish_sha || 'N/A' }}</td></tr>
+              <tr><td><strong>发布 commit</strong></td><td>${{ steps.result.outputs.publish_sha || steps.result.outputs.display_sha }}</td></tr>
               <tr><td><strong>源仓 commit</strong></td><td>${{ github.event.workflow_run.head_sha || github.sha }}</td></tr>
               <tr><td><strong>触发分支</strong></td><td>${{ github.event.workflow_run.head_branch || 'main' }}</td></tr>
               <tr><td><strong>部署运行</strong></td><td><a href="https://github.com/SpeechlessPanda/blog-s-code/actions/runs/${{ github.event.workflow_run.id }}">#${{ github.event.workflow_run.id }}</a></td></tr>
