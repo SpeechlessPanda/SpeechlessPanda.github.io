@@ -10,8 +10,14 @@ name: Deploy Notify
 # 官方替代建议：https://github.blog/changelog/2026-10-15-email-notifications-for-repository-push-events-have-been-retired
 #
 # 职责边界：只发部署结果通知，不参与部署本身。
-# 部署本体由 deploy-from-source.yml 完成；失败通知需要在部署失败时也能发出，
-# 因此这里用 workflow_run 监听而非在部署内部加步骤——后者失败后邮件也会一起丢掉。
+# 部署本体由源仓 deploy-from-source.yml 完成，本workflow 只被动监听结果。
+#
+# 关键约束：GitHub 的 workflow_run **只能监听与本 workflow 文件同一仓库中的运行**。
+# 「Deploy Blog From Source」跑在源仓 blog-s-code，而本文件在发布仓
+# SpeechlessPanda.github.io，跨仓监听不会产生任何事件（实测：静默不触发，
+# Actions 页面无运行记录）。因此这里监听发布仓自己的
+# 「pages build and deployment」—— 它由发布仓内容变更触发，与部署成功落地
+# 严格同时发生，是同仓可监听的正确信号。retry-pages-deploy.yml 同理。
 #
 # 同步：由 scripts/events/sync_comment_notify_workflow.js 同步到发布仓
 # SpeechlessPanda.github.io 并在那里激活（SMTP secrets 也在发布仓）。
@@ -19,7 +25,7 @@ name: Deploy Notify
 on:
   workflow_run:
     workflows:
-      - Deploy Blog From Source
+      - pages build and deployment
     types:
       - completed
   workflow_dispatch:
