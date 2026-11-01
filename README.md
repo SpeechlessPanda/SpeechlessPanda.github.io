@@ -206,13 +206,25 @@ pnpm exec hexo new --series "大学道路入门" "第一章"    # source/_posts/
 ### 一次性配置
 
 在源码仓库 `Settings → Secrets and variables → Actions` 新增 Secret：
-- `PAGES_DEPLOY_TOKEN`：GitHub PAT（classic），至少勾选 `repo`（用于向发布仓库推送）
+- `PAGES_DEPLOY_TOKEN`：GitHub PAT（classic），至少勾选 `repo`
+  （用于向发布仓库推送，并在部署后回读发布仓的 Pages 构建状态做校验）
 
 ### 日常更新
 
 1. 任意设备 `clone` 源码仓库
 2. 修改文章 / 配置后提交并 push 到 `main`
 3. Actions 自动构建并部署
+
+> **部署 ≠ 上线。** 构建产物 push 到发布仓后，还要等发布仓的
+> `pages build and deployment` 真正跑完才算生效。该构建偶尔会因上一次部署
+> 残留的 `in-progress` 锁而被 400 拒绝，那时源仓仍显示 success、站点却停在旧版本。
+> `Deploy Blog From Source` 末尾的 `Verify Pages deployment` 会轮询发布仓的构建结果，
+> 失败即让本次运行失败并给出失败运行链接。修复方式：
+>
+> ```bash
+> gh run rerun <失败的 pages-build-deployment 运行 ID> \
+>   --repo SpeechlessPanda/SpeechlessPanda.github.io --failed
+> ```
 
 ---
 
