@@ -54,35 +54,6 @@
       </tags>
   </entry>
   <entry>
-    <title>hello world!</title>
-    <url>/2026/03/08/hello%20world/</url>
-    <content><![CDATA[<p>我高考专业是在知道自己不想选什么，然后在剩下的里面挑一个的情况下，选择了计算机。一开始并没有什么兴趣可言，直到我接触了很多种语言之后，反复在每种语言学习的一开始，输出一个“ hello world ”。我开始觉得技术是一件很有意思的事，甚至有一瞬间觉得是神圣的。这算是我对计算机的热情和兴趣被点燃的时刻，为了纪念这一时刻，有了这一短篇。我将在这里，用各种我学过的语言输出一遍“ hello world !”。</p>
-<p>本文并非是专业技术性博客。只要我学过，且我想，就会出现。为了读起来方便一点，下面按编程语言、标记语言和 Shell 语言分了组。由于标记语言的展示形式多样，本文统一采用正文格式，或随机一种格式。</p>
-<p>然后因为我学的语言会越来越多，所以这个短篇理论上永不完结（也有可能变成一个小长篇）。</p>
-<h2 id="编程语言"><a class="markdownIt-Anchor" href="#编程语言"></a> 编程语言</h2>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello world!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;hello world!&quot;</span> &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world!&quot;</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight rust"><table><tr><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="标记语言"><a class="markdownIt-Anchor" href="#标记语言"></a> 标记语言</h2>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>hello world!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>hello world!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>&#123;article&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">hello world!</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">hello world!</span><br></pre></td></tr></table></figure>
-<figure class="highlight typst"><table><tr><td class="code"><pre><span class="line">hello world!</span><br></pre></td></tr></table></figure>
-<h2 id="shell-语言"><a class="markdownIt-Anchor" href="#shell-语言"></a> Shell 语言</h2>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello world!&quot;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> hello world!</span><br></pre></td></tr></table></figure>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Write-Host</span> <span class="string">&quot;hello world!&quot;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight fish"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello world!&quot;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>短篇</tag>
-        <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cpp bestpractice</title>
     <url>/2026/08/25/cpp-bestpractice/</url>
     <content><![CDATA[<blockquote>
@@ -482,6 +453,35 @@
 <p>将这些实践融入日常编码，会让你的 C++ 代码更健壮、更易读，也更容易维护。</p>
 ]]></content>
       <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hello world!</title>
+    <url>/2026/03/08/hello%20world/</url>
+    <content><![CDATA[<p>我高考专业是在知道自己不想选什么，然后在剩下的里面挑一个的情况下，选择了计算机。一开始并没有什么兴趣可言，直到我接触了很多种语言之后，反复在每种语言学习的一开始，输出一个“ hello world ”。我开始觉得技术是一件很有意思的事，甚至有一瞬间觉得是神圣的。这算是我对计算机的热情和兴趣被点燃的时刻，为了纪念这一时刻，有了这一短篇。我将在这里，用各种我学过的语言输出一遍“ hello world !”。</p>
+<p>本文并非是专业技术性博客。只要我学过，且我想，就会出现。为了读起来方便一点，下面按编程语言、标记语言和 Shell 语言分了组。由于标记语言的展示形式多样，本文统一采用正文格式，或随机一种格式。</p>
+<p>然后因为我学的语言会越来越多，所以这个短篇理论上永不完结（也有可能变成一个小长篇）。</p>
+<h2 id="编程语言"><a class="markdownIt-Anchor" href="#编程语言"></a> 编程语言</h2>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello world!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;hello world!&quot;</span> &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world!&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="标记语言"><a class="markdownIt-Anchor" href="#标记语言"></a> 标记语言</h2>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>hello world!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>hello world!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>&#123;article&#125;</span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line">hello world!</span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">hello world!</span><br></pre></td></tr></table></figure>
+<figure class="highlight typst"><table><tr><td class="code"><pre><span class="line">hello world!</span><br></pre></td></tr></table></figure>
+<h2 id="shell-语言"><a class="markdownIt-Anchor" href="#shell-语言"></a> Shell 语言</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello world!&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> hello world!</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Write-Host</span> <span class="string">&quot;hello world!&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight fish"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello world!&quot;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>短篇</tag>
         <tag>技术</tag>
       </tags>
   </entry>
