@@ -5636,6 +5636,52 @@ figure.highlight pre .javascript .function {
   line-height: 1em;
   border-radius: 3px;
 }
+.container [id] {
+  scroll-margin-top: var(--panda-anchor-offset, 70px);
+}
+.container a.headerlink {
+  margin-left: 0.35em;
+  color: #49b1f5;
+  font-weight: normal;
+  text-decoration: none;
+  opacity: 0.25;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
+  filter: alpha(opacity=25);
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  -ms-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+}
+.container a.headerlink:hover {
+  text-decoration: none;
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+.container :is(h1,
+.container h2,
+.container h3,
+.container h4,
+.container h5,
+.container h6):hover > a.headerlink,
+.container a.headerlink:focus-visible {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+@media (hover: none) {
+  .container a.headerlink {
+    opacity: 0.5;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=50);
+  }
+}
+@media print {
+  .container a.headerlink {
+    display: none;
+  }
+}
 .container ol ol,
 .container ul ol,
 .container ol ul,
