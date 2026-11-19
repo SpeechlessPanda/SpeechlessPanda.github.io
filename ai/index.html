@@ -1,0 +1,501 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>AI 阅读导航 | SpeechlessPanda</title><meta name="author" content="SpeechlessPanda"><meta name="copyright" content="SpeechlessPanda"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="SpeechlessPanda&#39;s blog about programming, technology, and life.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI 阅读导航">
+<meta property="og:url" content="https://speechlesspanda.github.io/ai/index.html">
+<meta property="og:site_name" content="SpeechlessPanda">
+<meta property="og:description" content="SpeechlessPanda&#39;s blog about programming, technology, and life.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://speechlesspanda.github.io/img/avatar.png">
+<meta property="article:author" content="SpeechlessPanda">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://speechlesspanda.github.io/img/avatar.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://speechlesspanda.github.io/ai/index.html"><link rel="describedby" type="text/plain" href="/llms.txt"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=1.1.10"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const start = 6
+              const end = 18
+              const isNight =
+                start < end
+                    ? hour < start || hour >= end
+                    : hour >= start || hour < end
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":320,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  anchor: {
+    copyLink: true,
+    clickToScroll: false
+  },
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'AI 阅读导航',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'ai-portal'
+}</script><style>
+    #page-header.full_page,
+    #page-header.post-bg,
+    #page-header.not-home-page {
+      background-image: linear-gradient(135deg, #4facfe 0%, #6ec6ff 25%, #a18cd1 55%, #fbc2eb 75%, #ffd2a8 100%) !important;
+      background-size: cover;
+      background-position: center;
+    }
+    #page-header.not-top-img { background: linear-gradient(135deg, #4facfe 0%, #6ec6ff 25%, #a18cd1 55%, #fbc2eb 75%, #ffd2a8 100%) !important; }
+    #page-header.full_page:before,
+    #page-header.post-bg:before,
+    #page-header.not-home-page:before,
+    #page-header.not-top-img:before { background: linear-gradient(180deg, rgba(26, 73, 118, 0.08) 0%, rgba(60, 66, 122, 0.16) 100%) !important; }
+    #page-header.full_page #site-title,
+    #page-header.full_page #site-subtitle,
+    #page-header.full_page #subtitle,
+    #page-header.post-bg #post-info .post-title,
+    #page-header.post-bg #post-meta,
+    #page-header.post-bg #post-meta a,
+    #page-header.nav-fixed #nav a,
+    #page-header #nav .site-page,
+    #page-header #nav .menus_item_child li a {
+      color: #ffffff !important;
+      text-shadow: 0 2px 12px rgba(28, 58, 92, 0.38);
+    }
+    #page-header.not-top-img #nav .site-page,
+    #page-header.not-top-img #nav #toggle-menu,
+    #page-header.not-top-img #nav #search-button,
+    #page-header.not-top-img #nav #nav-right div,
+    #page-header.not-top-img #nav .menus_item_child li a { color: #ffffff !important; }
+    [data-theme='dark'] #page-header.full_page,
+    [data-theme='dark'] #page-header.post-bg,
+    [data-theme='dark'] #page-header.not-home-page { background-image: linear-gradient(135deg, #020024 0%, #090979 25%, #1a2440 50%, #5b425d 75%, #9d4edd 100%) !important; }
+    [data-theme='dark'] #page-header.not-top-img { background: linear-gradient(135deg, #020024 0%, #090979 25%, #1a2440 50%, #5b425d 75%, #9d4edd 100%) !important; }
+    [data-theme='dark'] #page-header.full_page:before,
+    [data-theme='dark'] #page-header.post-bg:before,
+    [data-theme='dark'] #page-header.not-home-page:before,
+    [data-theme='dark'] #page-header.not-top-img:before { background: linear-gradient(180deg, rgba(6, 12, 24, 0.2) 0%, rgba(6, 12, 24, 0.38) 100%) !important; }
+    [data-theme='dark'] #page-header.full_page #site-title,
+    [data-theme='dark'] #page-header.full_page #site-subtitle,
+    [data-theme='dark'] #page-header.full_page #subtitle,
+    [data-theme='dark'] #page-header.post-bg #post-info .post-title,
+    [data-theme='dark'] #page-header.post-bg #post-meta,
+    [data-theme='dark'] #page-header.post-bg #post-meta a,
+    [data-theme='dark'] #page-header.nav-fixed #nav a,
+    [data-theme='dark'] #page-header #nav .site-page,
+    [data-theme='dark'] #page-header #nav .menus_item_child li a {
+      color: #eaf4ff !important;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.42);
+    }
+    [data-theme='dark'] #page-header.not-top-img #nav .site-page,
+    [data-theme='dark'] #page-header.not-top-img #nav #toggle-menu,
+    [data-theme='dark'] #page-header.not-top-img #nav #search-button,
+    [data-theme='dark'] #page-header.not-top-img #nav #nav-right div,
+    [data-theme='dark'] #page-header.not-top-img #nav .menus_item_child li a { color: #eaf4ff !important; }
+    .read-mode #page-header.post-bg {
+      background-image: linear-gradient(135deg, #4facfe 0%, #6ec6ff 25%, #a18cd1 55%, #fbc2eb 75%, #ffd2a8 100%) !important;
+      background-size: cover !important;
+      background-position: center !important;
+    }
+    .read-mode #page-header.post-bg:before { opacity: 1 !important; background: linear-gradient(180deg, rgba(26, 73, 118, 0.08) 0%, rgba(60, 66, 122, 0.16) 100%) !important; }
+    [data-theme='dark'] .read-mode #page-header.post-bg { background-image: linear-gradient(135deg, #020024 0%, #090979 25%, #1a2440 50%, #5b425d 75%, #9d4edd 100%) !important; }
+    [data-theme='dark'] .read-mode #page-header.post-bg:before { opacity: 1 !important; background: linear-gradient(180deg, rgba(6, 12, 24, 0.2) 0%, rgba(6, 12, 24, 0.38) 100%) !important; }
+  
+
+    #web_bg { background: linear-gradient(180deg, #f3f9ff 0%, #edf2ff 55%, #fff8f3 100%); }
+    [data-theme='dark'] #web_bg { background: linear-gradient(180deg, #0a0a1a 0%, #11132e 55%, #1a1529 100%); }
+  
+
+  #page-header.nav-fixed #nav,
+  #page-header.not-top-img.nav-fixed #nav {
+    background: linear-gradient(135deg, rgba(79, 172, 254, 0.96) 0%, rgba(161, 140, 209, 0.96) 55%, rgba(255, 210, 168, 0.96) 100%) !important;
+    box-shadow: 0 8px 20px rgba(38, 79, 126, 0.2) !important;
+    backdrop-filter: saturate(130%) blur(6px);
+    -webkit-backdrop-filter: saturate(130%) blur(6px);
+  }
+  #page-header.nav-fixed #nav a,
+  #page-header.nav-fixed #nav .site-page,
+  #page-header.nav-fixed #nav .site-name,
+  #page-header.nav-fixed #nav #toggle-menu,
+  #page-header.nav-fixed #nav #search-button,
+  #page-header.nav-fixed #nav #nav-right div,
+  #page-header.nav-fixed #nav .menus_item_child li a {
+    color: #ffffff !important;
+    text-shadow: 0 2px 12px rgba(28, 58, 92, 0.38);
+  }
+  [data-theme='dark'] #page-header.nav-fixed #nav,
+  [data-theme='dark'] #page-header.not-top-img.nav-fixed #nav {
+    background: linear-gradient(135deg, rgba(2, 0, 36, 0.96) 0%, rgba(26, 36, 64, 0.96) 50%, rgba(157, 78, 221, 0.96) 100%) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35) !important;
+    backdrop-filter: saturate(120%) blur(6px);
+    -webkit-backdrop-filter: saturate(120%) blur(6px);
+  }
+  [data-theme='dark'] #page-header.nav-fixed #nav a,
+  [data-theme='dark'] #page-header.nav-fixed #nav .site-page,
+  [data-theme='dark'] #page-header.nav-fixed #nav .site-name,
+  [data-theme='dark'] #page-header.nav-fixed #nav #toggle-menu,
+  [data-theme='dark'] #page-header.nav-fixed #nav #search-button,
+  [data-theme='dark'] #page-header.nav-fixed #nav #nav-right div,
+  [data-theme='dark'] #page-header.nav-fixed #nav .menus_item_child li a {
+    color: #eaf4ff !important;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.42);
+  }
+
+
+    #footer { background: linear-gradient(135deg, #4facfe 0%, #6ec6ff 25%, #a18cd1 55%, #fbc2eb 75%, #ffd2a8 100%) !important; }
+    #footer::before { background: rgba(255, 255, 255, 0.1) !important; }
+    #footer-wrap, #footer-wrap a { color: #eaf6ff !important; }
+    [data-theme='dark'] #footer { background: linear-gradient(135deg, #020024 0%, #090979 25%, #1a2440 50%, #5b425d 75%, #9d4edd 100%) !important; }
+    [data-theme='dark'] #footer::before { background: rgba(0, 0, 0, 0.24) !important; }
+    [data-theme='dark'] #footer-wrap,
+    [data-theme='dark'] #footer-wrap a { color: #d8e9f7 !important; }
+  </style><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" media="print" onload="this.media='all'">
+<style>
+  /* 头像旋转放慢到 8s */
+  .avatar-img { animation: avatar_turn_around 8s linear infinite !important; }
+  /* 文章正文字号略放大 */
+  #post #article-container { font-size: 1.15em; }
+</style>
+<link rel="alternate" type="application/atom+xml" title="SpeechlessPanda" href="/atom.xml"><meta name="generator" content="Hexo 8.1.2"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-feather-alt"></i><span> 博客</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/memos/"><i class="fa-fw fas fa-comment-dots"></i><span> 碎碎念</span></a></div></div></div></div><div class="page type-ai_portal" id="body-wrap"><header class="not-home-page fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">SpeechlessPanda</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-feather-alt"></i><span> 博客</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/memos/"><i class="fa-fw fas fa-comment-dots"></i><span> 碎碎念</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">AI 阅读导航</h1></div></header><main class="layout" id="content-inner"><div class="ai-portal" id="page"><div class="container" id="article-container"><section class="ai-portal-hero"><h1 class="ai-portal-hero__title">AI 阅读导航</h1><p class="ai-portal-hero__intro">这是一个以中文写作的个人博客,作者是在读计算机专业学生。内容以独立文章和系列两种形式组织: 独立文章按发布时间归档,主题覆盖 AI、编程、成长、观点、方法与生活;系列以文件夹归组, 有聚合页与按写作顺序排列的章节。碎碎念是短动态时间线,保持 noindex,不进入对外索引。</p><p class="ai-portal-hero__bio">由 SpeechlessPanda 维护。</p><ul class="ai-portal-topics"><li><span class="ai-portal-topic__name">AI</span><span class="ai-portal-topic__note">AI 工具、agent 工程与行业观察。</span></li><li><span class="ai-portal-topic__name">编程</span><span class="ai-portal-topic__note">C++ / Rust 语言实践、架构与设计模式、vibe coding 复盘。</span></li><li><span class="ai-portal-topic__name">成长</span><span class="ai-portal-topic__note">大学阶段的学习路径、选择与信息差。</span></li><li><span class="ai-portal-topic__name">观点</span><span class="ai-portal-topic__note">对技术与社会变化的个人判断。</span></li><li><span class="ai-portal-topic__name">方法</span><span class="ai-portal-topic__note">可复用的做事方式与思考框架。</span></li><li><span class="ai-portal-topic__name">知识</span><span class="ai-portal-topic__note">整理型长文与速查资料。</span></li><li><span class="ai-portal-topic__name">生活</span><span class="ai-portal-topic__note">阅读、比赛与日常记录。</span></li><li><span class="ai-portal-topic__name">叙事</span><span class="ai-portal-topic__note">以故事形式写下的经历。</span></li></ul></section><section class="ai-portal-section"><h2>精选文章</h2><ul class="ai-portal-list"><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/03/01/%E7%BB%83%E4%B9%A0%E6%97%B6%E9%95%BF%E4%B8%80%E5%B9%B4%E5%8D%8A%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%9C%89%E6%84%9F/">练习时长一年半大学生有感</a><time class="ai-portal-item__date" datetime="2026-03-01">2026-03-01</time><a class="ai-portal-item__md" href="/2026/03/01/%E7%BB%83%E4%B9%A0%E6%97%B6%E9%95%BF%E4%B8%80%E5%B9%B4%E5%8D%8A%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%9C%89%E6%84%9F/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/09/05/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%80%EF%BC%89/">大学道路入门（一）</a><time class="ai-portal-item__date" datetime="2026-09-05">2026-09-05</time><a class="ai-portal-item__md" href="/2026/09/05/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%80%EF%BC%89/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/06/06/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">代码品味与架构设计</a><time class="ai-portal-item__date" datetime="2026-06-06">2026-06-06</time><a class="ai-portal-item__md" href="/2026/06/06/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/04/12/%E5%AF%B9%20BFE%20%E6%9E%84%E5%BB%BA%E6%80%9D%E8%B7%AF%E7%9A%84%E9%87%8D%E6%80%9D%E8%80%83/">对 BFE 构建思路的重思考</a><time class="ai-portal-item__date" datetime="2026-04-12">2026-04-12</time><a class="ai-portal-item__md" href="/2026/04/12/%E5%AF%B9%20BFE%20%E6%9E%84%E5%BB%BA%E6%80%9D%E8%B7%AF%E7%9A%84%E9%87%8D%E6%80%9D%E8%80%83/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/08/25/cpp-bestpractice/">cpp bestpractice</a><time class="ai-portal-item__date" datetime="2026-08-25">2026-08-25</time><p class="ai-portal-item__desc">本文摘取 learncpp 教程中的 规则 、 最佳实践 和 警告 部分构成（由笔者手动复制粘贴）。像所有最佳实践一样，本文内容应作为 指导方针 ，而不是绝对的教条。在遵循它们的同时，请始终结合具体场景进行判断。 全文共 218 条规则，按 31 个主题分组整理。点击各主题标题即可展开查看，文末附有核心原则速览表。</p><a class="ai-portal-item__md" href="/2026/08/25/cpp-bestpractice/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/08/29/AI-is-coming/">AI is coming!</a><time class="ai-portal-item__date" datetime="2026-08-29">2026-08-29</time><a class="ai-portal-item__md" href="/2026/08/29/AI-is-coming/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/06/06/%E9%A1%B9%E7%9B%AE%E6%94%B6%E8%97%8F/">项目收藏</a><time class="ai-portal-item__date" datetime="2026-06-06">2026-06-06</time><p class="ai-portal-item__desc">这篇博客是由 AI 编写，但里面的项目是由我自己 github 上 star 的仓库。后续会持续更新。 本次新增： dsh-superagent 、 OpenVaala 、 Anti-Defensive Writing 、 dsh-our-free-model 、 Oleafly 、 Fly Island 、 MyGo 、 Craft Anything 、 gpu-unlock-ada 。 收集…</p><a class="ai-portal-item__md" href="/2026/06/06/%E9%A1%B9%E7%9B%AE%E6%94%B6%E8%97%8F/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/03/08/hello%20world/">hello world!</a><time class="ai-portal-item__date" datetime="2026-03-08">2026-03-08</time><a class="ai-portal-item__md" href="/2026/03/08/hello%20world/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li></ul></section><section class="ai-portal-section"><h2>最新文章</h2><ul class="ai-portal-list"><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/11/16/%E3%80%8A%E7%8C%AE%E7%BB%99%E9%98%BF%E5%B0%94%E5%90%89%E4%BE%AC%E7%9A%84%E8%8A%B1%E6%9D%9F%E3%80%8B%E8%AF%BB%E5%90%8E%E6%9D%82%E8%B0%88/">《献给阿尔吉侬的花束》读后杂谈</a><time class="ai-portal-item__date" datetime="2026-11-16">2026-11-16</time><a class="ai-portal-item__md" href="/2026/11/16/%E3%80%8A%E7%8C%AE%E7%BB%99%E9%98%BF%E5%B0%94%E5%90%89%E4%BE%AC%E7%9A%84%E8%8A%B1%E6%9D%9F%E3%80%8B%E8%AF%BB%E5%90%8E%E6%9D%82%E8%B0%88/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/09/30/%E4%B8%80%E5%87%BA%E5%A5%BD%E6%88%8F%E2%80%94%E2%80%94%E5%9B%BD%E5%A5%96%E5%B9%BB%E6%A2%A6%EF%BC%8C%E6%A2%A6%E7%A2%8E%EF%BC%9F%E6%A2%A6%E9%86%92%E6%97%B6%E5%88%86/">一出好戏——国奖幻梦，梦碎？梦醒时分</a><time class="ai-portal-item__date" datetime="2026-09-30">2026-09-30</time><a class="ai-portal-item__md" href="/2026/09/30/%E4%B8%80%E5%87%BA%E5%A5%BD%E6%88%8F%E2%80%94%E2%80%94%E5%9B%BD%E5%A5%96%E5%B9%BB%E6%A2%A6%EF%BC%8C%E6%A2%A6%E7%A2%8E%EF%BC%9F%E6%A2%A6%E9%86%92%E6%97%B6%E5%88%86/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/08/29/AI-is-coming/">AI is coming!</a><time class="ai-portal-item__date" datetime="2026-08-29">2026-08-29</time><a class="ai-portal-item__md" href="/2026/08/29/AI-is-coming/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/08/25/cpp-bestpractice/">cpp bestpractice</a><time class="ai-portal-item__date" datetime="2026-08-25">2026-08-25</time><p class="ai-portal-item__desc">本文摘取 learncpp 教程中的 规则 、 最佳实践 和 警告 部分构成（由笔者手动复制粘贴）。像所有最佳实践一样，本文内容应作为 指导方针 ，而不是绝对的教条。在遵循它们的同时，请始终结合具体场景进行判断。 全文共 218 条规则，按 31 个主题分组整理。点击各主题标题即可展开查看，文末附有核心原则速览表。</p><a class="ai-portal-item__md" href="/2026/08/25/cpp-bestpractice/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/08/03/%E7%9C%8B%E6%A2%81%E6%96%87%E9%94%8B-4-%E5%B0%8F%E6%97%B6%E5%8F%91%E8%A8%80%E6%9C%89%E6%84%9F/">看梁文锋 4 小时发言有感</a><time class="ai-portal-item__date" datetime="2026-08-03">2026-08-03</time><a class="ai-portal-item__md" href="/2026/08/03/%E7%9C%8B%E6%A2%81%E6%96%87%E9%94%8B-4-%E5%B0%8F%E6%97%B6%E5%8F%91%E8%A8%80%E6%9C%89%E6%84%9F/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/07/21/AI%20%E6%97%B6%E4%BB%A3%E4%B8%8B%E5%9B%9E%E7%9C%8B%E4%BB%A5%E5%89%8D%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/">AI 时代下回看以前的工作模式</a><time class="ai-portal-item__date" datetime="2026-07-21">2026-07-21</time><a class="ai-portal-item__md" href="/2026/07/21/AI%20%E6%97%B6%E4%BB%A3%E4%B8%8B%E5%9B%9E%E7%9C%8B%E4%BB%A5%E5%89%8D%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/07/05/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E2%89%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F/">代码品味≈设计模式？</a><time class="ai-portal-item__date" datetime="2026-07-05">2026-07-05</time><a class="ai-portal-item__md" href="/2026/07/05/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E2%89%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/06/06/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">代码品味与架构设计</a><time class="ai-portal-item__date" datetime="2026-06-06">2026-06-06</time><a class="ai-portal-item__md" href="/2026/06/06/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/06/06/%E9%A1%B9%E7%9B%AE%E6%94%B6%E8%97%8F/">项目收藏</a><time class="ai-portal-item__date" datetime="2026-06-06">2026-06-06</time><p class="ai-portal-item__desc">这篇博客是由 AI 编写，但里面的项目是由我自己 github 上 star 的仓库。后续会持续更新。 本次新增： dsh-superagent 、 OpenVaala 、 Anti-Defensive Writing 、 dsh-our-free-model 、 Oleafly 、 Fly Island 、 MyGo 、 Craft Anything 、 gpu-unlock-ada 。 收集…</p><a class="ai-portal-item__md" href="/2026/06/06/%E9%A1%B9%E7%9B%AE%E6%94%B6%E8%97%8F/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/2026/05/12/%E6%88%91%E7%9A%84%E8%8B%A6%E9%9A%BE%E5%AE%9A%E7%90%86/">我的苦难定理</a><time class="ai-portal-item__date" datetime="2026-05-12">2026-05-12</time><a class="ai-portal-item__md" href="/2026/05/12/%E6%88%91%E7%9A%84%E8%8B%A6%E9%9A%BE%E5%AE%9A%E7%90%86/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li></ul></section><section class="ai-portal-section"><h2>博客系列</h2><div class="ai-portal-series"><a class="ai-portal-series__title" href="/series/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8/index.html">大学道路入门</a><p class="ai-portal-series__desc">带你入门了解各个大学道路的文章们。</p><ol class="ai-portal-series__members"><li><a href="/2026/09/05/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%80%EF%BC%89/">大学道路入门（一）</a><a class="ai-portal-item__md" href="/2026/09/05/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%80%EF%BC%89/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li></ol></div><div class="ai-portal-series"><a class="ai-portal-series__title" href="/series/%E5%88%B7%20leetcode%20%E5%B0%8F%E6%96%87%E7%AB%A0/index.html">刷 leetcode 小文章</a><p class="ai-portal-series__desc">一些刷 leetcode 之后想写的一些内容，新手就是爱记录，大佬轻喷。</p><ol class="ai-portal-series__members"><li><a href="/2026/07/13/%E5%88%B7%20leetcode%20%E5%B0%8F%E6%96%87%E7%AB%A0/cpp%20%E6%95%B0%E7%BB%84%E6%9C%89%E8%B6%A3%E4%B9%8B%E4%B8%80/">cpp 数组有趣之一</a><a class="ai-portal-item__md" href="/2026/07/13/%E5%88%B7%20leetcode%20%E5%B0%8F%E6%96%87%E7%AB%A0/cpp%20%E6%95%B0%E7%BB%84%E6%9C%89%E8%B6%A3%E4%B9%8B%E4%B8%80/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li><a href="/2026/07/15/%E5%88%B7%20leetcode%20%E5%B0%8F%E6%96%87%E7%AB%A0/%E6%95%B0%E5%AD%A6%E6%98%AF%E6%9C%80%E5%A5%BD%E7%9A%84%E7%AE%97%E6%B3%95/">数学是最好的算法</a><a class="ai-portal-item__md" href="/2026/07/15/%E5%88%B7%20leetcode%20%E5%B0%8F%E6%96%87%E7%AB%A0/%E6%95%B0%E5%AD%A6%E6%98%AF%E6%9C%80%E5%A5%BD%E7%9A%84%E7%AE%97%E6%B3%95/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li></ol></div><div class="ai-portal-series"><a class="ai-portal-series__title" href="/series/%E4%B8%80%E7%82%B9%E5%AF%B9%E6%8A%80%E6%9C%AF%E7%84%A6%E8%99%91%E7%9A%84%E6%80%9D%E8%80%83/index.html">一点对技术焦虑的思考</a><p class="ai-portal-series__desc">这个时代是否还能做到不技术焦虑？</p><ol class="ai-portal-series__members"><li><a href="/2026/05/14/%E4%B8%80%E7%82%B9%E5%AF%B9%E6%8A%80%E6%9C%AF%E7%84%A6%E8%99%91%E7%9A%84%E6%80%9D%E8%80%83/%E5%BF%AB%E4%B8%8E%E6%85%A2/">快与慢</a><a class="ai-portal-item__md" href="/2026/05/14/%E4%B8%80%E7%82%B9%E5%AF%B9%E6%8A%80%E6%9C%AF%E7%84%A6%E8%99%91%E7%9A%84%E6%80%9D%E8%80%83/%E5%BF%AB%E4%B8%8E%E6%85%A2/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li><a href="/2026/05/30/%E4%B8%80%E7%82%B9%E5%AF%B9%E6%8A%80%E6%9C%AF%E7%84%A6%E8%99%91%E7%9A%84%E6%80%9D%E8%80%83/%E5%8E%9F%E6%9D%A5%E8%BF%98%E5%8F%AF%E4%BB%A5%E4%B8%8D%E6%98%AF%20fomo/">原来还可以不是 fomo</a><a class="ai-portal-item__md" href="/2026/05/30/%E4%B8%80%E7%82%B9%E5%AF%B9%E6%8A%80%E6%9C%AF%E7%84%A6%E8%99%91%E7%9A%84%E6%80%9D%E8%80%83/%E5%8E%9F%E6%9D%A5%E8%BF%98%E5%8F%AF%E4%BB%A5%E4%B8%8D%E6%98%AF%20fomo/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li></ol></div><div class="ai-portal-series"><a class="ai-portal-series__title" href="/series/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/index.html">有关看想做</a><p class="ai-portal-series__desc">大学怎么看想做的不标准答案</p><ol class="ai-portal-series__members"><li><a href="/2026/03/15/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/%E5%A4%9A%E7%9C%8B%EF%BC%8C%E5%A4%9A%E6%83%B3%EF%BC%8C%E5%B0%91%E5%81%9A/">多看，多想，少做</a><a class="ai-portal-item__md" href="/2026/03/15/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/%E5%A4%9A%E7%9C%8B%EF%BC%8C%E5%A4%9A%E6%83%B3%EF%BC%8C%E5%B0%91%E5%81%9A/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li><a href="/2026/03/19/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/%E5%A4%9A%E7%9C%8B%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%9C%89%E5%85%B3idea/">多看之后，有关idea</a><a class="ai-portal-item__md" href="/2026/03/19/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/%E5%A4%9A%E7%9C%8B%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%9C%89%E5%85%B3idea/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li><a href="/2026/04/04/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/vibe%20coding%20%E5%89%8D%E4%BC%A0%EF%BC%8C%E7%9C%8B%E6%83%B3%E5%81%9A%E5%90%8E%E8%AE%B0/">vibe coding 前传，看想做后记</a><a class="ai-portal-item__md" href="/2026/04/04/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/vibe%20coding%20%E5%89%8D%E4%BC%A0%EF%BC%8C%E7%9C%8B%E6%83%B3%E5%81%9A%E5%90%8E%E8%AE%B0/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li><li><a href="/2026/10/07/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/37-%E6%B3%95%E5%88%99/">37 法则</a><a class="ai-portal-item__md" href="/2026/10/07/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/37-%E6%B3%95%E5%88%99/index.md" title="阅读本页的 Markdown 版本">Markdown</a></li></ol></div></section><section class="ai-portal-section"><h2>项目</h2><ul class="ai-portal-list"><li class="ai-portal-item"><a class="ai-portal-item__title" target="_blank" rel="noopener" href="https://github.com/SpeechlessPanda/hexo-theme-panda">hexo-theme-panda</a><p class="ai-portal-item__desc">基于 Butterfly 二开并独立维护的卡片式 Hexo 主题,本站即演示站。</p></li><li class="ai-portal-item"><a class="ai-portal-item__title" target="_blank" rel="noopener" href="https://github.com/SpeechlessPanda/BlogForEveryone">BlogForEveryone</a><p class="ai-portal-item__desc">面向新手的博客搭建与管理桌面应用(Electron + Vue 3),可视化替代命令行。</p></li><li class="ai-portal-item"><a class="ai-portal-item__title" target="_blank" rel="noopener" href="https://github.com/HIT-A/HITA_Android">HITA_Android</a><p class="ai-portal-item__desc">面向哈工大三校区的开源校园工具 App,参与课表数据刷新与合并策略。</p></li><li class="ai-portal-item"><a class="ai-portal-item__title" target="_blank" rel="noopener" href="https://github.com/SpeechlessPanda/hitsz-resume-typst">hitsz-resume-typst</a><p class="ai-portal-item__desc">哈工深中文简历的 Typst 模板,模板与个人信息分离,防止隐私误提交。</p></li><li class="ai-portal-item"><a class="ai-portal-item__title" target="_blank" rel="noopener" href="https://github.com/SpeechlessPanda/AircraftWar">AircraftWar</a><p class="ai-portal-item__desc">Java Swing 桌面射击游戏,集中实践多种设计模式并附 JUnit 5 测试。</p></li><li class="ai-portal-item"><a class="ai-portal-item__title" target="_blank" rel="noopener" href="https://github.com/SpeechlessPanda/EnvironmentalMonitoringInstrument">EnvironmentalMonitoringInstrument</a><p class="ai-portal-item__desc">手持多传感器环境监测装置,含固件采集与 Web Bluetooth 实时面板。</p></li><li class="ai-portal-item"><a class="ai-portal-item__title" target="_blank" rel="noopener" href="https://github.com/SpeechlessPanda/blog-s-code">blog-s-code</a><p class="ai-portal-item__desc">本站 Hexo 源码仓库,push 即自动构建并发布到 GitHub Pages。</p></li></ul></section><section class="ai-portal-section"><h2>机器可读资源</h2><ul class="ai-portal-list ai-portal-resources"><li class="ai-portal-item"><a class="ai-portal-item__title" href="/llms.txt">llms.txt</a><p class="ai-portal-item__desc">LLM 内容索引</p></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/sitemap.xml">sitemap.xml</a><p class="ai-portal-item__desc">搜索引擎索引</p></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/atom.xml">Atom</a><p class="ai-portal-item__desc">文章与碎碎念订阅</p></li><li class="ai-portal-item"><a class="ai-portal-item__title" href="/rights/">版权与内容使用政策</a><p class="ai-portal-item__desc">许可与 AI 使用政策</p></li></ul></section></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SpeechlessPanda</div><div class="author-info-description">主要分享我的个人成长心得，偶尔可能会分享一些技术文章，欢迎关注~（右上角有碎碎念可以看）</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/SpeechlessPanda"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SpeechlessPanda" target="_blank" title="GitHub"><i class="fab fa-github" style="color: #ffffff;"></i></a><a class="social-icon" href="mailto:zhoushimingyu@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color: #ff6600;"></i></a><a class="social-icon ai-reading-icon" href="/ai/" title="AI 阅读入口" aria-label="AI 阅读入口"><i class="fas fa-robot" style="color: #49B1F5;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我是一名计算机学生，这里是我向外输出内容的地方，如果你看了本博客之后有想和我交流的内容，欢迎在文章下方留言或者通过邮箱联系我~大家还可以多多关注友链里的内容，不仅有各种大佬，还有很多有用的资源。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/11/16/%E3%80%8A%E7%8C%AE%E7%BB%99%E9%98%BF%E5%B0%94%E5%90%89%E4%BE%AC%E7%9A%84%E8%8A%B1%E6%9D%9F%E3%80%8B%E8%AF%BB%E5%90%8E%E6%9D%82%E8%B0%88/" title="《献给阿尔吉侬的花束》读后杂谈">《献给阿尔吉侬的花束》读后杂谈</a><time datetime="2026-11-16T07:21:20.000Z" title="发表于 2026-11-16 15:21:20">2026-11-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/10/07/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/37-%E6%B3%95%E5%88%99/" title="37 法则">37 法则</a><time datetime="2026-10-07T05:23:23.000Z" title="发表于 2026-10-07 13:23:23">2026-10-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/30/%E4%B8%80%E5%87%BA%E5%A5%BD%E6%88%8F%E2%80%94%E2%80%94%E5%9B%BD%E5%A5%96%E5%B9%BB%E6%A2%A6%EF%BC%8C%E6%A2%A6%E7%A2%8E%EF%BC%9F%E6%A2%A6%E9%86%92%E6%97%B6%E5%88%86/" title="一出好戏——国奖幻梦，梦碎？梦醒时分">一出好戏——国奖幻梦，梦碎？梦醒时分</a><time datetime="2026-09-30T15:15:43.000Z" title="发表于 2026-09-30 23:15:43">2026-09-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/09/05/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%80%EF%BC%89/" title="大学道路入门（一）">大学道路入门（一）</a><time datetime="2026-09-05T13:56:02.000Z" title="发表于 2026-09-05 21:56:02">2026-09-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/29/AI-is-coming/" title="AI is coming!">AI is coming!</a><time datetime="2026-08-29T08:57:12.000Z" title="发表于 2026-08-29 16:57:12">2026-08-29</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 1.5em; color: #99a9bf">编程</a> <a href="/tags/%E6%88%90%E9%95%BF/" style="font-size: 1.23em; color: #999ea6">成长</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.1em; color: #999">生活</a> <a href="/tags/%E7%9F%A5%E8%AF%86/" style="font-size: 1.37em; color: #99a4b2">知识</a> <a href="/tags/%E5%8F%99%E4%BA%8B/" style="font-size: 1.1em; color: #999">叙事</a> <a href="/tags/AI/" style="font-size: 1.37em; color: #99a4b2">AI</a> <a href="/tags/%E8%A7%82%E7%82%B9/" style="font-size: 1.5em; color: #99a9bf">观点</a> <a href="/tags/%E6%96%B9%E6%B3%95/" style="font-size: 1.23em; color: #999ea6">方法</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/"
+            title="查看更多">
+            <i class="fas fa-angle-right"></i>
+          </a></div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/11/">
+            <span class="card-archive-list-date">
+              十一月 2026
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/10/">
+            <span class="card-archive-list-date">
+              十月 2026
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/09/">
+            <span class="card-archive-list-date">
+              九月 2026
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/08/">
+            <span class="card-archive-list-date">
+              八月 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/07/">
+            <span class="card-archive-list-date">
+              七月 2026
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/06/">
+            <span class="card-archive-list-date">
+              六月 2026
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/05/">
+            <span class="card-archive-list-date">
+              五月 2026
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/04/">
+            <span class="card-archive-list-date">
+              四月 2026
+            </span>
+            <span class="card-archive-list-count">4</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">25</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">70.7k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-11-19T14:51:39.773Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By SpeechlessPanda</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/SpeechlessPanda/hexo-theme-panda">Panda 1.1.10</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=1.1.10"></script><script src="/js/main.js?v=1.1.10"></script><script src="/js/fix-link-target.js" data-pjax></script><script src="/js/anchor.js?v=1.1.10" data-pjax></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1.14/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:description\"]","link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([data-fancybox]):not([href="/memos/"]):not([href="/memos/index.html"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      if (!item.parentNode) return
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || ''
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    const responseURL = e.request && e.request.responseURL
+    if (e.request && e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : responseURL && (window.location.href = responseURL)
+    } else if (responseURL) {
+      window.location.href = responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=1.1.10"></script></div></div></body></html>

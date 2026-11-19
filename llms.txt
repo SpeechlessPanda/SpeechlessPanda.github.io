@@ -1,0 +1,85 @@
+# SpeechlessPanda
+
+> SpeechlessPanda's blog about programming, technology, and life.
+
+由 SpeechlessPanda 维护。
+
+主要内容方向: AI, 编程, 成长, 观点, 方法, 知识, 生活, 叙事.
+
+下列每个页面都在同一地址提供 Markdown 版本（末尾追加 `/index.md`）。这些链接让 Agent 直接读到干净文本，而不必解析 HTML。
+
+## 精选文章
+
+- [练习时长一年半大学生有感](https://speechlesspanda.github.io/2026/03/01/%E7%BB%83%E4%B9%A0%E6%97%B6%E9%95%BF%E4%B8%80%E5%B9%B4%E5%8D%8A%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%9C%89%E6%84%9F/index.md): 大二寒假对 FOMO、技术焦虑与大学选择的复盘,写给同样处在选择边缘的人。
+- [大学道路入门（一）](https://speechlesspanda.github.io/2026/09/05/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%80%EF%BC%89/index.md): 保研、就业等方向入门时的术语与信息差整理,面向刚起步的读者。
+- [代码品味与架构设计](https://speechlesspanda.github.io/2026/06/06/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.md): 借一次 vibe coding 经历,讨论设计模式、代码品味与架构设计如何培养。
+- [对 BFE 构建思路的重思考](https://speechlesspanda.github.io/2026/04/12/%E5%AF%B9%20BFE%20%E6%9E%84%E5%BB%BA%E6%80%9D%E8%B7%AF%E7%9A%84%E9%87%8D%E6%80%9D%E8%80%83/index.md): 把"适配十个主题"的难需求改写成"重写主题"的易需求,一次需求转化的复盘。
+- [cpp bestpractice](https://speechlesspanda.github.io/2026/08/25/cpp-bestpractice/index.md): 从 learncpp 摘录的 218 条规则与最佳实践,按 31 个主题分组整理。
+- [AI is coming!](https://speechlesspanda.github.io/2026/08/29/AI-is-coming/index.md): 关于 AI 冲击就业、抽走入门的阶梯,以及个人该如何准备的思考。
+- [项目收藏](https://speechlesspanda.github.io/2026/06/06/%E9%A1%B9%E7%9B%AE%E6%94%B6%E8%97%8F/index.md): 按类别整理的 GitHub 优质开源项目清单,持续更新。
+- [hello world!](https://speechlesspanda.github.io/2026/03/08/hello%20world/index.md): 用不同语言各写一遍 hello world,记录对编程最初的好奇。
+
+## 文章
+
+- [《献给阿尔吉侬的花束》读后杂谈](https://speechlesspanda.github.io/2026/11/16/%E3%80%8A%E7%8C%AE%E7%BB%99%E9%98%BF%E5%B0%94%E5%90%89%E4%BE%AC%E7%9A%84%E8%8A%B1%E6%9D%9F%E3%80%8B%E8%AF%BB%E5%90%8E%E6%9D%82%E8%B0%88/index.md)
+- [一出好戏——国奖幻梦，梦碎？梦醒时分](https://speechlesspanda.github.io/2026/09/30/%E4%B8%80%E5%87%BA%E5%A5%BD%E6%88%8F%E2%80%94%E2%80%94%E5%9B%BD%E5%A5%96%E5%B9%BB%E6%A2%A6%EF%BC%8C%E6%A2%A6%E7%A2%8E%EF%BC%9F%E6%A2%A6%E9%86%92%E6%97%B6%E5%88%86/index.md)
+- [AI is coming!](https://speechlesspanda.github.io/2026/08/29/AI-is-coming/index.md)
+- [cpp bestpractice](https://speechlesspanda.github.io/2026/08/25/cpp-bestpractice/index.md): 本文摘取 learncpp 教程中的 规则 、 最佳实践 和 警告 部分构成（由笔者手动复制粘贴）。像所有最佳实践一样，本文内容应作为 指导方针 ，而不是绝对的教条。在遵循它们的同时，请始终结合具体场景进行判断。 全文共 218 条规则，按 31 个主题分组整理。点击各主题标题即可展开查看，文末附有核心原则速览表。
+- [看梁文锋 4 小时发言有感](https://speechlesspanda.github.io/2026/08/03/%E7%9C%8B%E6%A2%81%E6%96%87%E9%94%8B-4-%E5%B0%8F%E6%97%B6%E5%8F%91%E8%A8%80%E6%9C%89%E6%84%9F/index.md)
+- [AI 时代下回看以前的工作模式](https://speechlesspanda.github.io/2026/07/21/AI%20%E6%97%B6%E4%BB%A3%E4%B8%8B%E5%9B%9E%E7%9C%8B%E4%BB%A5%E5%89%8D%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F/index.md)
+- [代码品味≈设计模式？](https://speechlesspanda.github.io/2026/07/05/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E2%89%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F/index.md)
+- [代码品味与架构设计](https://speechlesspanda.github.io/2026/06/06/%E4%BB%A3%E7%A0%81%E5%93%81%E5%91%B3%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.md)
+- [项目收藏](https://speechlesspanda.github.io/2026/06/06/%E9%A1%B9%E7%9B%AE%E6%94%B6%E8%97%8F/index.md): 这篇博客是由 AI 编写，但里面的项目是由我自己 github 上 star 的仓库。后续会持续更新。 本次新增： dsh-superagent 、 OpenVaala 、 Anti-Defensive Writing 、 dsh-our-free-model 、 Oleafly 、 Fly Island 、 MyGo 、 Craft Anything 、 gpu-unlock-ada 。 收集…
+- [我的苦难定理](https://speechlesspanda.github.io/2026/05/12/%E6%88%91%E7%9A%84%E8%8B%A6%E9%9A%BE%E5%AE%9A%E7%90%86/index.md)
+
+## 博客系列
+
+- [大学道路入门](https://speechlesspanda.github.io/series/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8/index.md): 带你入门了解各个大学道路的文章们。
+  - [大学道路入门（一）](https://speechlesspanda.github.io/2026/09/05/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8/%E5%A4%A7%E5%AD%A6%E9%81%93%E8%B7%AF%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%80%EF%BC%89/index.md)
+- [刷 leetcode 小文章](https://speechlesspanda.github.io/series/%E5%88%B7%20leetcode%20%E5%B0%8F%E6%96%87%E7%AB%A0/index.md): 一些刷 leetcode 之后想写的一些内容，新手就是爱记录，大佬轻喷。
+  - [cpp 数组有趣之一](https://speechlesspanda.github.io/2026/07/13/%E5%88%B7%20leetcode%20%E5%B0%8F%E6%96%87%E7%AB%A0/cpp%20%E6%95%B0%E7%BB%84%E6%9C%89%E8%B6%A3%E4%B9%8B%E4%B8%80/index.md)
+  - [数学是最好的算法](https://speechlesspanda.github.io/2026/07/15/%E5%88%B7%20leetcode%20%E5%B0%8F%E6%96%87%E7%AB%A0/%E6%95%B0%E5%AD%A6%E6%98%AF%E6%9C%80%E5%A5%BD%E7%9A%84%E7%AE%97%E6%B3%95/index.md)
+- [一点对技术焦虑的思考](https://speechlesspanda.github.io/series/%E4%B8%80%E7%82%B9%E5%AF%B9%E6%8A%80%E6%9C%AF%E7%84%A6%E8%99%91%E7%9A%84%E6%80%9D%E8%80%83/index.md): 这个时代是否还能做到不技术焦虑？
+  - [快与慢](https://speechlesspanda.github.io/2026/05/14/%E4%B8%80%E7%82%B9%E5%AF%B9%E6%8A%80%E6%9C%AF%E7%84%A6%E8%99%91%E7%9A%84%E6%80%9D%E8%80%83/%E5%BF%AB%E4%B8%8E%E6%85%A2/index.md)
+  - [原来还可以不是 fomo](https://speechlesspanda.github.io/2026/05/30/%E4%B8%80%E7%82%B9%E5%AF%B9%E6%8A%80%E6%9C%AF%E7%84%A6%E8%99%91%E7%9A%84%E6%80%9D%E8%80%83/%E5%8E%9F%E6%9D%A5%E8%BF%98%E5%8F%AF%E4%BB%A5%E4%B8%8D%E6%98%AF%20fomo/index.md)
+- [有关看想做](https://speechlesspanda.github.io/series/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/index.md): 大学怎么看想做的不标准答案
+  - [多看，多想，少做](https://speechlesspanda.github.io/2026/03/15/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/%E5%A4%9A%E7%9C%8B%EF%BC%8C%E5%A4%9A%E6%83%B3%EF%BC%8C%E5%B0%91%E5%81%9A/index.md)
+  - [多看之后，有关idea](https://speechlesspanda.github.io/2026/03/19/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/%E5%A4%9A%E7%9C%8B%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%9C%89%E5%85%B3idea/index.md)
+  - [vibe coding 前传，看想做后记](https://speechlesspanda.github.io/2026/04/04/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/vibe%20coding%20%E5%89%8D%E4%BC%A0%EF%BC%8C%E7%9C%8B%E6%83%B3%E5%81%9A%E5%90%8E%E8%AE%B0/index.md)
+  - [37 法则](https://speechlesspanda.github.io/2026/10/07/%E6%9C%89%E5%85%B3%E7%9C%8B%E6%83%B3%E5%81%9A/37-%E6%B3%95%E5%88%99/index.md)
+
+## 项目
+
+- [hexo-theme-panda](https://github.com/SpeechlessPanda/hexo-theme-panda): 基于 Butterfly 二开并独立维护的卡片式 Hexo 主题,本站即演示站。
+- [BlogForEveryone](https://github.com/SpeechlessPanda/BlogForEveryone): 面向新手的博客搭建与管理桌面应用(Electron + Vue 3),可视化替代命令行。
+- [HITA_Android](https://github.com/HIT-A/HITA_Android): 面向哈工大三校区的开源校园工具 App,参与课表数据刷新与合并策略。
+- [hitsz-resume-typst](https://github.com/SpeechlessPanda/hitsz-resume-typst): 哈工深中文简历的 Typst 模板,模板与个人信息分离,防止隐私误提交。
+- [AircraftWar](https://github.com/SpeechlessPanda/AircraftWar): Java Swing 桌面射击游戏,集中实践多种设计模式并附 JUnit 5 测试。
+- [EnvironmentalMonitoringInstrument](https://github.com/SpeechlessPanda/EnvironmentalMonitoringInstrument): 手持多传感器环境监测装置,含固件采集与 Web Bluetooth 实时面板。
+- [blog-s-code](https://github.com/SpeechlessPanda/blog-s-code): 本站 Hexo 源码仓库,push 即自动构建并发布到 GitHub Pages。
+
+## 内容主题
+
+- [AI](https://speechlesspanda.github.io/tags/AI/index.html): AI 工具、agent 工程与行业观察。
+- [编程](https://speechlesspanda.github.io/tags/%E7%BC%96%E7%A8%8B/index.html): C++ / Rust 语言实践、架构与设计模式、vibe coding 复盘。
+- [成长](https://speechlesspanda.github.io/tags/%E6%88%90%E9%95%BF/index.html): 大学阶段的学习路径、选择与信息差。
+- [观点](https://speechlesspanda.github.io/tags/%E8%A7%82%E7%82%B9/index.html): 对技术与社会变化的个人判断。
+- [方法](https://speechlesspanda.github.io/tags/%E6%96%B9%E6%B3%95/index.html): 可复用的做事方式与思考框架。
+- [知识](https://speechlesspanda.github.io/tags/%E7%9F%A5%E8%AF%86/index.html): 整理型长文与速查资料。
+- [生活](https://speechlesspanda.github.io/tags/%E7%94%9F%E6%B4%BB/index.html): 阅读、比赛与日常记录。
+- [叙事](https://speechlesspanda.github.io/tags/%E5%8F%99%E4%BA%8B/index.html): 以故事形式写下的经历。
+
+## 许可与 AI 使用偏好
+
+- 许可: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+- AI 使用: allow-search
+- AI 训练偏好: deny
+- 完整说明: https://speechlesspanda.github.io/rights/index.html
+
+## 资源
+
+- [sitemap.xml](https://speechlesspanda.github.io/sitemap.xml): 所有可索引页面
+- [atom.xml](https://speechlesspanda.github.io/atom.xml): 最新文章与碎碎念
+- [归档](https://speechlesspanda.github.io/archives/index.html): 按时间排列的全部文章
+- [AI 阅读导航](https://speechlesspanda.github.io/ai/index.html): 面向人类的机器可读资源说明
+- [版权与内容使用政策](https://speechlesspanda.github.io/rights/index.html): 许可、署名与 AI 使用偏好
