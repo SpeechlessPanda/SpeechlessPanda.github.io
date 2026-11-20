@@ -8,10 +8,9 @@
 # a CDN/WAF policy or server-side rules for those.
 
 User-agent: *
-Allow: /
 Disallow: /memos/
 
-# Search indexing: allowed, so the site stays discoverable.
+# Search indexing: allowed unless restricted in the site rules.
 User-agent: Googlebot
 User-agent: OAI-SearchBot
 User-agent: Claude-SearchBot
@@ -19,7 +18,6 @@ User-agent: Bingbot
 User-agent: DuckDuckBot
 User-agent: Baiduspider
 User-agent: YandexBot
-Allow: /
 Disallow: /memos/
 
 # User-triggered fetches (a person asking a chat assistant about this page):
@@ -27,7 +25,6 @@ Disallow: /memos/
 User-agent: ChatGPT-User
 User-agent: Claude-User
 User-agent: Perplexity-User
-Allow: /
 Disallow: /memos/
 
 # Model training: opt out.

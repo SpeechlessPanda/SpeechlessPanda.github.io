@@ -1,12 +1,10 @@
 # SpeechlessPanda
 
-> SpeechlessPanda's blog about programming, technology, and life.
+> SpeechlessPanda 的个人博客,记录编程、技术与生活。
 
 由 SpeechlessPanda 维护。
 
 主要内容方向: AI, 编程, 成长, 观点, 方法, 知识, 生活, 叙事.
-
-下列每个页面都在同一地址提供 Markdown 版本（末尾追加 `/index.md`）。这些链接让 Agent 直接读到干净文本，而不必解析 HTML。
 
 ## 精选文章
 
